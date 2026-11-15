@@ -1,0 +1,20 @@
+# Build output
+**/target/
+**/.gradle/
+*.class
+*.jar
+
+# Python's temporary files
+__pycache__/
+*.pyc
+
+# macOS folder files
+.DS_Store
+
+# Local settings that may hold addresses or keys
+.env
+.env.*
+!.env.example
+
+# Answers from trying things out on a laptop (the reported Colab runs are kept)
+harness/cache/*__apple-*.jsonl

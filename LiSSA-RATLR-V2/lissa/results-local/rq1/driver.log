@@ -1,0 +1,60 @@
+
+=== 2026-11-14 20:27:05 --seeds 1 --hours 20
+>> Building LiSSA (mvn -DskipTests package)
+[0.000s][warning][os,container] Cgroup memory controller path at '/sys/fs/cgroup' seems to have moved to '/../../jupyter-children', detected limits won't be accurate
+[0.000s][warning][os,container] Cgroup cpu controller path at '/sys/fs/cgroup' seems to have moved to '/../../jupyter-children', detected limits won't be accurate
+>> ollama pull qwen2.5-coder:14b
+
+=== 2026-11-14 20:30:38 --seeds 1 --hours 20
+>> ollama pull qwen2.5-coder:14b
+>> ollama pull llama3.1:8b
+>> ollama pull bge-m3
+>> Preflight for qwen2.5-coder:14b (loads the models with num_ctx 16384 and checks GPU placement)
+Ollama 0.40.2 at http://127.0.0.1:11434
+[embedding] trying bge-m3 ...
+[llm] trying qwen2.5-coder:14b ...
+
+[embedding] bge-m3: num_ctx 8192, 100% GPU, 0.88 GiB loaded
+[llm] qwen2.5-coder:14b: num_ctx 16384, 100% GPU, 11.21 GiB loaded
+>> Preflight for llama3.1:8b (loads the models with num_ctx 16384 and checks GPU placement)
+Ollama 0.40.2 at http://127.0.0.1:11434
+[embedding] trying bge-m3 ...
+[llm] trying llama3.1:8b ...
+
+[embedding] bge-m3: num_ctx 8192, 100% GPU, 0.88 GiB loaded
+[llm] llama3.1:8b: num_ctx 16384, 100% GPU, 6.54 GiB loaded
+Plan:
+    1. SMOS      bge-m3             retrieval only  
+    2. eTour_en  bge-m3             retrieval only  
+    3. iTrust    bge-m3             retrieval only  
+    4. SMOS      qwen2.5-coder:14b  CoT             seed 133742243
+    5. eTour_en  qwen2.5-coder:14b  CoT             seed 133742243
+    6. iTrust    qwen2.5-coder:14b  CoT             seed 133742243
+    7. SMOS      qwen2.5-coder:14b  KISS            seed 133742243
+    8. eTour_en  qwen2.5-coder:14b  KISS            seed 133742243
+    9. iTrust    qwen2.5-coder:14b  KISS            seed 133742243
+   10. SMOS      llama3.1:8b        CoT             seed 133742243
+   11. eTour_en  llama3.1:8b        CoT             seed 133742243
+   12. iTrust    llama3.1:8b        CoT             seed 133742243
+   13. SMOS      llama3.1:8b        KISS            seed 133742243
+   14. eTour_en  llama3.1:8b        KISS            seed 133742243
+   15. iTrust    llama3.1:8b        KISS            seed 133742243
+  15 configs, at most 20,480 LLM calls (20,480 in the first pass)
+>> [1/15] SMOS_artifact_artifact_no_llm_bge-m3.json (attempt 1)
+>> [2/15] eTour_en_artifact_artifact_no_llm_bge-m3.json (attempt 1)
+>> [3/15] iTrust_artifact_artifact_no_llm_bge-m3.json (attempt 1)
+>> [4/15] SMOS_133742243_artifact_artifact_reasoning_ollama_qwen2.5-coder-14b_bge-m3.json (attempt 1)
+>> [5/15] eTour_en_133742243_artifact_artifact_reasoning_ollama_qwen2.5-coder-14b_bge-m3.json (attempt 1)
+>> [6/15] iTrust_133742243_artifact_artifact_reasoning_ollama_qwen2.5-coder-14b_bge-m3.json (attempt 1)
+>> [7/15] SMOS_artifact_artifact_simple_ollama_qwen2.5-coder-14b_bge-m3.json (attempt 1)
+>> [8/15] eTour_en_artifact_artifact_simple_ollama_qwen2.5-coder-14b_bge-m3.json (attempt 1)
+>> [9/15] iTrust_artifact_artifact_simple_ollama_qwen2.5-coder-14b_bge-m3.json (attempt 1)
+>> [10/15] SMOS_133742243_artifact_artifact_reasoning_ollama_llama3.1-8b_bge-m3.json (attempt 1)
+>> [11/15] eTour_en_133742243_artifact_artifact_reasoning_ollama_llama3.1-8b_bge-m3.json (attempt 1)
+>> [12/15] iTrust_133742243_artifact_artifact_reasoning_ollama_llama3.1-8b_bge-m3.json (attempt 1)
+>> [13/15] SMOS_artifact_artifact_simple_ollama_llama3.1-8b_bge-m3.json (attempt 1)
+>> [14/15] eTour_en_artifact_artifact_simple_ollama_llama3.1-8b_bge-m3.json (attempt 1)
+>> [15/15] iTrust_artifact_artifact_simple_ollama_llama3.1-8b_bge-m3.json (attempt 1)
+
+Report: /content/LiSSA-Replication-Package/LiSSA-RATLR-V2/lissa/results-local/rq1/rq1-report.md
+Configs finished: 15 of 15. Candidate pairs answered: 20,480 of 20,480 (100%).

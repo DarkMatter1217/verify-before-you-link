@@ -1,0 +1,8 @@
+commit: ce58f685dd2515bd1133ca4e26ce3a3e01e45174
+jar sha256: d95529b933243d99121d9fb2f3f598090ad44efb915e4e15dc284c973a56ef2c
+java: openjdk version "21.0.13.0.3" 2026-10-24
+ollama: ollama version is 0.40.2
+
+git status:
+ D harness/data/candidates-local.json
+?? LiSSA-RATLR-V2/lissa/results-local/
