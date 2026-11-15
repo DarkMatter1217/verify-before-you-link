@@ -1,7 +1,7 @@
 # Results: where they are
 
 The results stay where the code writes them, so every script works on them in place. This page is the index.
-State: 15 November 2026, about 18:20 UTC. RQ2/RQ3 are still running; only finished runs are included.
+State: 2026-11-15 18:49 UTC. RQ2/RQ3 are still running; only finished runs are included (the log and saved answers are a snapshot of that moment).
 
 | What | Location |
 |---|---|
@@ -28,7 +28,9 @@ Each run folder has `metrics.md` (readable tables), `metrics.json`, `decisions.c
 |---|---|---|---|---|---|
 | 0.348 | 0.247 | 0.264 | 0.265 | 0.356 | 0.365 |
 
-**RQ2, dev slice, Qwen** (average F1, strict / tolerant parsing): fresh baseline 0.208 / 0.332, definition 0.203 / 0.325. GPT-4o chain-of-thought on the same slice: 0.385.
+**RQ2, dev slice, Qwen**, average F1 with LiSSA's strict rule (the reported result): fresh baseline 0.208, definition 0.203, summary 0.167. GPT-4o chain-of-thought on the same slice: 0.385.
+
+The run folders also contain tolerant-rule scores (0.332, 0.325, 0.323). They are used only in RQ4, to measure the cost of answers that lack the `<trace>` tag (see [`reports/proposal-compliance.md`](../reports/proposal-compliance.md), section 2.5).
 
 ## Recomputing a table
 

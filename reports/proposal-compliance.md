@@ -13,6 +13,8 @@ Each change below is stated, explained and backed by a measurement, and the fina
 | LiSSA's benchmark: SMOS, eTour, iTrust; 256 requirements, 442 code files, 1,638 gold links; top-20 retrieval, 5,120 candidate pairs | Same data, checked by the RQ1 runner (`rq1-report.md`, "Validity checks") | Matches |
 | RQ1: LiSSA run unchanged with Ollama, bge-m3, Qwen2.5-Coder-14B and Llama-3.1-8B, 4-bit, temperature 0, no paid API | Same. Two technical fixes in LiSSA's connection to Ollama (see [`code-changes.md`](code-changes.md)) | Matches; the fixes are reported |
 | RQ1 metrics: P, R, F1, F2 per project, average and link-weighted average; compared with GPT-4o, GPT-4o-mini, VSM, LSI, FTLR; retrieval-only recall@20 as the ceiling | All in `rq1-report.md` | Matches |
+| Scoring "exactly as LiSSA does"; LiSSA run "unchanged" | Every reported result uses LiSSA's own answer rule (strict parsing): RQ1, the dev choices, the test comparisons, the Wilcoxon tests and the GPT-4o comparison | Matches |
+| (not in the proposal) | Tolerant parsing, used only in RQ4 to measure how much the "missing answer tag" error costs | Inside RQ4's error analysis, see 2.5 |
 | RQ2 adds one piece of information at a time to LiSSA's chain-of-thought prompt: definition, code summary from a Java parser, project description, cross-project examples | Four single variants, prompt texts frozen on 14 Nov 2026 before any run | Matches |
 | (not in the proposal) | Round-2 prompt combining the information types that helped on dev, with the rule fixed before pass 1 | Extension, see 2.3 |
 | RQ3: up to five atomic claims citing code identifiers; static identifier check; a factored check that sees only the cited code and not the requirement; keep a link if the supported share reaches τ | Implemented this way (`harness/verify.py`) | Matches |
@@ -66,9 +68,21 @@ The report will describe it as an extension.
 
 LiSSA's significance runs used five seeds. At temperature 0, the seed made no difference in our smoke tests, so we ran one seed (`133742243`, LiSSA's first). The variation that does exist comes from the GPU session, which section 2.2 measures.
 
-### 2.5 Strict and tolerant answer parsing
+### 2.5 Answer parsing: strict for all results, tolerant only in RQ4
 
-Strict parsing is LiSSA's own rule (a link only if the `<trace>` tag says yes) and is the primary result. Tolerant parsing (also accepting a leading yes/no) is reported next to it as a sensitivity check, because Qwen often leaves out the tag (65% of its chain-of-thought answers in RQ1).
+**What the proposal says.** RQ1 metrics are computed "exactly as LiSSA does", and LiSSA is run "unchanged". RQ2–RQ3 report precision, recall and F1 and test per-requirement F1. The proposal names no second parsing rule.
+
+**What we do.**
+- **Strict parsing** is LiSSA's own rule: a link only if the answer's `<trace>` tag says yes; an answer without the tag counts as "no". It is used for **every reported result**: RQ1, the dev choices (best prompt, τ), all test comparisons, the Wilcoxon tests and the comparison with GPT-4o.
+- **Tolerant parsing** is our addition: if the tag is missing, a "yes" or "no" at the very start of the answer is taken as the answer. It is **not** used for any RQ1–RQ3 result. It appears only in RQ4.
+
+**Why tolerant parsing belongs in RQ4.** RQ4 asks which error types remain. One of the most frequent is a format error: the model answers but leaves out the required tag. Qwen does this in 65% of its chain-of-thought answers in RQ1 and in 70–78% on the dev slice; Llama in about 19% in RQ1. Under the strict rule each of these answers becomes "no", even when the answer starts with "Yes". Scoring the same answers with the tolerant rule shows how much F1 this one error type costs, which is a measurement of an error type, not a new evaluation metric.
+
+**Why it is not used elsewhere.**
+- The published GPT-4o numbers use only the strict rule. Tolerant scores for our models would have no GPT-4o counterpart, so a comparison would mix two rules.
+- The proposal fixes the scoring to LiSSA's. Choosing prompts or τ, or running the Wilcoxon tests, with a different rule would change the study.
+
+**What it shows so far (dev slice, Qwen):** strict average F1 0.17–0.21, tolerant 0.32–0.33 for the baseline, `definition` and `summary`. The added information hardly changes Qwen's actual yes/no judgement, but it makes Qwen leave out the tag more often.
 
 ## 3. Wording for the final report
 
@@ -76,7 +90,7 @@ Strict parsing is LiSSA's own rule (a link only if the `<trace>` tag says yes) a
 > A smoke test showed that one full RQ1 run takes about 27 hours on our 24 GB laptop, which made all RQ1–RQ3 configurations infeasible within the course timeline. We therefore ran RQ1–RQ3 with the identical software stack (Ollama 0.40.2, the same 4-bit model files, temperature 0, fixed seed, 16K context) on a single NVIDIA L4 GPU. No paid LLM API was used, and no model provider received any prompt. RQ4 runtimes were measured on a 24 GB M5 Pro laptop.
 
 **Threats to validity, output variability** (fill in the bracketed numbers when the runs finish):
-> We decode greedily (temperature 0, fixed seed), yet outputs are not bit-identical across GPU sessions, a reproducibility threat noted by Sallou et al. [3]. Following their guidelines, we measured it: re-asked prompts gave identical decisions in [X]% of cases within a session and 85% across sessions, and two full runs of the baseline on the development slice differed by 0.027 F1 with strict and 0.005 with tolerant parsing. LiSSA's own three GPT-4o runs have link-set Jaccard indices of 0.79–0.88 but differ by at most 0.009 in average F1. We ran all compared configurations of a slice in one session where possible, release all prompts, answers, model and runtime versions, and do not interpret differences smaller than the measured run-to-run difference.
+> We decode greedily (temperature 0, fixed seed), yet outputs are not bit-identical across GPU sessions, a reproducibility threat noted by Sallou et al. [3]. Following their guidelines, we measured it: re-asked prompts gave identical decisions in [X]% of cases within a session and 85% across sessions, and two full runs of the baseline on the development slice differed by 0.027 in average F1. LiSSA's own three GPT-4o runs have link-set Jaccard indices of 0.79–0.88 but differ by at most 0.009 in average F1. We ran all compared configurations of a slice in one session where possible, release all prompts, answers, model and runtime versions, and do not interpret differences smaller than the measured run-to-run difference.
 
 **One sentence of the proposal to word more precisely.** The proposal says local open models "support reproducible research [3]". Sallou et al. warn that closed models change without notice; they do not claim that open models solve reproducibility. Suggested wording:
 > Closed models can change without notice, a reproducibility threat noted by Sallou et al. [3]; open weights can be pinned to an exact version.
@@ -87,4 +101,5 @@ Strict parsing is LiSSA's own rule (a link only if the `<trace>` tag says yes) a
 2. **Freeze before test:** write down the chosen prompt per model and τ, with the date and file hashes, before any test-slice call.
 3. **Run the test slice once**, with every variant, verification and the 2×2, and the Wilcoxon tests as planned.
 4. **Teamwork as planned:** Rahul leads the evaluation scripts, statistics, laptop runs and the threats section; both code the RQ4 errors independently.
-5. **State all changes** in sections 2.1–2.5 in the report.
+5. **Score every RQ1–RQ3 result with LiSSA's strict rule**; use tolerant scores only in the RQ4 error analysis.
+6. **State all changes** in sections 2.1–2.5 in the report.

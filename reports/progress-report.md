@@ -9,7 +9,8 @@
 - **RQ1 is done** on a Colab L4 GPU: LiSSA unchanged with Qwen2.5-Coder-14B and Llama-3.1-8B, all 20,480 model calls. A second RQ1 run is in progress on Rahul's laptop.
 - **Best local result:** Qwen with LiSSA's short (KISS) prompt reaches an average F1 of **0.348**, close to GPT-4o's 0.356 with the same prompt and 0.365 with chain-of-thought, on the same three projects.
 - **RQ2/RQ3 on the dev slice are running.** The Qwen baseline and the `definition` variant are done; `summary` is about three-quarters done. The dev passes should finish around 16 November, 13:00–15:00 UTC.
-- **Main problem so far:** Qwen often leaves out the `<trace>` tag that LiSSA's strict rule requires (65–75% of its chain-of-thought answers), which costs it recall.
+- **Main problem so far:** Qwen often leaves out the `<trace>` tag that LiSSA's answer rule requires (65–78% of its chain-of-thought answers), which costs it recall.
+- **Scoring:** as the proposal says ("exactly as LiSSA does"), every result uses LiSSA's own answer rule (strict parsing). A second, tolerant rule is used only in RQ4, to measure what the missing-tag error costs.
 - **Nothing has been run on the test slice.** It will be run once, after the dev choices are frozen.
 
 ## 1. Setup and checks
@@ -62,9 +63,14 @@ The pipeline runs both passes on dev: for each model, a fresh baseline plus the 
 | Baseline, fresh run in this session | 0.208 (0.435 / 0.157) | 0.332 | 718 of 1,020 |
 | Baseline, RQ1's answers (earlier session) | 0.235 (0.429 / 0.187) | 0.337 | 685 of 1,020 |
 | + definition | 0.203 (0.532 / 0.138) | 0.325 | 764 of 1,020 |
-| + summary, + project, + examples | running | | |
+| + summary | 0.167 (0.355 / 0.127) | 0.323 | 794 of 1,020 |
+| + project, + examples | running | | |
+
+**Strict F1 is the result** (LiSSA's rule, as in the proposal). The tolerant column is shown only to explain the missing-tag problem; in the final report it appears only in RQ4 (see [`proposal-compliance.md`](proposal-compliance.md), section 2.5).
 
 - **Definition:** precision went up and recall went down; F1 is unchanged within noise.
+- **Summary:** strict F1 fell, mostly on eTour (0.389 → 0.232), because even more answers lack the tag. With the tolerant rule all three runs are within 0.01, so the added information hardly changes Qwen's actual judgement; it mainly hurts the answer format.
+- **Next important run:** `examples`, the only variant whose added text shows the `<trace>yes</trace>` format.
 - **Time on the L4:** median 4.0 s per call, about 92 s per requirement (20 candidate pairs).
 - Llama's dev runs, the combination and the verification come after Qwen's variants.
 
@@ -107,6 +113,7 @@ All are explained in [`proposal-compliance.md`](proposal-compliance.md):
 - RQ1 with one seed instead of five.
 - A round-2 combination prompt as one more candidate for "best prompt".
 - A fresh dev baseline in the same session as the variants.
+- Strict parsing (LiSSA's rule) for every result; tolerant parsing only inside RQ4's error analysis. Reason: the proposal fixes the scoring to LiSSA's, and the published GPT-4o numbers use only the strict rule, while RQ4 asks which error types remain, and the missing tag is one of them.
 
 ## 8. Next steps
 

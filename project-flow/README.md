@@ -29,8 +29,8 @@ flowchart LR
 | RQ1 on Rahul's laptop | Running | Rahul's machine |
 | Dev split and frozen prompt texts | Done 14 Nov | `harness/data/split.json`, `harness/prompts/` |
 | RQ2/RQ3 dev passes (pipeline v2) | Running since 15 Nov 14:42 UTC | `harness/runs/pipeline-dev.log` |
-| — Qwen: baseline, definition | Done | `harness/runs/*qwen*__dev` |
-| — Qwen: summary, project, examples | Running / waiting | |
+| — Qwen: baseline, definition, summary | Done | `harness/runs/*qwen*__dev` |
+| — Qwen: project, examples | Running / waiting | |
 | — Llama: baseline + 4 variants | Waiting | |
 | — Round-2 combination, both models | Waiting | |
 | — Repeatability check (50 pairs per model) | Waiting | |
@@ -57,7 +57,7 @@ The rules were fixed before any result was seen:
 |---|---|
 | Best prompt per model | Highest average F1 on dev with strict parsing, among the baseline, the four variants and the round-2 combination |
 | τ | Highest average F1 of the baseline's dev verification, from {0.2, 0.4, 0.6, 0.8, 1.0} |
-| Parsing | Strict (LiSSA's rule) is primary; tolerant is a sensitivity check |
+| Parsing | Strict (LiSSA's rule) for every choice and result, as the proposal says ("exactly as LiSSA does"). Tolerant only in RQ4 (step 6) |
 | Verification details | "Unclear" counts as not supported; a link without claims has share 0 |
 | Unlinked requirements | Left out of the Wilcoxon tests |
 
@@ -84,7 +84,7 @@ python3 harness/analyze.py --parser strict test harness/runs/baseline__<model>__
 ```
 
 - Two-sided Wilcoxon signed-rank test on per-requirement F1, α = 0.05, Holm-corrected; effect size reported.
-- Tables: P, R, F1, F2 per project and averages, for every configuration on test; the same with tolerant parsing as a sensitivity check.
+- Tables: P, R, F1, F2 per project and averages, for every configuration on test, all with strict parsing (LiSSA's rule).
 
 ### Step 5. RQ1, final tables (both)
 
@@ -94,7 +94,8 @@ python3 harness/analyze.py --parser strict test harness/runs/baseline__<model>__
 ### Step 6. RQ4, errors (both, by 5 Dec)
 
 - **Sample:** from the best test configuration before and after verification, three pools: false links kept, false links removed, correct links lost. About 33 per pool, drawn with a fixed seed. If a pool is small, code all of it and fill from the others (up to 100).
-- **Coding:** start codes: lexical overlap only, interface or helper class, invented identifier, gold-standard gap, input cut short. Code 20 together, then 80 independently. Report Cohen's κ. A first codebook can be drafted from dev errors only.
+- **Coding:** start codes: lexical overlap only, interface or helper class, invented identifier, gold-standard gap, input cut short, **missing answer tag**. Code 20 together, then 80 independently. Report Cohen's κ. A first codebook can be drafted from dev errors only.
+- **Missing answer tag (counted, not sampled):** for every configuration, count the answers without the `<trace>` tag, and score the same answers once more with the tolerant rule (`--parser tolerant`). The difference from the strict F1 is what this error type costs. This is the **only** place tolerant scores appear, because the proposal fixes all other scoring to LiSSA's rule.
 
 ### Step 7. RQ4, runtime on a laptop (Rahul, after his RQ1 run)
 
@@ -124,6 +125,7 @@ python3 harness/analyze.py --parser strict test harness/runs/baseline__<model>__
 ## 5. Rules that must not change
 
 - No test-slice result is looked at before the dev choices are frozen and committed.
+- Every RQ1–RQ3 result is scored with LiSSA's strict rule; tolerant scores appear only in RQ4.
 - Same models (digests in `run.json`), Ollama 0.40.2, temperature 0, seed 133742243, context 16,384, answers capped at 4,096 tokens.
 - bge-m3 embeddings only; the top-20 candidates from RQ1 (`harness/data/candidates-rq1.json`).
 - One request at a time on the GPU (`OLLAMA_NUM_PARALLEL=1`); no other speed-ups that change run conditions.
@@ -136,7 +138,7 @@ python3 harness/analyze.py --parser strict test harness/runs/baseline__<model>__
 |---|---|
 | Colab ends a session after 24 hours | The pipeline saves to Drive every 2 minutes and skips finished steps. Resume: open the notebook with an L4 runtime, run cells 1–4, the hash-check cell, then `!bash /content/drive/MyDrive/lissa_start2.sh` (details in [`colab/README.md`](../colab/README.md)). |
 | Answers differ between sessions | Dev comparisons in one session; test split by requirement; the variability is measured and reported. |
-| Qwen leaves out the `<trace>` tag | Strict parsing stays primary (LiSSA's rule); tolerant parsing as a sensitivity check; reported as a finding. |
+| Qwen leaves out the `<trace>` tag | Results stay on LiSSA's strict rule, as the proposal requires; the tag errors are counted and costed in RQ4. |
 | Verification takes longer than estimated | It only removes links and can continue in a new session; verify only the baseline and the best prompt on test. |
 | Compute units | About 1,320 units left on 15 Nov; the whole plan needs about 250. |
 | The test runs slip | One week of slack before 28 Nov; the report can start on dev and RQ1 results. |
