@@ -1,6 +1,6 @@
 # How the project still matches the proposal
 
-Status: 15 November 2026. Proposal: [`proposal/CSI5187_Proposal_Singh_Rahul.pdf`](../proposal/CSI5187_Proposal_Singh_Rahul.pdf).
+Status: 16 November 2026 (dev passes done, choices frozen, test slice starting). Proposal: [`proposal/CSI5187_Proposal_Singh_Rahul.pdf`](../proposal/CSI5187_Proposal_Singh_Rahul.pdf).
 
 **Short answer:** the research design is the one in the proposal: same RQs, data, models, prompts, slices, metrics and tests.
 What changed is **where** the experiments run (a rented GPU instead of our laptops). The method did not change.
@@ -46,6 +46,8 @@ Temperature 0 makes a model pick its most likely word each time, but GPU arithme
 | Measurement | Result |
 |---|---|
 | Same 20 RQ1 questions asked again in a later Colab session | identical text 8 of 20, identical yes/no 17 of 20 |
+| Same 50 questions asked again within one session | same yes/no 49 of 50 (Qwen) and 46 of 50 (Llama); identical text only 36 and 9 of 50 |
+| Qwen, RQ1's answers vs. a fresh run in another session, all 1,020 dev pairs | same yes/no for 96.7% |
 | Qwen dev baseline, RQ1's answers vs. a fresh run (strict parsing) | average F1 0.235 vs. 0.208 |
 | Same, tolerant parsing | 0.337 vs. 0.332 |
 | GPT-4o in LiSSA's own package, three runs with different seeds | links overlap only 79–88% (Jaccard), but average F1 varies by less than 0.01 (dev 0.385–0.394) |
@@ -53,7 +55,8 @@ Temperature 0 makes a model pick its most likely word each time, but GPU arithme
 **Why this is acceptable, and how we handle it.**
 - It is a known threat: Sallou et al. [3] list output variability as a reproducibility threat, and OpenAI states that GPT-4o is not guaranteed to be deterministic either. Our variability is of the same kind as GPT-4o's own.
 - We follow Sallou et al.'s two guidelines. (1) **Measure it:** the re-asks and repeated runs above, plus a 50-pair check per model in the current session. (2) **Record what ran:** model digests, Ollama version, seed, settings, GPU type, and every prompt and answer with its time, all in this repository.
-- **Design:** all RQ2 comparisons on dev run in one Colab session (a fresh baseline was run for this reason); verification is compared within the same run; the test runs are split by requirement so that all configurations of a requirement are answered in the same session.
+- **Design:** all RQ2 comparisons on dev ran in one Colab session (a fresh baseline was run for this reason); verification is compared within the same run; the test runs are split by requirement so that all configurations of a requirement are answered close together.
+- **Within a session, too:** on the Colab GPU, answers vary slightly even within one session (2% of Qwen's and 8% of Llama's decisions in the re-ask check). For Qwen this is about as much as across sessions, so the variation comes from the GPU setup rather than from session breaks. It is random, so it adds noise to every configuration alike and does not favour any of them.
 - **Reading the results:** differences smaller than the measured run-to-run difference are not treated as effects. "On par with GPT-4o" is judged against GPT-4o's own spread.
 - Strict parsing varies more than tolerant parsing (0.027 vs. 0.005 above), because whether Qwen writes the `<trace>` tag changes between runs. This is reported as a finding.
 
@@ -90,7 +93,7 @@ LiSSA's significance runs used five seeds. At temperature 0, the seed made no di
 > A smoke test showed that one full RQ1 run takes about 27 hours on our 24 GB laptop, which made all RQ1–RQ3 configurations infeasible within the course timeline. We therefore ran RQ1–RQ3 with the identical software stack (Ollama 0.40.2, the same 4-bit model files, temperature 0, fixed seed, 16K context) on a single NVIDIA L4 GPU. No paid LLM API was used, and no model provider received any prompt. RQ4 runtimes were measured on a 24 GB M5 Pro laptop.
 
 **Threats to validity, output variability** (fill in the bracketed numbers when the runs finish):
-> We decode greedily (temperature 0, fixed seed), yet outputs are not bit-identical across GPU sessions, a reproducibility threat noted by Sallou et al. [3]. Following their guidelines, we measured it: re-asked prompts gave identical decisions in [X]% of cases within a session and 85% across sessions, and two full runs of the baseline on the development slice differed by 0.027 in average F1. LiSSA's own three GPT-4o runs have link-set Jaccard indices of 0.79–0.88 but differ by at most 0.009 in average F1. We ran all compared configurations of a slice in one session where possible, release all prompts, answers, model and runtime versions, and do not interpret differences smaller than the measured run-to-run difference.
+> We decode greedily (temperature 0, fixed seed), yet outputs are not bit-identical across GPU sessions, a reproducibility threat noted by Sallou et al. [3]. Following their guidelines, we measured it: re-asked prompts gave identical decisions in 98% (Qwen) and 92% (Llama) of cases within a session, and 96.7% of Qwen's 1,020 development decisions were identical across sessions, and two full runs of the baseline on the development slice differed by 0.027 in average F1. LiSSA's own three GPT-4o runs have link-set Jaccard indices of 0.79–0.88 but differ by at most 0.009 in average F1. We ran all compared configurations of a slice in one session where possible, release all prompts, answers, model and runtime versions, and do not interpret differences smaller than the measured run-to-run difference.
 
 **One sentence of the proposal to word more precisely.** The proposal says local open models "support reproducible research [3]". Sallou et al. warn that closed models change without notice; they do not claim that open models solve reproducibility. Suggested wording:
 > Closed models can change without notice, a reproducibility threat noted by Sallou et al. [3]; open weights can be pinned to an exact version.

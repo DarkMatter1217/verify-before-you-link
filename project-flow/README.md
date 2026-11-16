@@ -1,7 +1,7 @@
 # Project flow
 
 Where the project stands, what comes next, and how each step is done.
-Last updated: 15 November 2026, about 18:30 UTC.
+Last updated: 16 November 2026 (checkpoint after the dev passes).
 
 ## 1. The pipeline
 
@@ -28,18 +28,18 @@ flowchart LR
 | RQ1 on Colab L4 (both models, KISS, chain-of-thought, retrieval only) | Done 15 Nov 13:32 UTC | `LiSSA-RATLR-V2/lissa/results-local/rq1/` |
 | RQ1 on Rahul's laptop | Running | Rahul's machine |
 | Dev split and frozen prompt texts | Done 14 Nov | `harness/data/split.json`, `harness/prompts/` |
-| RQ2/RQ3 dev passes (pipeline v2) | Running since 15 Nov 14:42 UTC | `harness/runs/pipeline-dev.log` |
-| — Qwen: baseline, definition, summary | Done | `harness/runs/*qwen*__dev` |
-| — Qwen: project, examples | Running / waiting | |
-| — Llama: baseline + 4 variants | Waiting | |
-| — Round-2 combination, both models | Waiting | |
-| — Repeatability check (50 pairs per model) | Waiting | |
-| — Claim verification on dev, τ choice | Waiting | |
-| Test slice | Not started | |
+| RQ2/RQ3 dev passes (pipeline v2) | Done 16 Nov 11:26 UTC | `harness/runs/pipeline-dev.log` (summary at the end) |
+| — Both models: baseline + 4 variants, round-2 combination | Done | `harness/runs/*__dev/metrics.md` |
+| — Repeatability check | Done | NOISE lines in the log |
+| — Claim verification on dev, τ choice (0.2) | Done | `harness/runs/*__dev/verify-strict/` |
+| Freeze of the dev choices | Done 16 Nov, committed before any test call | `harness/FROZEN.md` |
+| Test slice | Starting 16 Nov | `harness/runs/pipeline-test.log` |
 | RQ4 error coding, laptop timings | Not started | |
 | Final report | Not started | |
 
-The dev passes should end around **16 Nov, 13:00–15:00 UTC**. Colab ends a session after 24 hours (about 14:18 UTC on 16 Nov), so verification may need one resume (see section 6).
+Dev results (strict average F1; GPT-4o 0.385): best prompt Qwen `examples` 0.308, Llama `definition+summary` 0.316; verification lowered F1 at every τ. Details: [`reports/progress-report.md`](../reports/progress-report.md), section 3.
+
+Steps 1 and 2 below are done; the test slice (step 3) runs with `colab/lissa_pipeline_test.sh`, started by `!bash /content/drive/MyDrive/lissa_start_test.sh` after setup cells 1–4.
 
 ## 3. What's next, and how
 

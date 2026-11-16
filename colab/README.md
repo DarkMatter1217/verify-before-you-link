@@ -9,6 +9,8 @@ RQ1–RQ3 run on Google Colab with an **NVIDIA L4** GPU, one session at a time. 
 | `lissa_pipeline2.sh` | Pipeline v2: both dev passes. For each model, a fresh baseline and the four variants, then the round-2 combination, the repeatability check, and claim verification. Finished steps are skipped. |
 | `lissa_rq23v2.py` | Helpers for the pipeline: choose the round-2 combination, find the best single variant, the repeatability checks, the dev summary. |
 | `lissa_start2.sh` | Starts Ollama and the autosave if needed, starts the pipeline as its own background process, and shows its progress. |
+| `lissa_pipeline_test.sh` | The test slice, run once with the choices in `harness/FROZEN.md`: per model, requirements in chunks (the first 10, 20, …, 110 per project), every configuration per chunk, verification of the baseline and the best prompt, then the Wilcoxon comparisons. Log: `harness/runs/pipeline-test.log`. |
+| `lissa_start_test.sh` | Like `lissa_start2.sh`, for the test pipeline. Run it with `!bash /content/drive/MyDrive/lissa_start_test.sh` after setup cells 1–4. |
 
 The three scripts are byte-for-byte the versions that ran (SHA-256 prefixes `06929e34ad74`, `a5980eaa19f1`, `d52c55258d51`). On Colab they live in `MyDrive/`.
 

@@ -2,16 +2,20 @@
 
 **Project:** Verify Before You Link: Local LLMs for Requirements Traceability (CSI5187, Fall 2026)
 **Team:** Prabhjot Singh and Rahul
-**Date:** 15 November 2026, about 18:30 UTC
+**Date:** 16 November 2026. Checkpoint: RQ1 done, RQ2/RQ3 dev passes done, choices frozen, test slice about to start.
 
 ## Summary
 
 - **RQ1 is done** on a Colab L4 GPU: LiSSA unchanged with Qwen2.5-Coder-14B and Llama-3.1-8B, all 20,480 model calls. A second RQ1 run is in progress on Rahul's laptop.
-- **Best local result:** Qwen with LiSSA's short (KISS) prompt reaches an average F1 of **0.348**, close to GPT-4o's 0.356 with the same prompt and 0.365 with chain-of-thought, on the same three projects.
-- **RQ2/RQ3 on the dev slice are running.** The Qwen baseline and the `definition` variant are done; `summary` is about three-quarters done. The dev passes should finish around 16 November, 13:00–15:00 UTC.
-- **Main problem so far:** Qwen often leaves out the `<trace>` tag that LiSSA's answer rule requires (65–78% of its chain-of-thought answers), which costs it recall.
+- **RQ1, best local result:** Qwen with LiSSA's short (KISS) prompt reaches an average F1 of **0.348**, close to GPT-4o's 0.356 with the same prompt and 0.365 with chain-of-thought, on the same three projects.
+- **RQ2 on dev:** what helps depends on how each model fails.
+  - Labelled examples fix Qwen's answer format: average F1 rises from 0.208 to **0.308**.
+  - A precise definition, plus a code summary, curbs Llama's over-linking: average F1 rises from 0.281 to **0.316**.
+  - The other kinds of information don't help.
+- **RQ3 on dev:** claim verification lowers F1 at every threshold, for both models.
+- **Against GPT-4o (dev average F1 0.385):** both models are below it on average, but each beats GPT-4o on one project: Llama on SMOS, Qwen on iTrust.
 - **Scoring:** as the proposal says ("exactly as LiSSA does"), every result uses LiSSA's own answer rule (strict parsing). A second, tolerant rule is used only in RQ4, to measure what the missing-tag error costs.
-- **Nothing has been run on the test slice.** It will be run once, after the dev choices are frozen.
+- **Freeze:** the best prompt per model and τ were frozen and committed before any test-slice call ([`harness/FROZEN.md`](../harness/FROZEN.md)). The test slice runs next.
 
 ## 1. Setup and checks
 
@@ -24,7 +28,7 @@
 | Dev/test split | 20/80 per project, seed 5187: dev 51 requirements (SMOS 13, eTour 12, iTrust 26), test 205. |
 | Software | Ollama 0.40.2; Qwen `9ec8897f747e`, Llama `46e0c10c039e`, both Q4_K_M; bge-m3; temperature 0; seed 133742243; context 16,384 tokens. |
 
-## 2. RQ1 results (Colab L4, one seed)
+## 2. RQ1 results (Colab L4, one seed, all 256 requirements)
 
 Averages over SMOS, eTour and iTrust. The published rows are recomputed over the same three projects (the paper's averages also include Dronology, which we cannot run). Full tables: [`rq1-report.md`](../LiSSA-RATLR-V2/lissa/results-local/rq1/rq1-report.md).
 
@@ -40,60 +44,70 @@ Averages over SMOS, eTour and iTrust. The published rows are recomputed over the
 | GPT-4o-mini, chain-of-thought (published) | 0.361 | 0.479 | 0.342 | 0.396 |
 | FTLR, optimised (published) | 0.351 | 0.475 | 0.398 | 0.439 |
 
-| F1 per project | SMOS | eTour | iTrust |
-|---|---|---|---|
-| Qwen, KISS | 0.304 | 0.480 | 0.261 |
-| Qwen, chain-of-thought | 0.200 | 0.392 | 0.151 |
-| Llama, KISS | 0.408 | 0.284 | 0.101 |
-| Llama, chain-of-thought | 0.394 | 0.310 | 0.089 |
-| GPT-4o, chain-of-thought | 0.294 | 0.526 | 0.276 |
-
 **Observations**
 1. A free 14B model on one GPU comes within about 0.01–0.02 average F1 of GPT-4o with LiSSA's KISS prompt.
 2. Chain-of-thought hurts Qwen: 3,277 of its 5,040 chain-of-thought answers have no `<trace>` tag and count as "no" under LiSSA's rule.
 3. Llama says "yes" often: high recall, low precision, and it fails on iTrust (F1 about 0.09–0.10).
-4. Retrieval limits recall: bge-m3's top 20 contain fewer gold links than the OpenAI embeddings in LiSSA's runs (recall 0.506 vs. 0.588 on average; eTour 0.666 vs. 0.815, iTrust 0.402 vs. 0.531). No classifier can find links that retrieval missed.
+4. Retrieval limits recall: bge-m3's top 20 contain fewer gold links than the OpenAI embeddings in LiSSA's runs (recall 0.506 vs. 0.588 on average). No classifier can find links that retrieval missed.
 
-## 3. RQ2/RQ3 on the dev slice (in progress)
+## 3. RQ2 and RQ3 on the dev slice (finished 16 Nov, 11:26 UTC)
 
-The pipeline runs both passes on dev: for each model, a fresh baseline plus the four variants, then the round-2 combination, a repeatability check, and claim verification (RQ3). GPT-4o chain-of-thought on the same dev slice reaches an average F1 of 0.385 (0.385–0.394 over LiSSA's three seeds).
+Average F1 with LiSSA's strict rule. GPT-4o chain-of-thought on the same slice: **0.385** (0.385–0.394 over LiSSA's three seeds; SMOS 0.267, eTour 0.601, iTrust 0.286).
 
-| Qwen2.5-Coder-14B, dev slice | Strict F1 (P / R) | Tolerant F1 | Answers without `<trace>` |
-|---|---|---|---|
-| Baseline, fresh run in this session | 0.208 (0.435 / 0.157) | 0.332 | 718 of 1,020 |
-| Baseline, RQ1's answers (earlier session) | 0.235 (0.429 / 0.187) | 0.337 | 685 of 1,020 |
-| + definition | 0.203 (0.532 / 0.138) | 0.325 | 764 of 1,020 |
-| + summary | 0.167 (0.355 / 0.127) | 0.323 | 794 of 1,020 |
-| + project, + examples | running | | |
+| Prompt | Qwen2.5-Coder-14B | Llama-3.1-8B |
+|---|---|---|
+| Baseline (LiSSA's prompt, fresh run) | 0.208 | 0.281 |
+| + definition | 0.203 | **0.312** |
+| + summary | 0.167 | 0.285 |
+| + project | 0.156 | 0.268 |
+| + examples | **0.308** | 0.157 |
+| Round-2 combination (rule fixed in advance) | definition+examples 0.307 | **definition+summary 0.316** |
+| **Best on dev** | **examples, 0.308** | **definition+summary, 0.316** |
 
-**Strict F1 is the result** (LiSSA's rule, as in the proposal). The tolerant column is shown only to explain the missing-tag problem; in the final report it appears only in RQ4 (see [`proposal-compliance.md`](proposal-compliance.md), section 2.5).
+**RQ2 observations**
+- **Qwen's problem is format, not judgement.** Most added information makes Qwen leave out the `<trace>` tag more often (718 → 764–808 of 1,020 answers). Labelled examples show the format and halve the missing tags (486), which lifts F1 by 0.10.
+- **Llama's problem is over-linking.** The baseline predicts 792 links at precision 0.225. The definition makes it stricter (precision 0.308; iTrust F1 0.084 → 0.158).
+- **The same information helps one model and hurts the other:** labelled examples make Llama far too cautious (recall 0.458 → 0.113).
+- **Per project, the local models beat GPT-4o in places:** Llama on SMOS (0.30–0.38 vs. 0.27) and Qwen's definition+examples on iTrust (0.298 vs. 0.286).
 
-- **Definition:** precision went up and recall went down; F1 is unchanged within noise.
-- **Summary:** strict F1 fell, mostly on eTour (0.389 → 0.232), because even more answers lack the tag. With the tolerant rule all three runs are within 0.01, so the added information hardly changes Qwen's actual judgement; it mainly hurts the answer format.
-- **Next important run:** `examples`, the only variant whose added text shows the `<trace>yes</trace>` format.
-- **Time on the L4:** median 4.0 s per call, about 92 s per requirement (20 candidate pairs).
-- Llama's dev runs, the combination and the verification come after Qwen's variants.
+**RQ3: claim verification**, average F1 by threshold τ ("unclear" counts as not supported):
+
+| Run | none | τ 0.2 | 0.4 | 0.6 | 0.8 | 1.0 |
+|---|---|---|---|---|---|---|
+| Qwen baseline | 0.208 | 0.159 | 0.145 | 0.109 | 0.055 | 0.015 |
+| Qwen examples | 0.308 | 0.267 | 0.256 | 0.183 | 0.113 | 0.042 |
+| Llama baseline | 0.281 | 0.250 | 0.218 | 0.192 | 0.163 | 0.106 |
+| Llama definition | 0.312 | 0.269 | 0.218 | 0.189 | 0.154 | 0.092 |
+| Llama definition+summary | 0.316 | 0.265 | 0.221 | 0.178 | 0.131 | 0.062 |
+
+- **τ chosen by the fixed rule:** 0.2.
+- **Qwen:** verification raises precision (examples: 0.505 → 0.625 at τ 0.2), but recall falls more.
+- **Llama:** precision barely moves; correct and wrong links are removed at about the same rate.
+- **Invented identifiers:** many claims cite classes or methods that don't exist in the file: 22–30% of Qwen's claims and 38–44% of Llama's.
+- **Sensitivity check:** counting "unclear" as supported changes little.
 
 ## 4. Repeatability
 
-| Check | Result |
-|---|---|
-| 20 RQ1 questions asked again in a later session | text identical 8/20; yes/no identical 17/20 |
-| Qwen dev baseline, two runs in different sessions | strict F1 0.235 vs. 0.208; tolerant 0.337 vs. 0.332 |
-| GPT-4o, LiSSA's three seeds (for comparison) | links overlap 79–88%; dev average F1 0.385–0.394 |
-| Within one session (50 pairs per model) | runs after classification (pending) |
+| Check | Qwen | Llama |
+|---|---|---|
+| 50 questions asked again in the same session: identical text | 36 of 50 | 9 of 50 |
+| … same yes/no decision | 49 of 50 (98%) | 46 of 50 (92%) |
+| RQ1's answers vs. a fresh run (another session), 1,020 dev pairs: same decision | 96.7% | to be computed offline |
+| Dev baseline F1, RQ1's answers vs. fresh run | 0.235 vs. 0.208 | — |
+| For comparison: GPT-4o, LiSSA's three seeds | links overlap 79–88%; dev average F1 0.385–0.394 | |
 
-Because answers differ slightly between sessions, all dev comparisons now run in one session, with a fresh baseline. See [`proposal-compliance.md`](proposal-compliance.md), section 2.2.
+- **On the Colab GPU, answers vary slightly even within one session.** For Qwen, this is about as much as between sessions.
+- **This is random noise, not bias.** Differences smaller than this run-to-run variation are not treated as effects. See [`proposal-compliance.md`](proposal-compliance.md), section 2.2.
 
 ## 5. Compute
 
-| Run | Where | Time |
-|---|---|---|
-| RQ1 | Colab L4 | 14 Nov 20:30 – 15 Nov 13:32 UTC (about 17 h) |
-| RQ2/RQ3 dev, both passes | Colab L4, one session | started 15 Nov 14:42 UTC; about 22–24 h expected |
-| RQ1, second run | Rahul's MacBook Pro (M5 Pro, 24 GB) | in progress |
+| Run | Where | Time | Compute units |
+|---|---|---|---|
+| RQ1 | Colab L4 | 14 Nov 20:30 – 15 Nov 13:32 UTC (about 17 h) | about 33 |
+| RQ2/RQ3 dev, both passes | Colab L4, one session | 15 Nov 14:42 – 16 Nov 11:26 UTC (about 21 h) | about 41 |
+| RQ1, second run | Rahul's MacBook Pro (M5 Pro, 24 GB) | in progress | — |
 
-Colab use is about 1.94 compute units per hour; about 1,320 units were left on 15 November.
+Colab use is about 1.94 compute units per hour; about 1,284 units were left on 16 November.
 
 ## 6. Problems and how they were solved
 
@@ -102,9 +116,9 @@ Colab use is about 1.94 compute units per hour; about 1,320 units were left on 1
 | Ollama's old embedding endpoint failed on long code files (HTTP 500) | LiSSA now uses Ollama's current endpoint; inputs are cut at bge-m3's 8,192-token limit |
 | Ollama silently cuts prompts beyond its default context | Context set to 16,384 tokens in LiSSA and on the Ollama server |
 | One RQ1 run takes about 27 h on a laptop | RQ1–RQ3 moved to a Colab L4 (the free Colab T4 was tested and was no faster than the laptop; Kaggle's free quota of 30 GPU hours a week was too small) |
-| Answers differ slightly between Colab sessions | Fresh same-session baseline; dev comparisons in one session; differences measured and reported |
-| Stopping a notebook cell also stopped the Ollama server | The pipeline now runs as a separate background process; the notebook only shows its progress |
-| An idle second Colab session doubled the cost | Closed; only one session runs at a time, checked every hour |
+| Answers differ slightly between runs, even within a session | Measured and reported; dev comparisons ran in one session; the test runs in chunks of requirements |
+| Stopping a notebook cell also stopped the Ollama server | The pipeline runs as a separate background process; the notebook only shows its progress |
+| An idle second Colab session doubled the cost | Closed; only one session runs at a time, checked every 50 minutes |
 
 ## 7. Changes from the original plan
 
@@ -119,14 +133,12 @@ All are explained in [`proposal-compliance.md`](proposal-compliance.md):
 
 Details and commands: [`project-flow/README.md`](../project-flow/README.md).
 
-1. Finish the dev passes (automatic, about 16 November midday UTC).
-2. Freeze the best prompt per model and τ, and record them with the date and file hashes.
-3. Run the test slice once (about 80–90 GPU hours, 17–21 November).
-4. Run the Wilcoxon tests and build the result tables (by 28 November).
-5. RQ4: code up to 100 errors (both authors, Cohen's κ) and measure laptop runtimes.
-6. Write the report (by mid-December; hard deadline 21 December).
+1. **Test slice** (starting 16 Nov): every variant, the best prompt and the 2×2 with verification, both models; about 95–100 GPU hours over about 5 Colab sessions.
+2. Wilcoxon tests and result tables (Rahul leads; by 24–28 November).
+3. RQ1: compare the Colab run with Rahul's laptop run; RQ4 runtime sample on Rahul's laptop.
+4. RQ4 error coding (both, Cohen's κ), by 5 December.
+5. Report, by mid-December (hard deadline 21 December).
 
 ## 9. Open decisions
 
 - **Which RQ1 run is the main result:** Rahul's laptop run (matches the proposal's wording) or the Colab run? Recommended: the laptop run as the main result and the Colab run as a second run that shows the run-to-run difference.
-- **Approval of the frozen dev choices** before the test runs start.
