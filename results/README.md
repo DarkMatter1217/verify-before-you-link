@@ -1,7 +1,7 @@
 # Results: where they are
 
 The results stay where the code writes them, so every script works on them in place. This page is the index.
-State: 2026-11-15 18:49 UTC. RQ2/RQ3 are still running; only finished runs are included (the log and saved answers are a snapshot of that moment).
+State: 16 November 2026. The dev passes of RQ2/RQ3 are complete (finished 11:26 UTC); the test slice has not been run yet.
 
 | What | Location |
 |---|---|
@@ -28,9 +28,21 @@ Each run folder has `metrics.md` (readable tables), `metrics.json`, `decisions.c
 |---|---|---|---|---|---|
 | 0.348 | 0.247 | 0.264 | 0.265 | 0.356 | 0.365 |
 
-**RQ2, dev slice, Qwen**, average F1 with LiSSA's strict rule (the reported result): fresh baseline 0.208, definition 0.203, summary 0.167. GPT-4o chain-of-thought on the same slice: 0.385.
+**RQ2/RQ3, dev slice**, average F1 with LiSSA's strict rule (the reported result; GPT-4o chain-of-thought on the same slice: 0.385):
 
-The run folders also contain tolerant-rule scores (0.332, 0.325, 0.323). They are used only in RQ4, to measure the cost of answers that lack the `<trace>` tag (see [`reports/proposal-compliance.md`](../reports/proposal-compliance.md), section 2.5).
+| Prompt | Qwen2.5-Coder-14B | Llama-3.1-8B |
+|---|---|---|
+| Baseline | 0.208 | 0.281 |
+| + definition | 0.203 | 0.312 |
+| + summary | 0.167 | 0.285 |
+| + project | 0.156 | 0.268 |
+| + examples | **0.308** | 0.157 |
+| Round-2 combination | definition+examples 0.307 | **definition+summary 0.316** |
+| Best prompt + verification, τ = 0.2 | 0.267 | 0.265 |
+
+Claim verification lowered F1 at every τ for both models. Full tables: `harness/runs/*__dev/metrics.md` and `.../verify-strict/metrics.md`; the summary is at the end of `harness/runs/pipeline-dev.log`. The choices frozen for the test slice are in [`harness/FROZEN.md`](../harness/FROZEN.md).
+
+The run folders also contain tolerant-rule scores. They are used only in RQ4, to measure the cost of answers that lack the `<trace>` tag (see [`reports/proposal-compliance.md`](../reports/proposal-compliance.md), section 2.5).
 
 ## Recomputing a table
 
