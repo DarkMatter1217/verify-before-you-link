@@ -42,7 +42,6 @@ This is why the change is larger than a few lines: it replaces one library call 
 | `run_rq1_benchmark.py` | Runs RQ1: LiSSA unchanged with Ollama, every configuration, then builds `rq1-report.md` with the published GPT-4o, GPT-4o-mini, VSM, LSI and FTLR numbers next to ours. Resumes after a stop. |
 | `LiSSA-RATLR-V2/lissa/local/` | Helpers for the runner: model settings (`models.conf`), a check that each model loads fully on the GPU before a run (`preflight.py`), configuration generation and result summaries. |
 | `LiSSA-RATLR-V2/lissa/env-template-ollama` | Tells LiSSA where Ollama runs. |
-| `run-local-benchmark.sh`, `LOCAL-OLLAMA.md` | An earlier one-command runner for a laptop, and its notes. |
 | `harness/` | Our Python code for RQ2 (prompt variants), RQ3 (claim verification) and the analysis (Wilcoxon, Holm). It copies LiSSA's prompt, retrieval candidates, answer parsing and metrics exactly. `harness/selftest.py` and `harness/check_rq1.py` prove this against LiSSA's own files. |
 | `colab/` | The two Colab notebooks and three scripts that ran RQ1–RQ3. See [`colab/README.md`](../colab/README.md). |
 

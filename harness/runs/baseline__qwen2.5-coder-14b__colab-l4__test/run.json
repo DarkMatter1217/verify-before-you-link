@@ -1,0 +1,47 @@
+{
+ "args": {
+  "variant": "baseline",
+  "model": "qwen2.5-coder:14b",
+  "slice": "test",
+  "projects": [
+   "SMOS",
+   "eTour_en",
+   "iTrust"
+  ],
+  "candidates": null,
+  "lissa_cache": null,
+  "limit": 20,
+  "hours": null,
+  "ollama_url": "http://127.0.0.1:11434",
+  "device": "colab-l4",
+  "run_id": "baseline__qwen2.5-coder-14b__colab-l4__test",
+  "dry_run": false
+ },
+ "options": {
+  "temperature": 0.0,
+  "seed": 133742243,
+  "num_predict": 4096,
+  "num_ctx": 16384
+ },
+ "ollama_version": "0.40.2",
+ "model_digest": "9ec8897f747e246e970bc5cfdda85d22f1123dc2e3d34978a010a75968716849",
+ "device": "colab-l4",
+ "finished": "2026-11-16T20:25:36",
+ "candidates": {
+  "file": "/content/LiSSA-Replication-Package/harness/data/candidates-rq1.json",
+  "sha256": "7cde755d62b57db7a2f2bdae62ad88992f233b845495107e69cda9ee8b6a6b14",
+  "source": {
+   "kind": "lissa-cache",
+   "path": "/content/LiSSA-Replication-Package/LiSSA-RATLR-V2/lissa/cache-local-r2c"
+  }
+ },
+ "split_sha256": "f62dd9ab7d3c63a8f53994eb3da1bfeb600152b06156a2be2e51e20d05505e33",
+ "variant_files_sha256": {},
+ "code_sha256": {
+  "lissa_compat.py": "1d6613ff894c8cbe24bf73ee3e5e3d570c82915ee52506fa064296bdb0499784",
+  "llm.py": "6b80cc95092d87e5c42a1998fb270e43ee73ce56a62814c509877a9efcb831e1",
+  "variants.py": "69580753ceddd2469a500c3baa8904426bce0114bcf196d83744f46565e9db76",
+  "run.py": "d73e34880c32e187961b27aa232451273f6c11611220342a5049e2ed5a92f783",
+  "javaparse.py": "a1fb3fb159a606897c21288bef8da2f15c3b9c509084d0601376601972fbe7a3"
+ }
+}

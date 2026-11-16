@@ -1,0 +1,11 @@
+UC11S1,HCPVisitBean
+UC11S1,MedicationBean
+UC11S1,TransactionType
+UC11S2,EditOfficeVisitAction
+UC11S2,EditPrescriptionAction
+UC11S2,LabProcHCPAction
+UC11S2,OfficeVisitBean
+UC11S2,TransactionType
+UC12,OperationalProfile
+UC13,DeclareHCPAction
+UC15S1,CPTCodesDAO

@@ -16,7 +16,7 @@ State: 16 November 2026. The dev passes of RQ2/RQ3 are complete (finished 11:26 
 | RQ2/RQ3 runs on dev (decisions, links, metrics, settings) | `harness/runs/<variant>__<model>__colab-l4__dev/` |
 | RQ2/RQ3 pipeline log | [`harness/runs/pipeline-dev.log`](../harness/runs/pipeline-dev.log) |
 | RQ2/RQ3 saved answers (every prompt's answer, with timing and token counts) | `harness/cache/<model>__colab-l4.jsonl` |
-| GPT-4o results used for comparison (LiSSA's own) | `LiSSA-RATLR-V2/lissa/results-r2c/`, `Evaluation-Req2Code*.xlsx`, `statistical-evaluation/` |
+| GPT-4o results used for comparison (LiSSA's own) | `LiSSA-RATLR-V2/lissa/results-r2c/`, `Evaluation-Req2Code.xlsx` |
 
 Each run folder has `metrics.md` (readable tables), `metrics.json`, `decisions.csv` (one row per candidate pair, with the model's answer) and `run.json` (model digest, settings, file hashes, time).
 

@@ -18,3 +18,8 @@ __pycache__/
 
 # Answers from trying things out on a laptop (the reported Colab runs are kept)
 harness/cache/*__apple-*.jsonl
+
+# Pipeline state and leftovers on Colab (not results)
+harness/runs/.markers/
+harness/runs/*-first*/
+*.tgz

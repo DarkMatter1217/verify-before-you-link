@@ -32,10 +32,9 @@ LiSSA (Fuchß et al., ICSE 2025) recovers them automatically: it retrieves the 2
 | `run_rq1_benchmark.py` | Runs RQ1 and writes `rq1-report.md` |
 | `harness/` | Our Python code for RQ2, RQ3 and the analysis, with its inputs (`data/`, `prompts/`), runs (`runs/`) and saved answers (`cache/`) |
 | `colab/` | The Colab notebooks and scripts that ran RQ1–RQ3 |
-| `Evaluation-Req2Code*.xlsx`, `statistical-evaluation/` | LiSSA's published numbers, read only |
-| `LOCAL-OLLAMA.md`, `run-local-benchmark.sh` | An earlier runner and notes for running on a laptop |
+| `Evaluation-Req2Code.xlsx` | LiSSA's published numbers, read only (the RQ1 report compares against them) |
 
-Left out of the original package because this project does not use them: LiSSA V1, the architecture-documentation datasets and results, the Dronology projects (their code is not redistributed, and the proposal excludes them) and the Docker files.
+Only deliverables are kept here. Left out: LiSSA V1, the architecture-documentation datasets and results, the Dronology projects (their code is not redistributed, and the proposal excludes them), the Docker files, the paper preprint, LiSSA's statistics scripts, earlier laptop runners and working notes, and temporary files from the runs.
 
 ## Running it
 
@@ -61,5 +60,5 @@ All model answers are saved, so every table can be recomputed without calling a 
 
 ## Credits
 
-- LiSSA and its replication package: D. Fuchß, T. Hey, J. Keim, H. Liu, N. Ewald, T. Thirolf, A. Koziolek, ICSE 2025, [doi:10.5281/zenodo.14714706](https://doi.org/10.5281/zenodo.14714706). MIT licence: [`LiSSA-RATLR-V2/LICENSE-replication-package.md`](LiSSA-RATLR-V2/LICENSE-replication-package.md). The package's original README is [`LiSSA-RATLR-V2/README-replication-package.md`](LiSSA-RATLR-V2/README-replication-package.md).
+- LiSSA and its replication package: D. Fuchß, T. Hey, J. Keim, H. Liu, N. Ewald, T. Thirolf, A. Koziolek, ICSE 2025, [doi:10.5281/zenodo.14714706](https://doi.org/10.5281/zenodo.14714706). MIT licence: [`LiSSA-RATLR-V2/LICENSE-replication-package.md`](LiSSA-RATLR-V2/LICENSE-replication-package.md).
 - Datasets: the CoEST traceability datasets (SMOS, eTour, iTrust), as distributed with LiSSA's package.

@@ -26,7 +26,6 @@ Every Ollama call's timing and token counts are kept (RQ4).
 | `analyze.py` | Chooses the variant and τ on dev; on test, per-requirement F1 with Wilcoxon and Holm |
 | `check_rq1.py` | Checks the harness against RQ1's outputs (candidates, cache keys, links, metrics) |
 | `selftest.py` | Checks that need no RQ1 output |
-| `RQ2_RQ3_INSTRUCTIONS.md` | Instructions and technical details, written when RQ2 and RQ3 were planned on Rahul's laptop. The runs moved to Colab (see `../colab/README.md`); Part B is still the technical reference |
 
 ## Workflow
 

@@ -30,7 +30,7 @@ for M in $MODELS; do
     done_ test-$T-L$N && continue
     say "TEST $M: chunk up to $N requirements per project"
     for v in $CONFIGS; do
-      python3 harness/run.py --variant $v --model $M --slice test --limit $N --device $D
+      python3 harness/run.py --variant $v --model $M --slice test --limit $N --device $D --run-id "${v}__${T}__${D}__test"
     done
     for v in baseline $B; do
       python3 harness/verify.py --run "$(run_dir $v $T)" --parser strict --device $D

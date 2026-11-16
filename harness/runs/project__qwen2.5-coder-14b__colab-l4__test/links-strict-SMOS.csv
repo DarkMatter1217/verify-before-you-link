@@ -1,0 +1,15 @@
+SMOS1,LoginException
+SMOS10,Role
+SMOS10,ServletShowUserRoleForm
+SMOS11,ServletAddRemoveTeachingsAsAddress
+SMOS11,ServletShowTeacherTeachingFormByClass
+SMOS11,Teaching
+SMOS15,Classroom
+SMOS15,ManagerClassroom
+SMOS17,Address
+SMOS17,ManagerAddress
+SMOS19,Address
+SMOS19,ManagerAddress
+SMOS2,LoginException
+SMOS2,User
+SMOS20,Address
