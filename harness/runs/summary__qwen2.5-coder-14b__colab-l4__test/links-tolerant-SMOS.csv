@@ -237,3 +237,14 @@ SMOS66,ServletLoadClassByAccademicYear
 SMOS66,ServletLoadReport
 SMOS66,ServletLoadYear
 SMOS66,ServletShowStudentsByClass
+SMOS7,ServletShowUserDetails
+SMOS7,User
+SMOS7,UserListItem
+SMOS7,managerUser
+SMOS8,ServletUpdateUser
+SMOS8,User
+SMOS8,UserListItem
+SMOS9,DeleteAdministratorException
+SMOS9,DeleteManagerException
+SMOS9,ServletDeleteUser
+SMOS9,UserListItem

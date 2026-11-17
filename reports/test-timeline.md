@@ -66,3 +66,25 @@ The tables come from `reports/test_progress.py`.
 - **The gap to GPT-4o has settled at about 0.04–0.05 F1.** It was 0.04 after chunk 1, 0.015 after chunk 2 and 0.035 after chunk 3; it narrows on iTrust and widens on SMOS.
 - **Verification keeps lowering F1** (examples 0.305 → 0.264): precision rises (0.548 → 0.611), but recall drops more. RQ3's negative result from dev holds.
 - These are partial results over about 70–78% of the test requirements; the final numbers and the Wilcoxon tests come once all 205 are scored.
+
+## 2026-11-17 16:06 UTC — Session 2 running normally
+
+- **Health check one hour into session 2:** exactly 1 active session at about 1.94 units per hour; 1,235.8 units left. Drive saved at 16:03 UTC. No new error since the restart (the only Traceback in the log is the folder-name issue fixed on Nov 16).
+- **After the restart:** chunk 6 finished at 15:57 UTC, including verification of the baseline's 548 and `examples`' 432 accepted links. All prompts have now scored 160 requirements.
+- **Now:** Qwen chunk 7 (iTrust only, up to 70 per project), the baseline at 3,276 of 3,400 pairs.
+
+**qwen2.5-coder-14b** (test slice, strict parsing)
+
+| Prompt | Requirements scored | Avg. F1 | P / R | F1 SMOS / eTour / iTrust | With verification, tau 0.2 | GPT-4o on the same requirements |
+|---|---|---|---|---|---|---|
+| baseline | 160 | 0.241 | 0.398 / 0.210 | 0.212 / 0.384 / 0.126 | 0.207 (P 0.477, R 0.160; 160 requirements) | 0.344–0.349 |
+| definition | 160 | 0.191 | 0.499 / 0.131 | 0.137 / 0.264 / 0.173 |  | 0.344–0.349 |
+| summary | 160 | 0.212 | 0.360 / 0.182 | 0.178 / 0.330 / 0.129 |  | 0.344–0.349 |
+| project | 160 | 0.208 | 0.420 / 0.167 | 0.185 / 0.287 / 0.152 |  | 0.344–0.349 |
+| examples (frozen best) | 160 | 0.310 | 0.558 / 0.263 | 0.201 / 0.495 / 0.234 | 0.261 (P 0.612, R 0.195; 160 requirements) | 0.344–0.349 |
+
+**Inferences so far**
+- **Every prompt has now scored the same 160 requirements** (all of SMOS and eTour, 60 of iTrust's 105), so the comparison between prompts is like for like.
+- **`examples` holds its lead:** 0.310 vs the baseline's 0.241 (+0.07). Every other kind of added information stays below the baseline.
+- **The gap to GPT-4o is about 0.035–0.04** (0.310 vs 0.344–0.349). It comes mostly from SMOS (0.20 vs about 0.29). On iTrust, the remaining requirements will decide it.
+- **Verification lowers F1 for both prompts** (examples 0.310 → 0.261, baseline 0.241 → 0.207) while raising precision. RQ3's negative result keeps holding.

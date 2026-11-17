@@ -115,3 +115,7 @@ SMOS65,RegisterLine
 SMOS65,ServletShowJustifyList
 SMOS66,Classroom
 SMOS66,ServletLoadYear
+SMOS7,User
+SMOS7,UserListItem
+SMOS8,UserListItem
+SMOS9,UserListItem

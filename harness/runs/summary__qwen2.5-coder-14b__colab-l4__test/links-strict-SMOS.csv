@@ -141,3 +141,9 @@ SMOS66,ManagerVotes
 SMOS66,Report
 SMOS66,ServletLoadClassByAccademicYear
 SMOS66,ServletShowStudentsByClass
+SMOS7,UserListItem
+SMOS7,managerUser
+SMOS8,UserListItem
+SMOS9,DeleteAdministratorException
+SMOS9,DeleteManagerException
+SMOS9,UserListItem

@@ -108,3 +108,10 @@ SMOS65,ServletShowRegister
 SMOS66,ManagerClassroom
 SMOS66,ServletLoadReport
 SMOS66,ServletShowStudentsByClass
+SMOS7,ServletShowUserDetails
+SMOS7,UserListItem
+SMOS7,managerUser
+SMOS8,ServletUpdateUser
+SMOS8,User
+SMOS8,UserListItem
+SMOS9,ServletDeleteUser

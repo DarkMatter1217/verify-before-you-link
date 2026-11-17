@@ -17439,3 +17439,955 @@ Device: colab-l4. 3200 pairs; 2940 already answered; 260 to ask qwen2.5-coder:14
 [3162/3200] iTrust UC31S1.txt #2 EditOfficeVisitForm.java: no (no tag) (6.6 s; about 0.0 h left)
 [3163/3200] iTrust UC31S1.txt #3 AgeFactor.java: no (no tag) (3.6 s; about 0.0 h left)
 [3164/3200] iTrust UC31S1.txt #4 PrescriptionReportBean.java: yes (5.6 s; about 0.0 h left)
+=== 2026-11-17T15:03:54Z TEST PIPELINE: frozen choices (qwen: examples, llama: definition+summary, tau 0.2, strict parsing)
+=== 2026-11-17T15:05:25Z TEST qwen2.5-coder:14b: chunk up to 60 requirements per project
+Device: colab-l4. 3200 pairs; 3200 already answered; 0 to ask qwen2.5-coder:14b.
+# baseline with qwen2.5-coder:14b on colab-l4, test slice (first 60 per project)
+
+## Strict parsing
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 163 | 105 | 58 | 723 | 0.644 | 0.127 | 0.212 | 0.151 |
+| eTour_en | 46 | 235 | 176 | 79 | 97 | 156 | 0.449 | 0.336 | 0.384 | 0.354 |
+| iTrust | 60 | 125 | 209 | 21 | 188 | 104 | 0.100 | 0.168 | 0.126 | 0.148 |
+| Avg. |  |  |  |  |  |  | 0.398 | 0.210 | 0.241 | 0.218 |
+| w. Avg. |  |  |  |  |  |  | 0.548 | 0.173 | 0.237 | 0.191 |
+
+## Tolerant parsing
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 239 | 164 | 75 | 664 | 0.686 | 0.198 | 0.307 | 0.231 |
+| eTour_en | 46 | 235 | 243 | 124 | 119 | 111 | 0.510 | 0.528 | 0.519 | 0.524 |
+| iTrust | 60 | 125 | 239 | 36 | 203 | 89 | 0.151 | 0.288 | 0.198 | 0.244 |
+| Avg. |  |  |  |  |  |  | 0.449 | 0.338 | 0.341 | 0.333 |
+| w. Avg. |  |  |  |  |  |  | 0.595 | 0.273 | 0.338 | 0.290 |
+
+- Pairs: 3200; answers from {'ollama': 0, 'harness-cache': 3200, 'lissa-rq1': 0}
+- Without a <trace> tag: 2178; cut at 4096 answer tokens: 0
+- Per call: median 4.1 s (IQR 3.0-5.7 s, n = 3200)
+- Per requirement: median 92.4 s (IQR 81.9-103.0 s, n = 160)
+
+Run folder: /content/LiSSA-Replication-Package/harness/runs/baseline__qwen2.5-coder-14b__colab-l4__test
+Device: colab-l4. 3200 pairs; 3200 already answered; 0 to ask qwen2.5-coder:14b.
+# definition with qwen2.5-coder:14b on colab-l4, test slice (first 60 per project)
+
+## Strict parsing
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 79 | 62 | 17 | 766 | 0.785 | 0.075 | 0.137 | 0.091 |
+| eTour_en | 46 | 235 | 91 | 43 | 48 | 192 | 0.473 | 0.183 | 0.264 | 0.209 |
+| iTrust | 60 | 125 | 71 | 17 | 54 | 108 | 0.239 | 0.136 | 0.173 | 0.149 |
+| Avg. |  |  |  |  |  |  | 0.499 | 0.131 | 0.191 | 0.150 |
+| w. Avg. |  |  |  |  |  |  | 0.666 | 0.103 | 0.166 | 0.121 |
+
+## Tolerant parsing
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 112 | 92 | 20 | 736 | 0.821 | 0.111 | 0.196 | 0.134 |
+| eTour_en | 46 | 235 | 157 | 93 | 64 | 142 | 0.592 | 0.396 | 0.474 | 0.424 |
+| iTrust | 60 | 125 | 98 | 33 | 65 | 92 | 0.337 | 0.264 | 0.296 | 0.276 |
+| Avg. |  |  |  |  |  |  | 0.584 | 0.257 | 0.322 | 0.278 |
+| w. Avg. |  |  |  |  |  |  | 0.725 | 0.184 | 0.261 | 0.207 |
+
+- Pairs: 3200; answers from {'ollama': 0, 'harness-cache': 3200, 'lissa-rq1': 0}
+- Without a <trace> tag: 2430; cut at 4096 answer tokens: 0
+- Per call: median 4.4 s (IQR 3.4-5.7 s, n = 3200)
+- Per requirement: median 95.7 s (IQR 83.4-108.7 s, n = 160)
+
+Run folder: /content/LiSSA-Replication-Package/harness/runs/definition__qwen2.5-coder-14b__colab-l4__test
+Device: colab-l4. 3200 pairs; 3164 already answered; 36 to ask qwen2.5-coder:14b.
+[3165/3200] iTrust UC31S1.txt #5 ViewPrescriptionRenewalNeedsAction.java: no (no tag) (77.5 s; about 0.8 h left)
+[3166/3200] iTrust UC31S1.txt #6 HCPLinkBean.java: no (no tag) (5.4 s; about 0.4 h left)
+[3167/3200] iTrust UC31S1.txt #7 PrescriptionBean.java: yes (5.0 s; about 0.3 h left)
+[3168/3200] iTrust UC31S1.txt #8 HCPDiagnosisBean.java: no (no tag) (5.5 s; about 0.2 h left)
+[3169/3200] iTrust UC31S1.txt #9 PatientRiskFactor.java: no (no tag) (3.3 s; about 0.2 h left)
+[3170/3200] iTrust UC31S1.txt #10 TransactionType.java: yes (9.5 s; about 0.1 h left)
+[3171/3200] iTrust UC31S1.txt #11 PrescriptionAlerts.java: no (no tag) (3.1 s; about 0.1 h left)
+[3172/3200] iTrust UC31S1.txt #12 ReferralBean.java: no (no tag) (2.6 s; about 0.1 h left)
+[3173/3200] iTrust UC31S1.txt #13 PrescriptionReportAction.java: yes (7.2 s; about 0.1 h left)
+[3174/3200] iTrust UC31S1.txt #14 ViewExpiredPrescriptionsAction.java: yes (no tag) (6.6 s; about 0.1 h left)
+[3175/3200] iTrust UC31S1.txt #15 CholesterolFactor.java: no (no tag) (2.5 s; about 0.1 h left)
+[3176/3200] iTrust UC31S1.txt #16 AdverseEventBean.java: no (no tag) (5.2 s; about 0.1 h left)
+[3177/3200] iTrust UC31S1.txt #17 OfficeVisitBean.java: no (no tag) (5.4 s; about 0.1 h left)
+[3178/3200] iTrust UC31S1.txt #18 VisitReminderReturnForm.java: no (no tag) (2.5 s; about 0.1 h left)
+[3179/3200] iTrust UC31S1.txt #19 ViewMyReportRequestsAction.java: no (no tag) (5.3 s; about 0.1 h left)
+[3180/3200] iTrust UC31S1.txt #20 ViewOfficeVisitAction.java: yes (7.7 s; about 0.1 h left)
+[3181/3200] iTrust UC32E1.txt #1 NoHealthRecordsException.java: no (no tag) (2.9 s; about 0.0 h left)
+[3182/3200] iTrust UC32E1.txt #2 PatientRiskFactor.java: no (no tag) (2.8 s; about 0.0 h left)
+[3183/3200] iTrust UC32E1.txt #3 Role.java: no (no tag) (2.6 s; about 0.0 h left)
+[3184/3200] iTrust UC32E1.txt #4 OfficeVisitDAO.java: no (no tag) (8.8 s; about 0.0 h left)
+[3185/3200] iTrust UC32E1.txt #5 VisitFlag.java: no (no tag) (4.0 s; about 0.0 h left)
+[3186/3200] iTrust UC32E1.txt #6 ViewMyRecordsAction.java: no (7.2 s; about 0.0 h left)
+[3187/3200] iTrust UC32E1.txt #7 PatientDAO.java: no (10.2 s; about 0.0 h left)
+[3188/3200] iTrust UC32E1.txt #8 EditPHRAction.java: no (7.8 s; about 0.0 h left)
+[3189/3200] iTrust UC32E1.txt #9 PatientVisitBean.java: no (no tag) (4.0 s; about 0.0 h left)
+[3190/3200] iTrust UC32E1.txt #10 HCPDiagnosisBean.java: no (no tag) (3.1 s; about 0.0 h left)
+[3191/3200] iTrust UC32E1.txt #11 ErrorList.java: no (no tag) (2.8 s; about 0.0 h left)
+[3192/3200] iTrust UC32E1.txt #12 ViewMyReportRequestsAction.java: no (no tag) (5.3 s; about 0.0 h left)
+[3193/3200] iTrust UC32E1.txt #13 GetVisitRemindersAction.java: no (no tag) (9.2 s; about 0.0 h left)
+[3194/3200] iTrust UC32E1.txt #14 AgeFactor.java: no (no tag) (3.8 s; about 0.0 h left)
+[3195/3200] iTrust UC32E1.txt #15 CholesterolFactor.java: no (no tag) (2.7 s; about 0.0 h left)
+[3196/3200] iTrust UC32E1.txt #16 iTrustException.java: no (no tag) (2.7 s; about 0.0 h left)
+[3197/3200] iTrust UC32E1.txt #17 PatientValidator.java: no (no tag) (3.8 s; about 0.0 h left)
+[3198/3200] iTrust UC32E1.txt #18 ReferralBean.java: no (no tag) (3.0 s; about 0.0 h left)
+[3199/3200] iTrust UC32E1.txt #19 EditOfficeVisitAction.java: no (no tag) (7.1 s; about 0.0 h left)
+[3200/3200] iTrust UC32E1.txt #20 EditOfficeVisitForm.java: no (no tag) (4.5 s; about 0.0 h left)
+# summary with qwen2.5-coder:14b on colab-l4, test slice (first 60 per project)
+
+## Strict parsing
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 149 | 87 | 62 | 741 | 0.584 | 0.105 | 0.178 | 0.126 |
+| eTour_en | 46 | 235 | 177 | 68 | 109 | 167 | 0.384 | 0.289 | 0.330 | 0.304 |
+| iTrust | 60 | 125 | 169 | 19 | 150 | 106 | 0.112 | 0.152 | 0.129 | 0.142 |
+| Avg. |  |  |  |  |  |  | 0.360 | 0.182 | 0.212 | 0.191 |
+| w. Avg. |  |  |  |  |  |  | 0.495 | 0.146 | 0.203 | 0.163 |
+
+## Tolerant parsing
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 250 | 165 | 85 | 663 | 0.660 | 0.199 | 0.306 | 0.232 |
+| eTour_en | 46 | 235 | 277 | 129 | 148 | 106 | 0.466 | 0.549 | 0.504 | 0.530 |
+| iTrust | 60 | 125 | 230 | 39 | 191 | 86 | 0.170 | 0.312 | 0.220 | 0.267 |
+| Avg. |  |  |  |  |  |  | 0.432 | 0.353 | 0.343 | 0.343 |
+| w. Avg. |  |  |  |  |  |  | 0.570 | 0.280 | 0.336 | 0.294 |
+
+- Pairs: 3200; answers from {'ollama': 36, 'harness-cache': 3164, 'lissa-rq1': 0}
+- Without a <trace> tag: 2430; cut at 4096 answer tokens: 0
+- Per call: median 4.3 s (IQR 3.1-6.1 s, n = 3200)
+- Per requirement: median 100.5 s (IQR 85.7-110.3 s, n = 160)
+
+Run folder: /content/LiSSA-Replication-Package/harness/runs/summary__qwen2.5-coder-14b__colab-l4__test
+Device: colab-l4. 3200 pairs; 2940 already answered; 260 to ask qwen2.5-coder:14b.
+[1001/3200] SMOS SMOS67.txt #1 RegisterLine.txt: no (no tag) (2.6 s; about 0.2 h left)
+[1002/3200] SMOS SMOS67.txt #2 ServletShowNoteDetails.txt: no (no tag) (2.7 s; about 0.2 h left)
+[1003/3200] SMOS SMOS67.txt #3 ServletInsertNewNote.txt: no (no tag) (3.1 s; about 0.2 h left)
+[1004/3200] SMOS SMOS67.txt #4 ServletShowJustifyList.txt: no (no tag) (3.0 s; about 0.2 h left)
+[1005/3200] SMOS SMOS67.txt #5 ServletUpdateRegister.txt: no (no tag) (5.1 s; about 0.2 h left)
+[1006/3200] SMOS SMOS67.txt #6 ServletShowClassroomManagement.txt: no (no tag) (5.5 s; about 0.3 h left)
+[1007/3200] SMOS SMOS67.txt #7 ServletAssignParentStudent.txt: no (no tag) (3.1 s; about 0.3 h left)
+[1008/3200] SMOS SMOS67.txt #8 ServletShowNoteList.txt: no (no tag) (2.9 s; about 0.2 h left)
+[1009/3200] SMOS SMOS67.txt #9 ServletShowRegister.txt: no (no tag) (2.9 s; about 0.2 h left)
+[1010/3200] SMOS SMOS67.txt #10 ServletShowUserClassroomForm.txt: no (no tag) (2.3 s; about 0.2 h left)
+[1011/3200] SMOS SMOS67.txt #11 ServletShowJustifyDetails.txt: no (no tag) (2.9 s; about 0.2 h left)
+[1012/3200] SMOS SMOS67.txt #12 ServletInsertUser.txt: no (no tag) (2.9 s; about 0.2 h left)
+[1013/3200] SMOS SMOS67.txt #13 ServletDeleteNote.txt: no (no tag) (2.8 s; about 0.2 h left)
+[1014/3200] SMOS SMOS67.txt #14 ServletComputateStatistics.txt: no (no tag) (3.8 s; about 0.2 h left)
+[1015/3200] SMOS SMOS67.txt #15 ServletLogout.txt: no (no tag) (2.4 s; about 0.2 h left)
+[1016/3200] SMOS SMOS67.txt #16 ServletShowUserRoleForm.txt: no (no tag) (3.0 s; about 0.2 h left)
+[1017/3200] SMOS SMOS67.txt #17 ServletAssignStudentClassroom.txt: no (no tag) (2.7 s; about 0.2 h left)
+[1018/3200] SMOS SMOS67.txt #18 ServletAddTeachingAsTeacher.txt: no (no tag) (3.0 s; about 0.2 h left)
+[1019/3200] SMOS SMOS67.txt #19 ServletDeleteClassroom.txt: no (no tag) (2.9 s; about 0.2 h left)
+[1020/3200] SMOS SMOS67.txt #20 ServletInsertJustify.txt: no (no tag) (1.0 s; about 0.2 h left)
+[1021/3200] SMOS SMOS7.txt #1 UserListItem.txt: yes (5.1 s; about 0.2 h left)
+[1022/3200] SMOS SMOS7.txt #2 managerUser.txt: yes (no tag) (5.0 s; about 0.2 h left)
+[1023/3200] SMOS SMOS7.txt #3 ServletShowUserDetails.txt: yes (no tag) (3.8 s; about 0.2 h left)
+[1024/3200] SMOS SMOS7.txt #4 User.txt: yes (4.8 s; about 0.2 h left)
+[1025/3200] SMOS SMOS7.txt #5 DeleteAdministratorException.txt: no (no tag) (2.7 s; about 0.2 h left)
+[1026/3200] SMOS SMOS7.txt #6 ServletShowUserList.txt: no (no tag) (2.2 s; about 0.2 h left)
+[1027/3200] SMOS SMOS7.txt #7 DeleteManagerException.txt: no (no tag) (2.5 s; about 0.2 h left)
+[1028/3200] SMOS SMOS7.txt #8 ServletShowUserClassroomForm.txt: no (no tag) (2.5 s; about 0.2 h left)
+[1029/3200] SMOS SMOS7.txt #9 ServletInitialize.txt: no (no tag) (2.4 s; about 0.2 h left)
+[1030/3200] SMOS SMOS7.txt #10 ServletShowUserRoleForm.txt: no (no tag) (4.9 s; about 0.2 h left)
+[1031/3200] SMOS SMOS7.txt #11 ServletDeleteUser.txt: no (no tag) (2.7 s; about 0.2 h left)
+[1032/3200] SMOS SMOS7.txt #12 ServletLogout.txt: no (no tag) (2.2 s; about 0.2 h left)
+[1033/3200] SMOS SMOS7.txt #13 ServletShowAddressDetails.txt: no (no tag) (1.9 s; about 0.2 h left)
+[1034/3200] SMOS SMOS7.txt #14 ServletShowUserTeachingFormByCourse.txt: no (no tag) (2.4 s; about 0.2 h left)
+[1035/3200] SMOS SMOS7.txt #15 Role.txt: no (no tag) (2.0 s; about 0.2 h left)
+[1036/3200] SMOS SMOS7.txt #16 ServletInsertUser.txt: no (no tag) (2.6 s; about 0.2 h left)
+[1037/3200] SMOS SMOS7.txt #17 ServletUpdateUser.txt: no (no tag) (0.9 s; about 0.2 h left)
+[1038/3200] SMOS SMOS7.txt #18 ServletAssignRole.txt: no (no tag) (3.0 s; about 0.2 h left)
+[1039/3200] SMOS SMOS7.txt #19 ManagerAddress.txt: no (no tag) (5.0 s; about 0.2 h left)
+[1040/3200] SMOS SMOS7.txt #20 ServletAlterPersonalDate.txt: no (no tag) (1.2 s; about 0.2 h left)
+[1041/3200] SMOS SMOS8.txt #1 ServletUpdateUser.txt: yes (no tag) (5.3 s; about 0.2 h left)
+[1042/3200] SMOS SMOS8.txt #2 DeleteAdministratorException.txt: no (no tag) (2.6 s; about 0.2 h left)
+[1043/3200] SMOS SMOS8.txt #3 ServletAlterPersonalDate.txt: no (no tag) (0.6 s; about 0.2 h left)
+[1044/3200] SMOS SMOS8.txt #4 UserListItem.txt: yes (6.7 s; about 0.2 h left)
+[1045/3200] SMOS SMOS8.txt #5 ServletDeleteUser.txt: no (no tag) (2.5 s; about 0.2 h left)
+[1046/3200] SMOS SMOS8.txt #6 managerUser.txt: no (no tag) (4.1 s; about 0.2 h left)
+[1047/3200] SMOS SMOS8.txt #7 ServletShowUserDetails.txt: no (no tag) (3.0 s; about 0.2 h left)
+[1048/3200] SMOS SMOS8.txt #8 DeleteManagerException.txt: no (no tag) (2.6 s; about 0.2 h left)
+[1049/3200] SMOS SMOS8.txt #9 ServletAssignRole.txt: no (no tag) (2.7 s; about 0.2 h left)
+[1050/3200] SMOS SMOS8.txt #10 ServletInsertUser.txt: no (no tag) (3.6 s; about 0.2 h left)
+[1051/3200] SMOS SMOS8.txt #11 ServletInitialize.txt: no (no tag) (2.8 s; about 0.2 h left)
+[1052/3200] SMOS SMOS8.txt #12 ServletShowUserRoleForm.txt: no (no tag) (2.6 s; about 0.2 h left)
+[1053/3200] SMOS SMOS8.txt #13 ServletAssignParentStudent.txt: no (no tag) (2.9 s; about 0.2 h left)
+[1054/3200] SMOS SMOS8.txt #14 ServletShowAddressDetails.txt: no (no tag) (2.7 s; about 0.2 h left)
+[1055/3200] SMOS SMOS8.txt #15 User.txt: yes (no tag) (4.3 s; about 0.2 h left)
+[1056/3200] SMOS SMOS8.txt #16 ServletShowUserList.txt: no (no tag) (2.3 s; about 0.2 h left)
+[1057/3200] SMOS SMOS8.txt #17 ServletShowUserClassroomForm.txt: no (no tag) (2.4 s; about 0.2 h left)
+[1058/3200] SMOS SMOS8.txt #18 Role.txt: no (no tag) (2.3 s; about 0.2 h left)
+[1059/3200] SMOS SMOS8.txt #19 ServletShowTeachingDetails.txt: no (no tag) (2.5 s; about 0.2 h left)
+[1060/3200] SMOS SMOS8.txt #20 ServletShowNoteDetails.txt: no (no tag) (2.5 s; about 0.2 h left)
+[1061/3200] SMOS SMOS9.txt #1 DeleteAdministratorException.txt: no (4.5 s; about 0.2 h left)
+[1062/3200] SMOS SMOS9.txt #2 DeleteManagerException.txt: no (4.7 s; about 0.2 h left)
+[1063/3200] SMOS SMOS9.txt #3 ServletDeleteUser.txt: yes (no tag) (3.7 s; about 0.2 h left)
+[1064/3200] SMOS SMOS9.txt #4 ServletLogout.txt: no (no tag) (2.3 s; about 0.2 h left)
+[1065/3200] SMOS SMOS9.txt #5 ServletAssignRole.txt: no (no tag) (2.9 s; about 0.2 h left)
+[1066/3200] SMOS SMOS9.txt #6 ServletDeleteTeaching.txt: no (no tag) (2.8 s; about 0.2 h left)
+[1067/3200] SMOS SMOS9.txt #7 ServletShowUserList.txt: no (no tag) (2.9 s; about 0.2 h left)
+[1068/3200] SMOS SMOS9.txt #8 ServletShowUserRoleForm.txt: no (no tag) (3.0 s; about 0.2 h left)
+[1069/3200] SMOS SMOS9.txt #9 ServletUpdateUser.txt: no (no tag) (3.0 s; about 0.2 h left)
+[1070/3200] SMOS SMOS9.txt #10 UserListItem.txt: yes (6.0 s; about 0.2 h left)
+[1071/3200] SMOS SMOS9.txt #11 ServletInsertUser.txt: no (no tag) (2.7 s; about 0.2 h left)
+[1072/3200] SMOS SMOS9.txt #12 ServletDeleteAddress.txt: no (no tag) (3.2 s; about 0.2 h left)
+[1073/3200] SMOS SMOS9.txt #13 ManagerClassroom.txt: no (no tag) (6.0 s; about 0.2 h left)
+[1074/3200] SMOS SMOS9.txt #14 managerUser.txt: no (no tag) (3.9 s; about 0.2 h left)
+[1075/3200] SMOS SMOS9.txt #15 ServletDeleteClassroom.txt: no (no tag) (2.8 s; about 0.2 h left)
+[1076/3200] SMOS SMOS9.txt #16 ServletShowUserDetails.txt: no (no tag) (2.9 s; about 0.2 h left)
+[1077/3200] SMOS SMOS9.txt #17 ManagerVotes.txt: no (no tag) (5.7 s; about 0.2 h left)
+[1078/3200] SMOS SMOS9.txt #18 ServletRemoveTeachingAsTeacher.txt: no (no tag) (3.7 s; about 0.2 h left)
+[1079/3200] SMOS SMOS9.txt #19 ServletInitialize.txt: no (no tag) (2.2 s; about 0.2 h left)
+[1080/3200] SMOS SMOS9.txt #20 ServletAssignParentStudent.txt: no (no tag) (3.1 s; about 0.2 h left)
+[3021/3200] iTrust UC30E2.txt #1 HCPDiagnosisBean.java: no (no tag) (5.9 s; about 0.2 h left)
+[3022/3200] iTrust UC30E2.txt #2 PatientRiskFactor.java: no (6.2 s; about 0.2 h left)
+[3023/3200] iTrust UC30E2.txt #3 Role.java: no (4.3 s; about 0.2 h left)
+[3024/3200] iTrust UC30E2.txt #4 DeclareHCPAction.java: no (no tag) (5.2 s; about 0.2 h left)
+[3025/3200] iTrust UC30E2.txt #5 AgeFactor.java: no (no tag) (3.7 s; about 0.2 h left)
+[3026/3200] iTrust UC30E2.txt #6 ViewVisitedHCPsAction.java: no (no tag) (5.7 s; about 0.2 h left)
+[3027/3200] iTrust UC30E2.txt #7 SurveyResultBean.java: no (no tag) (4.0 s; about 0.2 h left)
+[3028/3200] iTrust UC30E2.txt #8 ReferralBean.java: no (no tag) (3.5 s; about 0.2 h left)
+[3029/3200] iTrust UC30E2.txt #9 HospitalBean.java: no (no tag) (2.9 s; about 0.2 h left)
+[3030/3200] iTrust UC30E2.txt #10 ManageHospitalAssignmentsAction.java: no (7.5 s; about 0.2 h left)
+[3031/3200] iTrust UC30E2.txt #11 SendMessageAction.java: no (no tag) (5.2 s; about 0.2 h left)
+[3032/3200] iTrust UC30E2.txt #12 PatientDAO.java: no (no tag) (10.9 s; about 0.2 h left)
+[3033/3200] iTrust UC30E2.txt #13 HCPVisitBean.java: no (no tag) (4.5 s; about 0.2 h left)
+[3034/3200] iTrust UC30E2.txt #14 ViewPrescriptionRenewalNeedsAction.java: no (7.1 s; about 0.2 h left)
+[3035/3200] iTrust UC30E2.txt #15 HCPLinkBean.java: no (6.4 s; about 0.2 h left)
+[3036/3200] iTrust UC30E2.txt #16 GetVisitRemindersAction.java: no (no tag) (10.4 s; about 0.2 h left)
+[3037/3200] iTrust UC30E2.txt #17 MyDiagnosisAction.java: no (no tag) (6.4 s; about 0.2 h left)
+[3038/3200] iTrust UC30E2.txt #18 TransactionType.java: no (no tag) (3.8 s; about 0.2 h left)
+[3039/3200] iTrust UC30E2.txt #19 GenderFactor.java: no (no tag) (2.8 s; about 0.2 h left)
+[3040/3200] iTrust UC30E2.txt #20 EthnicityFactor.java: no (no tag) (2.7 s; about 0.2 h left)
+[3041/3200] iTrust UC30S2.txt #1 SendMessageAction.java: yes (no tag) (5.7 s; about 0.2 h left)
+[3042/3200] iTrust UC30S2.txt #2 MessageBean.java: yes (5.5 s; about 0.2 h left)
+[3043/3200] iTrust UC30S2.txt #3 ViewMyMessagesAction.java: yes (8.3 s; about 0.2 h left)
+[3044/3200] iTrust UC30S2.txt #4 HCPVisitBean.java: no (no tag) (3.2 s; about 0.2 h left)
+[3045/3200] iTrust UC30S2.txt #5 ApptBean.java: no (no tag) (3.1 s; about 0.2 h left)
+[3046/3200] iTrust UC30S2.txt #6 LabProcedureBean.java: no (no tag) (3.3 s; about 0.2 h left)
+[3047/3200] iTrust UC30S2.txt #7 ReferralBean.java: no (no tag) (3.4 s; about 0.2 h left)
+[3048/3200] iTrust UC30S2.txt #8 HCPDiagnosisBean.java: no (no tag) (3.1 s; about 0.2 h left)
+[3049/3200] iTrust UC30S2.txt #9 ViewExpiredPrescriptionsAction.java: no (no tag) (4.5 s; about 0.2 h left)
+[3050/3200] iTrust UC30S2.txt #10 ViewVisitedHCPsAction.java: no (no tag) (6.6 s; about 0.2 h left)
+[3051/3200] iTrust UC30S2.txt #11 HCPLinkBean.java: no (no tag) (3.5 s; about 0.2 h left)
+[3052/3200] iTrust UC30S2.txt #12 TransactionType.java: yes (6.0 s; about 0.2 h left)
+[3053/3200] iTrust UC30S2.txt #13 Email.java: yes (4.5 s; about 0.2 h left)
+[3054/3200] iTrust UC30S2.txt #14 ValidationFormat.java: yes (no tag) (5.6 s; about 0.2 h left)
+[3055/3200] iTrust UC30S2.txt #15 MyDiagnosisAction.java: no (no tag) (5.9 s; about 0.2 h left)
+[3056/3200] iTrust UC30S2.txt #16 PatientDAO.java: no (no tag) (10.5 s; about 0.2 h left)
+[3057/3200] iTrust UC30S2.txt #17 DeclareHCPAction.java: no (no tag) (5.9 s; about 0.2 h left)
+[3058/3200] iTrust UC30S2.txt #18 Role.java: no (no tag) (5.6 s; about 0.2 h left)
+[3059/3200] iTrust UC30S2.txt #19 ReportAdverseEventAction.java: no (no tag) (3.5 s; about 0.2 h left)
+[3060/3200] iTrust UC30S2.txt #20 ViewOfficeVisitAction.java: no (no tag) (5.5 s; about 0.2 h left)
+[3061/3200] iTrust UC30S3.txt #1 SendMessageAction.java: no (no tag) (5.9 s; about 0.2 h left)
+[3062/3200] iTrust UC30S3.txt #2 MessageBean.java: yes (7.0 s; about 0.2 h left)
+[3063/3200] iTrust UC30S3.txt #3 ApptBean.java: no (no tag) (4.6 s; about 0.1 h left)
+[3064/3200] iTrust UC30S3.txt #4 ViewMyMessagesAction.java: yes (9.5 s; about 0.2 h left)
+[3065/3200] iTrust UC30S3.txt #5 ReferralBean.java: no (no tag) (3.4 s; about 0.1 h left)
+[3066/3200] iTrust UC30S3.txt #6 ValidationFormat.java: yes (4.4 s; about 0.1 h left)
+[3067/3200] iTrust UC30S3.txt #7 VisitReminderReturnForm.java: no (no tag) (3.1 s; about 0.1 h left)
+[3068/3200] iTrust UC30S3.txt #8 TransactionType.java: yes (9.3 s; about 0.1 h left)
+[3069/3200] iTrust UC30S3.txt #9 ViewExpiredPrescriptionsAction.java: no (no tag) (3.7 s; about 0.1 h left)
+[3070/3200] iTrust UC30S3.txt #10 HCPDiagnosisBean.java: no (no tag) (3.1 s; about 0.1 h left)
+[3071/3200] iTrust UC30S3.txt #11 Role.java: no (no tag) (3.2 s; about 0.1 h left)
+[3072/3200] iTrust UC30S3.txt #12 Email.java: yes (8.3 s; about 0.1 h left)
+[3073/3200] iTrust UC30S3.txt #13 LabProcedureBean.java: no (no tag) (3.2 s; about 0.1 h left)
+[3074/3200] iTrust UC30S3.txt #14 HCPVisitBean.java: no (no tag) (4.6 s; about 0.1 h left)
+[3075/3200] iTrust UC30S3.txt #15 PatientVisitBean.java: no (no tag) (2.8 s; about 0.1 h left)
+[3076/3200] iTrust UC30S3.txt #16 ViewMyReportRequestsAction.java: no (no tag) (4.7 s; about 0.1 h left)
+[3077/3200] iTrust UC30S3.txt #17 ReportAdverseEventAction.java: no (no tag) (3.7 s; about 0.1 h left)
+[3078/3200] iTrust UC30S3.txt #18 PatientRiskFactor.java: no (4.0 s; about 0.1 h left)
+[3079/3200] iTrust UC30S3.txt #19 PatientDAO.java: no (no tag) (4.9 s; about 0.1 h left)
+[3080/3200] iTrust UC30S3.txt #20 PrescriptionReportAction.java: no (no tag) (4.8 s; about 0.1 h left)
+[3081/3200] iTrust UC30S4.txt #1 SendMessageAction.java: yes (no tag) (8.4 s; about 0.1 h left)
+[3082/3200] iTrust UC30S4.txt #2 MessageBean.java: yes (no tag) (6.3 s; about 0.1 h left)
+[3083/3200] iTrust UC30S4.txt #3 ApptBean.java: no (no tag) (4.7 s; about 0.1 h left)
+[3084/3200] iTrust UC30S4.txt #4 Email.java: yes (6.3 s; about 0.1 h left)
+[3085/3200] iTrust UC30S4.txt #5 ValidationFormat.java: yes (4.6 s; about 0.1 h left)
+[3086/3200] iTrust UC30S4.txt #6 ViewMyMessagesAction.java: yes (8.7 s; about 0.1 h left)
+[3087/3200] iTrust UC30S4.txt #7 HCPVisitBean.java: no (no tag) (4.8 s; about 0.1 h left)
+[3088/3200] iTrust UC30S4.txt #8 TransactionType.java: yes (8.7 s; about 0.1 h left)
+[3089/3200] iTrust UC30S4.txt #9 ReferralBean.java: no (no tag) (3.2 s; about 0.1 h left)
+[3090/3200] iTrust UC30S4.txt #10 HCPDiagnosisBean.java: no (no tag) (3.0 s; about 0.1 h left)
+[3091/3200] iTrust UC30S4.txt #11 VisitReminderReturnForm.java: no (no tag) (2.9 s; about 0.1 h left)
+[3092/3200] iTrust UC30S4.txt #12 Role.java: no (no tag) (3.4 s; about 0.1 h left)
+[3093/3200] iTrust UC30S4.txt #13 LabProcedureBean.java: no (no tag) (3.1 s; about 0.1 h left)
+[3094/3200] iTrust UC30S4.txt #14 ViewMyReportRequestsAction.java: no (no tag) (4.8 s; about 0.1 h left)
+[3095/3200] iTrust UC30S4.txt #15 ViewExpiredPrescriptionsAction.java: no (no tag) (3.9 s; about 0.1 h left)
+[3096/3200] iTrust UC30S4.txt #16 HCPLinkBean.java: no (no tag) (4.6 s; about 0.1 h left)
+[3097/3200] iTrust UC30S4.txt #17 SurveyResultBean.java: no (no tag) (3.3 s; about 0.1 h left)
+[3098/3200] iTrust UC30S4.txt #18 iTrustException.java: no (no tag) (4.3 s; about 0.1 h left)
+[3099/3200] iTrust UC30S4.txt #19 ViewVisitedHCPsAction.java: no (no tag) (4.8 s; about 0.1 h left)
+[3100/3200] iTrust UC30S4.txt #20 MyDiagnosisAction.java: no (no tag) (4.4 s; about 0.1 h left)
+[3101/3200] iTrust UC30S5.txt #1 MessageBean.java: yes (5.4 s; about 0.1 h left)
+[3102/3200] iTrust UC30S5.txt #2 ViewMyMessagesAction.java: yes (no tag) (4.9 s; about 0.1 h left)
+[3103/3200] iTrust UC30S5.txt #3 HCPVisitBean.java: no (no tag) (3.4 s; about 0.1 h left)
+[3104/3200] iTrust UC30S5.txt #4 PatientVisitBean.java: no (no tag) (4.3 s; about 0.1 h left)
+[3105/3200] iTrust UC30S5.txt #5 ReferralBean.java: no (no tag) (3.7 s; about 0.1 h left)
+[3106/3200] iTrust UC30S5.txt #6 SendMessageAction.java: no (no tag) (5.1 s; about 0.1 h left)
+[3107/3200] iTrust UC30S5.txt #7 HCPDiagnosisBean.java: no (no tag) (3.2 s; about 0.1 h left)
+[3108/3200] iTrust UC30S5.txt #8 DrugInteractionBean.java: no (no tag) (3.6 s; about 0.1 h left)
+[3109/3200] iTrust UC30S5.txt #9 ViewMyReportRequestsAction.java: no (no tag) (5.4 s; about 0.1 h left)
+[3110/3200] iTrust UC30S5.txt #10 MessageDAO.java: yes (no tag) (7.6 s; about 0.1 h left)
+[3111/3200] iTrust UC30S5.txt #11 SurveyResultBean.java: no (no tag) (3.3 s; about 0.1 h left)
+[3112/3200] iTrust UC30S5.txt #12 HCPLinkBean.java: no (no tag) (4.0 s; about 0.1 h left)
+[3113/3200] iTrust UC30S5.txt #13 LabProcedureBean.java: no (no tag) (5.1 s; about 0.1 h left)
+[3114/3200] iTrust UC30S5.txt #14 EditOfficeVisitForm.java: no (no tag) (4.5 s; about 0.1 h left)
+[3115/3200] iTrust UC30S5.txt #15 Email.java: yes (6.2 s; about 0.1 h left)
+[3116/3200] iTrust UC30S5.txt #16 TransactionType.java: no (no tag) (4.3 s; about 0.1 h left)
+[3117/3200] iTrust UC30S5.txt #17 VisitReminderReturnForm.java: no (no tag) (3.1 s; about 0.1 h left)
+[3118/3200] iTrust UC30S5.txt #18 DiagnosisBean.java: no (no tag) (3.0 s; about 0.1 h left)
+[3119/3200] iTrust UC30S5.txt #19 PrescriptionReportAction.java: no (no tag) (1.3 s; about 0.1 h left)
+[3120/3200] iTrust UC30S5.txt #20 ViewExpiredPrescriptionsAction.java: no (no tag) (4.2 s; about 0.1 h left)
+[3121/3200] iTrust UC30S6.txt #1 MessageBean.java: yes (4.9 s; about 0.1 h left)
+[3122/3200] iTrust UC30S6.txt #2 ViewMyMessagesAction.java: yes (no tag) (6.6 s; about 0.1 h left)
+[3123/3200] iTrust UC30S6.txt #3 PatientVisitBean.java: no (no tag) (3.6 s; about 0.1 h left)
+[3124/3200] iTrust UC30S6.txt #4 HCPVisitBean.java: no (no tag) (3.1 s; about 0.1 h left)
+[3125/3200] iTrust UC30S6.txt #5 SurveyResultBean.java: no (no tag) (3.3 s; about 0.1 h left)
+[3126/3200] iTrust UC30S6.txt #6 ApptBean.java: no (no tag) (2.4 s; about 0.1 h left)
+[3127/3200] iTrust UC30S6.txt #7 FamilyMemberBean.java: no (no tag) (3.0 s; about 0.1 h left)
+[3128/3200] iTrust UC30S6.txt #8 ReferralBean.java: no (no tag) (3.0 s; about 0.1 h left)
+[3129/3200] iTrust UC30S6.txt #9 HCPDiagnosisBean.java: no (no tag) (3.1 s; about 0.1 h left)
+[3130/3200] iTrust UC30S6.txt #10 DrugInteractionBean.java: no (no tag) (2.8 s; about 0.1 h left)
+[3131/3200] iTrust UC30S6.txt #11 VisitReminderReturnForm.java: no (no tag) (2.8 s; about 0.1 h left)
+[3132/3200] iTrust UC30S6.txt #12 SendMessageAction.java: no (no tag) (3.5 s; about 0.1 h left)
+[3133/3200] iTrust UC30S6.txt #13 PersonnelDAO.java: no (no tag) (4.9 s; about 0.1 h left)
+[3134/3200] iTrust UC30S6.txt #14 ValidationFormat.java: no (no tag) (4.0 s; about 0.1 h left)
+[3135/3200] iTrust UC30S6.txt #15 Gender.java: no (no tag) (2.5 s; about 0.1 h left)
+[3136/3200] iTrust UC30S6.txt #16 Email.java: no (no tag) (3.6 s; about 0.1 h left)
+[3137/3200] iTrust UC30S6.txt #17 HealthRecordForm.java: no (no tag) (2.8 s; about 0.1 h left)
+[3138/3200] iTrust UC30S6.txt #18 ViewMyReportRequestsAction.java: no (no tag) (4.2 s; about 0.1 h left)
+[3139/3200] iTrust UC30S6.txt #19 LabProcedureBean.java: no (no tag) (3.9 s; about 0.1 h left)
+[3140/3200] iTrust UC30S6.txt #20 SearchUsersAction.java: no (no tag) (2.6 s; about 0.1 h left)
+[3141/3200] iTrust UC30S7.txt #1 ViewMyMessagesAction.java: yes (5.3 s; about 0.1 h left)
+[3142/3200] iTrust UC30S7.txt #2 HCPVisitBean.java: no (no tag) (3.1 s; about 0.1 h left)
+[3143/3200] iTrust UC30S7.txt #3 EditOfficeVisitForm.java: no (no tag) (2.8 s; about 0.1 h left)
+[3144/3200] iTrust UC30S7.txt #4 HCPDiagnosisBean.java: no (no tag) (3.0 s; about 0.1 h left)
+[3145/3200] iTrust UC30S7.txt #5 MessageBean.java: no (no tag) (3.4 s; about 0.1 h left)
+[3146/3200] iTrust UC30S7.txt #6 ApptBean.java: no (no tag) (2.1 s; about 0.1 h left)
+[3147/3200] iTrust UC30S7.txt #7 AllergyBean.java: no (no tag) (2.5 s; about 0.1 h left)
+[3148/3200] iTrust UC30S7.txt #8 ReferralBean.java: no (no tag) (2.3 s; about 0.1 h left)
+[3149/3200] iTrust UC30S7.txt #9 TransactionType.java: no (no tag) (3.1 s; about 0.1 h left)
+[3150/3200] iTrust UC30S7.txt #10 ReportRequestBean.java: no (no tag) (3.0 s; about 0.1 h left)
+[3151/3200] iTrust UC30S7.txt #11 ViewMyReportRequestsAction.java: no (no tag) (4.1 s; about 0.1 h left)
+[3152/3200] iTrust UC30S7.txt #12 HCPLinkBean.java: no (no tag) (3.2 s; about 0.1 h left)
+[3153/3200] iTrust UC30S7.txt #13 GenderFactor.java: no (no tag) (2.5 s; about 0.1 h left)
+[3154/3200] iTrust UC30S7.txt #14 ViewVisitedHCPsAction.java: no (no tag) (4.0 s; about 0.1 h left)
+[3155/3200] iTrust UC30S7.txt #15 Email.java: no (no tag) (3.1 s; about 0.1 h left)
+[3156/3200] iTrust UC30S7.txt #16 AgeFactor.java: no (no tag) (2.7 s; about 0.0 h left)
+[3157/3200] iTrust UC30S7.txt #17 LabProcedureBean.java: no (no tag) (2.9 s; about 0.0 h left)
+[3158/3200] iTrust UC30S7.txt #18 ResetPasswordAction.java: no (no tag) (3.6 s; about 0.0 h left)
+[3159/3200] iTrust UC30S7.txt #19 PatientRiskFactor.java: no (no tag) (2.8 s; about 0.0 h left)
+[3160/3200] iTrust UC30S7.txt #20 MyDiagnosisAction.java: no (no tag) (3.9 s; about 0.0 h left)
+[3161/3200] iTrust UC31S1.txt #1 MedicationBean.java: no (no tag) (4.0 s; about 0.0 h left)
+[3162/3200] iTrust UC31S1.txt #2 EditOfficeVisitForm.java: no (no tag) (2.4 s; about 0.0 h left)
+[3163/3200] iTrust UC31S1.txt #3 AgeFactor.java: no (3.8 s; about 0.0 h left)
+[3164/3200] iTrust UC31S1.txt #4 PrescriptionReportBean.java: yes (8.1 s; about 0.0 h left)
+[3165/3200] iTrust UC31S1.txt #5 ViewPrescriptionRenewalNeedsAction.java: no (no tag) (4.5 s; about 0.0 h left)
+[3166/3200] iTrust UC31S1.txt #6 HCPLinkBean.java: no (no tag) (5.3 s; about 0.0 h left)
+[3167/3200] iTrust UC31S1.txt #7 PrescriptionBean.java: yes (7.9 s; about 0.0 h left)
+[3168/3200] iTrust UC31S1.txt #8 HCPDiagnosisBean.java: no (no tag) (5.6 s; about 0.0 h left)
+[3169/3200] iTrust UC31S1.txt #9 PatientRiskFactor.java: no (3.9 s; about 0.0 h left)
+[3170/3200] iTrust UC31S1.txt #10 TransactionType.java: no (no tag) (6.0 s; about 0.0 h left)
+[3171/3200] iTrust UC31S1.txt #11 PrescriptionAlerts.java: no (no tag) (3.8 s; about 0.0 h left)
+[3172/3200] iTrust UC31S1.txt #12 ReferralBean.java: no (no tag) (4.6 s; about 0.0 h left)
+[3173/3200] iTrust UC31S1.txt #13 PrescriptionReportAction.java: no (no tag) (1.4 s; about 0.0 h left)
+[3174/3200] iTrust UC31S1.txt #14 ViewExpiredPrescriptionsAction.java: yes (no tag) (5.4 s; about 0.0 h left)
+[3175/3200] iTrust UC31S1.txt #15 CholesterolFactor.java: no (no tag) (3.5 s; about 0.0 h left)
+[3176/3200] iTrust UC31S1.txt #16 AdverseEventBean.java: no (no tag) (4.4 s; about 0.0 h left)
+[3177/3200] iTrust UC31S1.txt #17 OfficeVisitBean.java: no (no tag) (5.2 s; about 0.0 h left)
+[3178/3200] iTrust UC31S1.txt #18 VisitReminderReturnForm.java: no (no tag) (2.3 s; about 0.0 h left)
+[3179/3200] iTrust UC31S1.txt #19 ViewMyReportRequestsAction.java: no (no tag) (5.3 s; about 0.0 h left)
+[3180/3200] iTrust UC31S1.txt #20 ViewOfficeVisitAction.java: no (no tag) (4.9 s; about 0.0 h left)
+[3181/3200] iTrust UC32E1.txt #1 NoHealthRecordsException.java: no (5.7 s; about 0.0 h left)
+[3182/3200] iTrust UC32E1.txt #2 PatientRiskFactor.java: no (3.0 s; about 0.0 h left)
+[3183/3200] iTrust UC32E1.txt #3 Role.java: no (2.6 s; about 0.0 h left)
+[3184/3200] iTrust UC32E1.txt #4 OfficeVisitDAO.java: no (no tag) (8.2 s; about 0.0 h left)
+[3185/3200] iTrust UC32E1.txt #5 VisitFlag.java: no (no tag) (3.7 s; about 0.0 h left)
+[3186/3200] iTrust UC32E1.txt #6 ViewMyRecordsAction.java: no (6.7 s; about 0.0 h left)
+[3187/3200] iTrust UC32E1.txt #7 PatientDAO.java: no (no tag) (9.8 s; about 0.0 h left)
+[3188/3200] iTrust UC32E1.txt #8 EditPHRAction.java: no (no tag) (3.2 s; about 0.0 h left)
+[3189/3200] iTrust UC32E1.txt #9 PatientVisitBean.java: no (no tag) (3.4 s; about 0.0 h left)
+[3190/3200] iTrust UC32E1.txt #10 HCPDiagnosisBean.java: no (no tag) (3.5 s; about 0.0 h left)
+[3191/3200] iTrust UC32E1.txt #11 ErrorList.java: no (no tag) (3.0 s; about 0.0 h left)
+[3192/3200] iTrust UC32E1.txt #12 ViewMyReportRequestsAction.java: no (no tag) (5.4 s; about 0.0 h left)
+[3193/3200] iTrust UC32E1.txt #13 GetVisitRemindersAction.java: no (no tag) (8.3 s; about 0.0 h left)
+[3194/3200] iTrust UC32E1.txt #14 AgeFactor.java: no (no tag) (3.6 s; about 0.0 h left)
+[3195/3200] iTrust UC32E1.txt #15 CholesterolFactor.java: no (3.1 s; about 0.0 h left)
+[3196/3200] iTrust UC32E1.txt #16 iTrustException.java: no (no tag) (2.6 s; about 0.0 h left)
+[3197/3200] iTrust UC32E1.txt #17 PatientValidator.java: no (no tag) (3.5 s; about 0.0 h left)
+[3198/3200] iTrust UC32E1.txt #18 ReferralBean.java: no (no tag) (3.9 s; about 0.0 h left)
+[3199/3200] iTrust UC32E1.txt #19 EditOfficeVisitAction.java: no (no tag) (5.9 s; about 0.0 h left)
+[3200/3200] iTrust UC32E1.txt #20 EditOfficeVisitForm.java: no (no tag) (3.6 s; about 0.0 h left)
+# project with qwen2.5-coder:14b on colab-l4, test slice (first 60 per project)
+
+## Strict parsing
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 121 | 88 | 33 | 740 | 0.727 | 0.106 | 0.185 | 0.128 |
+| eTour_en | 46 | 235 | 134 | 53 | 81 | 182 | 0.396 | 0.226 | 0.287 | 0.247 |
+| iTrust | 60 | 125 | 152 | 21 | 131 | 104 | 0.138 | 0.168 | 0.152 | 0.161 |
+| Avg. |  |  |  |  |  |  | 0.420 | 0.167 | 0.208 | 0.179 |
+| w. Avg. |  |  |  |  |  |  | 0.600 | 0.136 | 0.202 | 0.155 |
+
+## Tolerant parsing
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 186 | 143 | 43 | 685 | 0.769 | 0.173 | 0.282 | 0.204 |
+| eTour_en | 46 | 235 | 243 | 128 | 115 | 107 | 0.527 | 0.545 | 0.536 | 0.541 |
+| iTrust | 60 | 125 | 203 | 39 | 164 | 86 | 0.192 | 0.312 | 0.238 | 0.277 |
+| Avg. |  |  |  |  |  |  | 0.496 | 0.343 | 0.352 | 0.341 |
+| w. Avg. |  |  |  |  |  |  | 0.660 | 0.261 | 0.328 | 0.279 |
+
+- Pairs: 3200; answers from {'ollama': 260, 'harness-cache': 2940, 'lissa-rq1': 0}
+- Without a <trace> tag: 2553; cut at 4096 answer tokens: 0
+- Per call: median 4.0 s (IQR 3.0-5.6 s, n = 3200)
+- Per requirement: median 90.5 s (IQR 80.4-102.6 s, n = 160)
+
+Run folder: /content/LiSSA-Replication-Package/harness/runs/project__qwen2.5-coder-14b__colab-l4__test
+Device: colab-l4. 3200 pairs; 2940 already answered; 260 to ask qwen2.5-coder:14b.
+[1001/3200] SMOS SMOS67.txt #1 RegisterLine.txt: no (no tag) (5.2 s; about 0.4 h left)
+[1002/3200] SMOS SMOS67.txt #2 ServletShowNoteDetails.txt: no (no tag) (4.6 s; about 0.4 h left)
+[1003/3200] SMOS SMOS67.txt #3 ServletInsertNewNote.txt: no (3.3 s; about 0.3 h left)
+[1004/3200] SMOS SMOS67.txt #4 ServletShowJustifyList.txt: no (no tag) (3.5 s; about 0.3 h left)
+[1005/3200] SMOS SMOS67.txt #5 ServletUpdateRegister.txt: no (no tag) (5.2 s; about 0.3 h left)
+[1006/3200] SMOS SMOS67.txt #6 ServletShowClassroomManagement.txt: no (no tag) (3.6 s; about 0.3 h left)
+[1007/3200] SMOS SMOS67.txt #7 ServletAssignParentStudent.txt: no (no tag) (3.1 s; about 0.3 h left)
+[1008/3200] SMOS SMOS67.txt #8 ServletShowNoteList.txt: no (no tag) (3.5 s; about 0.3 h left)
+[1009/3200] SMOS SMOS67.txt #9 ServletShowRegister.txt: no (no tag) (4.5 s; about 0.3 h left)
+[1010/3200] SMOS SMOS67.txt #10 ServletShowUserClassroomForm.txt: no (no tag) (2.9 s; about 0.3 h left)
+[1011/3200] SMOS SMOS67.txt #11 ServletShowJustifyDetails.txt: no (no tag) (3.5 s; about 0.3 h left)
+[1012/3200] SMOS SMOS67.txt #12 ServletInsertUser.txt: no (11.9 s; about 0.3 h left)
+[1013/3200] SMOS SMOS67.txt #13 ServletDeleteNote.txt: no (no tag) (2.9 s; about 0.3 h left)
+[1014/3200] SMOS SMOS67.txt #14 ServletComputateStatistics.txt: no (no tag) (3.5 s; about 0.3 h left)
+[1015/3200] SMOS SMOS67.txt #15 ServletLogout.txt: no (no tag) (2.0 s; about 0.3 h left)
+[1016/3200] SMOS SMOS67.txt #16 ServletShowUserRoleForm.txt: no (no tag) (3.6 s; about 0.3 h left)
+[1017/3200] SMOS SMOS67.txt #17 ServletAssignStudentClassroom.txt: no (no tag) (4.3 s; about 0.3 h left)
+[1018/3200] SMOS SMOS67.txt #18 ServletAddTeachingAsTeacher.txt: no (no tag) (2.8 s; about 0.3 h left)
+[1019/3200] SMOS SMOS67.txt #19 ServletDeleteClassroom.txt: no (no tag) (2.6 s; about 0.3 h left)
+[1020/3200] SMOS SMOS67.txt #20 ServletInsertJustify.txt: no (no tag) (4.0 s; about 0.3 h left)
+[1021/3200] SMOS SMOS7.txt #1 UserListItem.txt: yes (4.6 s; about 0.3 h left)
+[1022/3200] SMOS SMOS7.txt #2 managerUser.txt: yes (5.6 s; about 0.3 h left)
+[1023/3200] SMOS SMOS7.txt #3 ServletShowUserDetails.txt: yes (7.1 s; about 0.3 h left)
+[1024/3200] SMOS SMOS7.txt #4 User.txt: no (7.2 s; about 0.3 h left)
+[1025/3200] SMOS SMOS7.txt #5 DeleteAdministratorException.txt: no (no tag) (2.8 s; about 0.3 h left)
+[1026/3200] SMOS SMOS7.txt #6 ServletShowUserList.txt: no (no tag) (2.9 s; about 0.3 h left)
+[1027/3200] SMOS SMOS7.txt #7 DeleteManagerException.txt: no (no tag) (2.5 s; about 0.3 h left)
+[1028/3200] SMOS SMOS7.txt #8 ServletShowUserClassroomForm.txt: no (3.5 s; about 0.3 h left)
+[1029/3200] SMOS SMOS7.txt #9 ServletInitialize.txt: no (no tag) (2.0 s; about 0.3 h left)
+[1030/3200] SMOS SMOS7.txt #10 ServletShowUserRoleForm.txt: no (no tag) (5.0 s; about 0.3 h left)
+[1031/3200] SMOS SMOS7.txt #11 ServletDeleteUser.txt: no (no tag) (3.5 s; about 0.3 h left)
+[1032/3200] SMOS SMOS7.txt #12 ServletLogout.txt: no (no tag) (2.5 s; about 0.3 h left)
+[1033/3200] SMOS SMOS7.txt #13 ServletShowAddressDetails.txt: no (4.2 s; about 0.3 h left)
+[1034/3200] SMOS SMOS7.txt #14 ServletShowUserTeachingFormByCourse.txt: no (no tag) (2.5 s; about 0.3 h left)
+[1035/3200] SMOS SMOS7.txt #15 Role.txt: no (no tag) (2.4 s; about 0.2 h left)
+[1036/3200] SMOS SMOS7.txt #16 ServletInsertUser.txt: no (no tag) (3.2 s; about 0.2 h left)
+[1037/3200] SMOS SMOS7.txt #17 ServletUpdateUser.txt: no (3.8 s; about 0.2 h left)
+[1038/3200] SMOS SMOS7.txt #18 ServletAssignRole.txt: no (no tag) (3.1 s; about 0.2 h left)
+[1039/3200] SMOS SMOS7.txt #19 ManagerAddress.txt: no (no tag) (7.5 s; about 0.2 h left)
+[1040/3200] SMOS SMOS7.txt #20 ServletAlterPersonalDate.txt: no (5.5 s; about 0.2 h left)
+[1041/3200] SMOS SMOS8.txt #1 ServletUpdateUser.txt: yes (12.7 s; about 0.3 h left)
+[1042/3200] SMOS SMOS8.txt #2 DeleteAdministratorException.txt: no (no tag) (2.7 s; about 0.3 h left)
+[1043/3200] SMOS SMOS8.txt #3 ServletAlterPersonalDate.txt: no (4.5 s; about 0.3 h left)
+[1044/3200] SMOS SMOS8.txt #4 UserListItem.txt: yes (3.3 s; about 0.3 h left)
+[1045/3200] SMOS SMOS8.txt #5 ServletDeleteUser.txt: no (3.3 s; about 0.3 h left)
+[1046/3200] SMOS SMOS8.txt #6 managerUser.txt: no (no tag) (3.1 s; about 0.2 h left)
+[1047/3200] SMOS SMOS8.txt #7 ServletShowUserDetails.txt: no (3.3 s; about 0.2 h left)
+[1048/3200] SMOS SMOS8.txt #8 DeleteManagerException.txt: no (no tag) (2.4 s; about 0.2 h left)
+[1049/3200] SMOS SMOS8.txt #9 ServletAssignRole.txt: no (3.9 s; about 0.2 h left)
+[1050/3200] SMOS SMOS8.txt #10 ServletInsertUser.txt: no (no tag) (3.3 s; about 0.2 h left)
+[1051/3200] SMOS SMOS8.txt #11 ServletInitialize.txt: no (no tag) (1.9 s; about 0.2 h left)
+[1052/3200] SMOS SMOS8.txt #12 ServletShowUserRoleForm.txt: no (no tag) (3.1 s; about 0.2 h left)
+[1053/3200] SMOS SMOS8.txt #13 ServletAssignParentStudent.txt: no (4.0 s; about 0.2 h left)
+[1054/3200] SMOS SMOS8.txt #14 ServletShowAddressDetails.txt: no (3.9 s; about 0.2 h left)
+[1055/3200] SMOS SMOS8.txt #15 User.txt: yes (7.0 s; about 0.2 h left)
+[1056/3200] SMOS SMOS8.txt #16 ServletShowUserList.txt: no (no tag) (2.9 s; about 0.2 h left)
+[1057/3200] SMOS SMOS8.txt #17 ServletShowUserClassroomForm.txt: no (no tag) (2.2 s; about 0.2 h left)
+[1058/3200] SMOS SMOS8.txt #18 Role.txt: no (no tag) (3.4 s; about 0.2 h left)
+[1059/3200] SMOS SMOS8.txt #19 ServletShowTeachingDetails.txt: no (3.4 s; about 0.2 h left)
+[1060/3200] SMOS SMOS8.txt #20 ServletShowNoteDetails.txt: no (3.8 s; about 0.2 h left)
+[1061/3200] SMOS SMOS9.txt #1 DeleteAdministratorException.txt: no (4.1 s; about 0.2 h left)
+[1062/3200] SMOS SMOS9.txt #2 DeleteManagerException.txt: no (3.7 s; about 0.2 h left)
+[1063/3200] SMOS SMOS9.txt #3 ServletDeleteUser.txt: yes (11.9 s; about 0.2 h left)
+[1064/3200] SMOS SMOS9.txt #4 ServletLogout.txt: no (no tag) (2.5 s; about 0.2 h left)
+[1065/3200] SMOS SMOS9.txt #5 ServletAssignRole.txt: no (no tag) (3.4 s; about 0.2 h left)
+[1066/3200] SMOS SMOS9.txt #6 ServletDeleteTeaching.txt: no (4.2 s; about 0.2 h left)
+[1067/3200] SMOS SMOS9.txt #7 ServletShowUserList.txt: no (no tag) (2.9 s; about 0.2 h left)
+[1068/3200] SMOS SMOS9.txt #8 ServletShowUserRoleForm.txt: no (no tag) (3.3 s; about 0.2 h left)
+[1069/3200] SMOS SMOS9.txt #9 ServletUpdateUser.txt: no (no tag) (3.3 s; about 0.2 h left)
+[1070/3200] SMOS SMOS9.txt #10 UserListItem.txt: no (3.4 s; about 0.2 h left)
+[1071/3200] SMOS SMOS9.txt #11 ServletInsertUser.txt: no (no tag) (3.5 s; about 0.2 h left)
+[1072/3200] SMOS SMOS9.txt #12 ServletDeleteAddress.txt: no (3.5 s; about 0.2 h left)
+[1073/3200] SMOS SMOS9.txt #13 ManagerClassroom.txt: no (5.9 s; about 0.2 h left)
+[1074/3200] SMOS SMOS9.txt #14 managerUser.txt: no (no tag) (3.9 s; about 0.2 h left)
+[1075/3200] SMOS SMOS9.txt #15 ServletDeleteClassroom.txt: no (3.7 s; about 0.2 h left)
+[1076/3200] SMOS SMOS9.txt #16 ServletShowUserDetails.txt: no (no tag) (3.0 s; about 0.2 h left)
+[1077/3200] SMOS SMOS9.txt #17 ManagerVotes.txt: no (6.3 s; about 0.2 h left)
+[1078/3200] SMOS SMOS9.txt #18 ServletRemoveTeachingAsTeacher.txt: no (no tag) (3.9 s; about 0.2 h left)
+[1079/3200] SMOS SMOS9.txt #19 ServletInitialize.txt: no (no tag) (3.6 s; about 0.2 h left)
+[1080/3200] SMOS SMOS9.txt #20 ServletAssignParentStudent.txt: no (no tag) (3.3 s; about 0.2 h left)
+[3021/3200] iTrust UC30E2.txt #1 HCPDiagnosisBean.java: no (9.1 s; about 0.2 h left)
+[3022/3200] iTrust UC30E2.txt #2 PatientRiskFactor.java: no (no tag) (2.6 s; about 0.2 h left)
+[3023/3200] iTrust UC30E2.txt #3 Role.java: no (5.4 s; about 0.2 h left)
+[3024/3200] iTrust UC30E2.txt #4 DeclareHCPAction.java: no (6.0 s; about 0.2 h left)
+[3025/3200] iTrust UC30E2.txt #5 AgeFactor.java: no (5.9 s; about 0.2 h left)
+[3026/3200] iTrust UC30E2.txt #6 ViewVisitedHCPsAction.java: no (9.1 s; about 0.2 h left)
+[3027/3200] iTrust UC30E2.txt #7 SurveyResultBean.java: no (6.2 s; about 0.2 h left)
+[3028/3200] iTrust UC30E2.txt #8 ReferralBean.java: no (7.6 s; about 0.2 h left)
+[3029/3200] iTrust UC30E2.txt #9 HospitalBean.java: no (no tag) (4.4 s; about 0.2 h left)
+[3030/3200] iTrust UC30E2.txt #10 ManageHospitalAssignmentsAction.java: no (7.5 s; about 0.2 h left)
+[3031/3200] iTrust UC30E2.txt #11 SendMessageAction.java: no (7.2 s; about 0.2 h left)
+[3032/3200] iTrust UC30E2.txt #12 PatientDAO.java: no (no tag) (11.0 s; about 0.2 h left)
+[3033/3200] iTrust UC30E2.txt #13 HCPVisitBean.java: no (10.2 s; about 0.2 h left)
+[3034/3200] iTrust UC30E2.txt #14 ViewPrescriptionRenewalNeedsAction.java: no (4.9 s; about 0.2 h left)
+[3035/3200] iTrust UC30E2.txt #15 HCPLinkBean.java: no (6.6 s; about 0.2 h left)
+[3036/3200] iTrust UC30E2.txt #16 GetVisitRemindersAction.java: no (10.6 s; about 0.2 h left)
+[3037/3200] iTrust UC30E2.txt #17 MyDiagnosisAction.java: no (no tag) (6.4 s; about 0.2 h left)
+[3038/3200] iTrust UC30E2.txt #18 TransactionType.java: no (no tag) (7.0 s; about 0.2 h left)
+[3039/3200] iTrust UC30E2.txt #19 GenderFactor.java: no (7.5 s; about 0.2 h left)
+[3040/3200] iTrust UC30E2.txt #20 EthnicityFactor.java: no (6.4 s; about 0.2 h left)
+[3041/3200] iTrust UC30S2.txt #1 SendMessageAction.java: yes (10.4 s; about 0.2 h left)
+[3042/3200] iTrust UC30S2.txt #2 MessageBean.java: yes (11.6 s; about 0.2 h left)
+[3043/3200] iTrust UC30S2.txt #3 ViewMyMessagesAction.java: no (7.2 s; about 0.2 h left)
+[3044/3200] iTrust UC30S2.txt #4 HCPVisitBean.java: no (5.4 s; about 0.2 h left)
+[3045/3200] iTrust UC30S2.txt #5 ApptBean.java: no (no tag) (2.2 s; about 0.2 h left)
+[3046/3200] iTrust UC30S2.txt #6 LabProcedureBean.java: no (no tag) (3.3 s; about 0.2 h left)
+[3047/3200] iTrust UC30S2.txt #7 ReferralBean.java: no (4.1 s; about 0.2 h left)
+[3048/3200] iTrust UC30S2.txt #8 HCPDiagnosisBean.java: no (no tag) (5.2 s; about 0.2 h left)
+[3049/3200] iTrust UC30S2.txt #9 ViewExpiredPrescriptionsAction.java: no (no tag) (5.3 s; about 0.2 h left)
+[3050/3200] iTrust UC30S2.txt #10 ViewVisitedHCPsAction.java: no (no tag) (7.8 s; about 0.2 h left)
+[3051/3200] iTrust UC30S2.txt #11 HCPLinkBean.java: no (no tag) (5.4 s; about 0.2 h left)
+[3052/3200] iTrust UC30S2.txt #12 TransactionType.java: yes (4.6 s; about 0.2 h left)
+[3053/3200] iTrust UC30S2.txt #13 Email.java: no (6.5 s; about 0.2 h left)
+[3054/3200] iTrust UC30S2.txt #14 ValidationFormat.java: yes (6.0 s; about 0.2 h left)
+[3055/3200] iTrust UC30S2.txt #15 MyDiagnosisAction.java: no (no tag) (5.0 s; about 0.2 h left)
+[3056/3200] iTrust UC30S2.txt #16 PatientDAO.java: no (no tag) (8.8 s; about 0.2 h left)
+[3057/3200] iTrust UC30S2.txt #17 DeclareHCPAction.java: no (no tag) (6.9 s; about 0.2 h left)
+[3058/3200] iTrust UC30S2.txt #18 Role.java: no (5.2 s; about 0.2 h left)
+[3059/3200] iTrust UC30S2.txt #19 ReportAdverseEventAction.java: no (no tag) (4.0 s; about 0.2 h left)
+[3060/3200] iTrust UC30S2.txt #20 ViewOfficeVisitAction.java: no (6.1 s; about 0.2 h left)
+[3061/3200] iTrust UC30S3.txt #1 SendMessageAction.java: yes (8.4 s; about 0.2 h left)
+[3062/3200] iTrust UC30S3.txt #2 MessageBean.java: yes (7.9 s; about 0.2 h left)
+[3063/3200] iTrust UC30S3.txt #3 ApptBean.java: no (no tag) (4.4 s; about 0.2 h left)
+[3064/3200] iTrust UC30S3.txt #4 ViewMyMessagesAction.java: yes (6.3 s; about 0.2 h left)
+[3065/3200] iTrust UC30S3.txt #5 ReferralBean.java: no (no tag) (3.7 s; about 0.2 h left)
+[3066/3200] iTrust UC30S3.txt #6 ValidationFormat.java: no (no tag) (7.0 s; about 0.2 h left)
+[3067/3200] iTrust UC30S3.txt #7 VisitReminderReturnForm.java: no (no tag) (3.2 s; about 0.2 h left)
+[3068/3200] iTrust UC30S3.txt #8 TransactionType.java: no (6.1 s; about 0.2 h left)
+[3069/3200] iTrust UC30S3.txt #9 ViewExpiredPrescriptionsAction.java: no (no tag) (2.7 s; about 0.2 h left)
+[3070/3200] iTrust UC30S3.txt #10 HCPDiagnosisBean.java: no (no tag) (5.2 s; about 0.2 h left)
+[3071/3200] iTrust UC30S3.txt #11 Role.java: no (3.9 s; about 0.2 h left)
+[3072/3200] iTrust UC30S3.txt #12 Email.java: yes (7.2 s; about 0.2 h left)
+[3073/3200] iTrust UC30S3.txt #13 LabProcedureBean.java: no (no tag) (5.6 s; about 0.2 h left)
+[3074/3200] iTrust UC30S3.txt #14 HCPVisitBean.java: no (no tag) (4.5 s; about 0.2 h left)
+[3075/3200] iTrust UC30S3.txt #15 PatientVisitBean.java: no (no tag) (2.6 s; about 0.2 h left)
+[3076/3200] iTrust UC30S3.txt #16 ViewMyReportRequestsAction.java: no (no tag) (4.5 s; about 0.2 h left)
+[3077/3200] iTrust UC30S3.txt #17 ReportAdverseEventAction.java: no (no tag) (3.7 s; about 0.2 h left)
+[3078/3200] iTrust UC30S3.txt #18 PatientRiskFactor.java: no (4.1 s; about 0.2 h left)
+[3079/3200] iTrust UC30S3.txt #19 PatientDAO.java: no (no tag) (10.1 s; about 0.2 h left)
+[3080/3200] iTrust UC30S3.txt #20 PrescriptionReportAction.java: no (no tag) (4.5 s; about 0.2 h left)
+[3081/3200] iTrust UC30S4.txt #1 SendMessageAction.java: yes (8.6 s; about 0.2 h left)
+[3082/3200] iTrust UC30S4.txt #2 MessageBean.java: yes (8.2 s; about 0.2 h left)
+[3083/3200] iTrust UC30S4.txt #3 ApptBean.java: no (no tag) (5.2 s; about 0.2 h left)
+[3084/3200] iTrust UC30S4.txt #4 Email.java: no (6.3 s; about 0.2 h left)
+[3085/3200] iTrust UC30S4.txt #5 ValidationFormat.java: yes (10.8 s; about 0.2 h left)
+[3086/3200] iTrust UC30S4.txt #6 ViewMyMessagesAction.java: yes (9.4 s; about 0.2 h left)
+[3087/3200] iTrust UC30S4.txt #7 HCPVisitBean.java: no (no tag) (6.1 s; about 0.2 h left)
+[3088/3200] iTrust UC30S4.txt #8 TransactionType.java: no (6.3 s; about 0.2 h left)
+[3089/3200] iTrust UC30S4.txt #9 ReferralBean.java: no (no tag) (5.1 s; about 0.2 h left)
+[3090/3200] iTrust UC30S4.txt #10 HCPDiagnosisBean.java: no (no tag) (3.1 s; about 0.2 h left)
+[3091/3200] iTrust UC30S4.txt #11 VisitReminderReturnForm.java: no (no tag) (2.7 s; about 0.2 h left)
+[3092/3200] iTrust UC30S4.txt #12 Role.java: no (no tag) (6.5 s; about 0.2 h left)
+[3093/3200] iTrust UC30S4.txt #13 LabProcedureBean.java: no (no tag) (5.7 s; about 0.2 h left)
+[3094/3200] iTrust UC30S4.txt #14 ViewMyReportRequestsAction.java: no (no tag) (4.5 s; about 0.1 h left)
+[3095/3200] iTrust UC30S4.txt #15 ViewExpiredPrescriptionsAction.java: no (no tag) (4.5 s; about 0.1 h left)
+[3096/3200] iTrust UC30S4.txt #16 HCPLinkBean.java: no (no tag) (6.5 s; about 0.1 h left)
+[3097/3200] iTrust UC30S4.txt #17 SurveyResultBean.java: no (no tag) (4.9 s; about 0.1 h left)
+[3098/3200] iTrust UC30S4.txt #18 iTrustException.java: no (no tag) (3.7 s; about 0.1 h left)
+[3099/3200] iTrust UC30S4.txt #19 ViewVisitedHCPsAction.java: no (no tag) (4.9 s; about 0.1 h left)
+[3100/3200] iTrust UC30S4.txt #20 MyDiagnosisAction.java: no (no tag) (4.9 s; about 0.1 h left)
+[3101/3200] iTrust UC30S5.txt #1 MessageBean.java: yes (12.1 s; about 0.1 h left)
+[3102/3200] iTrust UC30S5.txt #2 ViewMyMessagesAction.java: yes (5.9 s; about 0.1 h left)
+[3103/3200] iTrust UC30S5.txt #3 HCPVisitBean.java: no (no tag) (4.0 s; about 0.1 h left)
+[3104/3200] iTrust UC30S5.txt #4 PatientVisitBean.java: no (no tag) (4.0 s; about 0.1 h left)
+[3105/3200] iTrust UC30S5.txt #5 ReferralBean.java: no (no tag) (4.1 s; about 0.1 h left)
+[3106/3200] iTrust UC30S5.txt #6 SendMessageAction.java: no (no tag) (5.8 s; about 0.1 h left)
+[3107/3200] iTrust UC30S5.txt #7 HCPDiagnosisBean.java: no (no tag) (5.2 s; about 0.1 h left)
+[3108/3200] iTrust UC30S5.txt #8 DrugInteractionBean.java: no (no tag) (3.4 s; about 0.1 h left)
+[3109/3200] iTrust UC30S5.txt #9 ViewMyReportRequestsAction.java: no (5.7 s; about 0.1 h left)
+[3110/3200] iTrust UC30S5.txt #10 MessageDAO.java: yes (7.5 s; about 0.1 h left)
+[3111/3200] iTrust UC30S5.txt #11 SurveyResultBean.java: no (no tag) (4.7 s; about 0.1 h left)
+[3112/3200] iTrust UC30S5.txt #12 HCPLinkBean.java: no (no tag) (4.0 s; about 0.1 h left)
+[3113/3200] iTrust UC30S5.txt #13 LabProcedureBean.java: no (no tag) (5.3 s; about 0.1 h left)
+[3114/3200] iTrust UC30S5.txt #14 EditOfficeVisitForm.java: no (no tag) (3.9 s; about 0.1 h left)
+[3115/3200] iTrust UC30S5.txt #15 Email.java: yes (6.7 s; about 0.1 h left)
+[3116/3200] iTrust UC30S5.txt #16 TransactionType.java: no (6.0 s; about 0.1 h left)
+[3117/3200] iTrust UC30S5.txt #17 VisitReminderReturnForm.java: no (no tag) (4.1 s; about 0.1 h left)
+[3118/3200] iTrust UC30S5.txt #18 DiagnosisBean.java: no (no tag) (3.6 s; about 0.1 h left)
+[3119/3200] iTrust UC30S5.txt #19 PrescriptionReportAction.java: no (no tag) (4.7 s; about 0.1 h left)
+[3120/3200] iTrust UC30S5.txt #20 ViewExpiredPrescriptionsAction.java: no (no tag) (5.0 s; about 0.1 h left)
+[3121/3200] iTrust UC30S6.txt #1 MessageBean.java: no (8.4 s; about 0.1 h left)
+[3122/3200] iTrust UC30S6.txt #2 ViewMyMessagesAction.java: yes (5.4 s; about 0.1 h left)
+[3123/3200] iTrust UC30S6.txt #3 PatientVisitBean.java: no (no tag) (3.3 s; about 0.1 h left)
+[3124/3200] iTrust UC30S6.txt #4 HCPVisitBean.java: no (no tag) (3.1 s; about 0.1 h left)
+[3125/3200] iTrust UC30S6.txt #5 SurveyResultBean.java: no (no tag) (2.8 s; about 0.1 h left)
+[3126/3200] iTrust UC30S6.txt #6 ApptBean.java: no (5.6 s; about 0.1 h left)
+[3127/3200] iTrust UC30S6.txt #7 FamilyMemberBean.java: no (no tag) (2.6 s; about 0.1 h left)
+[3128/3200] iTrust UC30S6.txt #8 ReferralBean.java: no (no tag) (2.6 s; about 0.1 h left)
+[3129/3200] iTrust UC30S6.txt #9 HCPDiagnosisBean.java: no (no tag) (3.2 s; about 0.1 h left)
+[3130/3200] iTrust UC30S6.txt #10 DrugInteractionBean.java: no (no tag) (2.6 s; about 0.1 h left)
+[3131/3200] iTrust UC30S6.txt #11 VisitReminderReturnForm.java: no (no tag) (3.2 s; about 0.1 h left)
+[3132/3200] iTrust UC30S6.txt #12 SendMessageAction.java: no (no tag) (3.7 s; about 0.1 h left)
+[3133/3200] iTrust UC30S6.txt #13 PersonnelDAO.java: no (no tag) (5.0 s; about 0.1 h left)
+[3134/3200] iTrust UC30S6.txt #14 ValidationFormat.java: no (no tag) (4.4 s; about 0.1 h left)
+[3135/3200] iTrust UC30S6.txt #15 Gender.java: no (no tag) (3.2 s; about 0.1 h left)
+[3136/3200] iTrust UC30S6.txt #16 Email.java: no (no tag) (3.7 s; about 0.1 h left)
+[3137/3200] iTrust UC30S6.txt #17 HealthRecordForm.java: no (no tag) (2.6 s; about 0.1 h left)
+[3138/3200] iTrust UC30S6.txt #18 ViewMyReportRequestsAction.java: no (no tag) (4.4 s; about 0.1 h left)
+[3139/3200] iTrust UC30S6.txt #19 LabProcedureBean.java: no (no tag) (3.8 s; about 0.1 h left)
+[3140/3200] iTrust UC30S6.txt #20 SearchUsersAction.java: no (no tag) (3.0 s; about 0.1 h left)
+[3141/3200] iTrust UC30S7.txt #1 ViewMyMessagesAction.java: yes (8.5 s; about 0.1 h left)
+[3142/3200] iTrust UC30S7.txt #2 HCPVisitBean.java: no (no tag) (3.6 s; about 0.1 h left)
+[3143/3200] iTrust UC30S7.txt #3 EditOfficeVisitForm.java: no (5.5 s; about 0.1 h left)
+[3144/3200] iTrust UC30S7.txt #4 HCPDiagnosisBean.java: no (no tag) (2.7 s; about 0.1 h left)
+[3145/3200] iTrust UC30S7.txt #5 MessageBean.java: no (8.1 s; about 0.1 h left)
+[3146/3200] iTrust UC30S7.txt #6 ApptBean.java: no (no tag) (3.0 s; about 0.1 h left)
+[3147/3200] iTrust UC30S7.txt #7 AllergyBean.java: no (no tag) (2.5 s; about 0.1 h left)
+[3148/3200] iTrust UC30S7.txt #8 ReferralBean.java: no (no tag) (3.1 s; about 0.1 h left)
+[3149/3200] iTrust UC30S7.txt #9 TransactionType.java: no (no tag) (3.5 s; about 0.1 h left)
+[3150/3200] iTrust UC30S7.txt #10 ReportRequestBean.java: no (no tag) (3.5 s; about 0.1 h left)
+[3151/3200] iTrust UC30S7.txt #11 ViewMyReportRequestsAction.java: no (no tag) (4.3 s; about 0.1 h left)
+[3152/3200] iTrust UC30S7.txt #12 HCPLinkBean.java: no (no tag) (3.3 s; about 0.1 h left)
+[3153/3200] iTrust UC30S7.txt #13 GenderFactor.java: no (no tag) (2.4 s; about 0.1 h left)
+[3154/3200] iTrust UC30S7.txt #14 ViewVisitedHCPsAction.java: no (no tag) (4.5 s; about 0.1 h left)
+[3155/3200] iTrust UC30S7.txt #15 Email.java: no (no tag) (3.1 s; about 0.1 h left)
+[3156/3200] iTrust UC30S7.txt #16 AgeFactor.java: no (no tag) (2.3 s; about 0.1 h left)
+[3157/3200] iTrust UC30S7.txt #17 LabProcedureBean.java: no (no tag) (3.1 s; about 0.1 h left)
+[3158/3200] iTrust UC30S7.txt #18 ResetPasswordAction.java: no (no tag) (3.3 s; about 0.1 h left)
+[3159/3200] iTrust UC30S7.txt #19 PatientRiskFactor.java: no (no tag) (2.9 s; about 0.1 h left)
+[3160/3200] iTrust UC30S7.txt #20 MyDiagnosisAction.java: no (no tag) (4.3 s; about 0.1 h left)
+[3161/3200] iTrust UC31S1.txt #1 MedicationBean.java: no (5.3 s; about 0.1 h left)
+[3162/3200] iTrust UC31S1.txt #2 EditOfficeVisitForm.java: no (5.3 s; about 0.1 h left)
+[3163/3200] iTrust UC31S1.txt #3 AgeFactor.java: no (no tag) (4.0 s; about 0.0 h left)
+[3164/3200] iTrust UC31S1.txt #4 PrescriptionReportBean.java: yes (7.1 s; about 0.0 h left)
+[3165/3200] iTrust UC31S1.txt #5 ViewPrescriptionRenewalNeedsAction.java: no (5.0 s; about 0.0 h left)
+[3166/3200] iTrust UC31S1.txt #6 HCPLinkBean.java: no (no tag) (5.1 s; about 0.0 h left)
+[3167/3200] iTrust UC31S1.txt #7 PrescriptionBean.java: no (7.3 s; about 0.0 h left)
+[3168/3200] iTrust UC31S1.txt #8 HCPDiagnosisBean.java: no (no tag) (5.5 s; about 0.0 h left)
+[3169/3200] iTrust UC31S1.txt #9 PatientRiskFactor.java: no (3.5 s; about 0.0 h left)
+[3170/3200] iTrust UC31S1.txt #10 TransactionType.java: no (6.8 s; about 0.0 h left)
+[3171/3200] iTrust UC31S1.txt #11 PrescriptionAlerts.java: no (no tag) (5.0 s; about 0.0 h left)
+[3172/3200] iTrust UC31S1.txt #12 ReferralBean.java: no (4.7 s; about 0.0 h left)
+[3173/3200] iTrust UC31S1.txt #13 PrescriptionReportAction.java: no (no tag) (5.1 s; about 0.0 h left)
+[3174/3200] iTrust UC31S1.txt #14 ViewExpiredPrescriptionsAction.java: no (7.6 s; about 0.0 h left)
+[3175/3200] iTrust UC31S1.txt #15 CholesterolFactor.java: no (no tag) (4.2 s; about 0.0 h left)
+[3176/3200] iTrust UC31S1.txt #16 AdverseEventBean.java: no (7.3 s; about 0.0 h left)
+[3177/3200] iTrust UC31S1.txt #17 OfficeVisitBean.java: no (7.8 s; about 0.0 h left)
+[3178/3200] iTrust UC31S1.txt #18 VisitReminderReturnForm.java: no (no tag) (4.6 s; about 0.0 h left)
+[3179/3200] iTrust UC31S1.txt #19 ViewMyReportRequestsAction.java: no (no tag) (5.2 s; about 0.0 h left)
+[3180/3200] iTrust UC31S1.txt #20 ViewOfficeVisitAction.java: no (8.5 s; about 0.0 h left)
+[3181/3200] iTrust UC32E1.txt #1 NoHealthRecordsException.java: no (no tag) (3.0 s; about 0.0 h left)
+[3182/3200] iTrust UC32E1.txt #2 PatientRiskFactor.java: no (no tag) (3.6 s; about 0.0 h left)
+[3183/3200] iTrust UC32E1.txt #3 Role.java: no (5.6 s; about 0.0 h left)
+[3184/3200] iTrust UC32E1.txt #4 OfficeVisitDAO.java: no (no tag) (8.7 s; about 0.0 h left)
+[3185/3200] iTrust UC32E1.txt #5 VisitFlag.java: no (no tag) (3.5 s; about 0.0 h left)
+[3186/3200] iTrust UC32E1.txt #6 ViewMyRecordsAction.java: no (15.0 s; about 0.0 h left)
+[3187/3200] iTrust UC32E1.txt #7 PatientDAO.java: no (no tag) (10.0 s; about 0.0 h left)
+[3188/3200] iTrust UC32E1.txt #8 EditPHRAction.java: no (no tag) (6.6 s; about 0.0 h left)
+[3189/3200] iTrust UC32E1.txt #9 PatientVisitBean.java: no (4.6 s; about 0.0 h left)
+[3190/3200] iTrust UC32E1.txt #10 HCPDiagnosisBean.java: no (5.6 s; about 0.0 h left)
+[3191/3200] iTrust UC32E1.txt #11 ErrorList.java: no (3.5 s; about 0.0 h left)
+[3192/3200] iTrust UC32E1.txt #12 ViewMyReportRequestsAction.java: no (5.7 s; about 0.0 h left)
+[3193/3200] iTrust UC32E1.txt #13 GetVisitRemindersAction.java: yes (10.1 s; about 0.0 h left)
+[3194/3200] iTrust UC32E1.txt #14 AgeFactor.java: no (3.6 s; about 0.0 h left)
+[3195/3200] iTrust UC32E1.txt #15 CholesterolFactor.java: no (3.3 s; about 0.0 h left)
+[3196/3200] iTrust UC32E1.txt #16 iTrustException.java: no (2.9 s; about 0.0 h left)
+[3197/3200] iTrust UC32E1.txt #17 PatientValidator.java: no (5.9 s; about 0.0 h left)
+[3198/3200] iTrust UC32E1.txt #18 ReferralBean.java: no (4.9 s; about 0.0 h left)
+[3199/3200] iTrust UC32E1.txt #19 EditOfficeVisitAction.java: no (7.8 s; about 0.0 h left)
+[3200/3200] iTrust UC32E1.txt #20 EditOfficeVisitForm.java: no (5.1 s; about 0.0 h left)
+# examples with qwen2.5-coder:14b on colab-l4, test slice (first 60 per project)
+
+## Strict parsing
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 117 | 95 | 22 | 733 | 0.812 | 0.115 | 0.201 | 0.139 |
+| eTour_en | 46 | 235 | 141 | 93 | 48 | 142 | 0.660 | 0.396 | 0.495 | 0.430 |
+| iTrust | 60 | 125 | 174 | 35 | 139 | 90 | 0.201 | 0.280 | 0.234 | 0.260 |
+| Avg. |  |  |  |  |  |  | 0.558 | 0.263 | 0.310 | 0.276 |
+| w. Avg. |  |  |  |  |  |  | 0.718 | 0.188 | 0.263 | 0.209 |
+
+## Tolerant parsing
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 117 | 95 | 22 | 733 | 0.812 | 0.115 | 0.201 | 0.139 |
+| eTour_en | 46 | 235 | 141 | 93 | 48 | 142 | 0.660 | 0.396 | 0.495 | 0.430 |
+| iTrust | 60 | 125 | 174 | 35 | 139 | 90 | 0.201 | 0.280 | 0.234 | 0.260 |
+| Avg. |  |  |  |  |  |  | 0.558 | 0.263 | 0.310 | 0.276 |
+| w. Avg. |  |  |  |  |  |  | 0.718 | 0.188 | 0.263 | 0.209 |
+
+- Pairs: 3200; answers from {'ollama': 260, 'harness-cache': 2940, 'lissa-rq1': 0}
+- Without a <trace> tag: 1555; cut at 4096 answer tokens: 0
+- Per call: median 4.7 s (IQR 3.6-6.5 s, n = 3200)
+- Per requirement: median 102.3 s (IQR 90.4-119.1 s, n = 160)
+
+Run folder: /content/LiSSA-Replication-Package/harness/runs/examples__qwen2.5-coder-14b__colab-l4__test
+Device: colab-l4. 548 accepted links (strict parsing) to verify with qwen2.5-coder:14b.
+[157/548] SMOS SMOS67.txt / RegisterLine.txt: share 0.00 (no claims; about 0.0 h left)
+[158/548] SMOS SMOS7.txt / UserListItem.txt: share 0.00 (unclear, unclear, unclear, unclear, unclear; about 0.0 h left)
+[159/548] SMOS SMOS7.txt / ServletShowUserDetails.txt: share 0.00 (identifier-not-declared, identifier-not-declared, identifier-not-declared, identifier-not-declared, identifier-not-declared; about 0.0 h left)
+[160/548] SMOS SMOS8.txt / ServletUpdateUser.txt: share 0.20 (supported, identifier-not-declared, identifier-not-declared, identifier-not-declared, identifier-not-declared; about 0.0 h left)
+[161/548] SMOS SMOS8.txt / UserListItem.txt: share 0.80 (supported, supported, supported, supported, identifier-not-declared; about 0.0 h left)
+[162/548] SMOS SMOS9.txt / DeleteManagerException.txt: share 0.00 (no claims; about 0.0 h left)
+[163/548] SMOS SMOS9.txt / UserListItem.txt: share 0.00 (no claims; about 0.0 h left)
+[528/548] iTrust UC30S2.txt / ViewMyMessagesAction.java: share 0.00 (no claims; about 0.0 h left)
+[529/548] iTrust UC30S2.txt / TransactionType.java: share 0.00 (identifier-not-declared, identifier-not-declared, unsupported, identifier-not-declared, unsupported; about 0.0 h left)
+[530/548] iTrust UC30S2.txt / Email.java: share 0.20 (supported, unclear, unsupported, unsupported, unclear; about 0.0 h left)
+[531/548] iTrust UC30S3.txt / MessageBean.java: share 0.60 (supported, supported, unclear, supported, unclear; about 0.0 h left)
+[532/548] iTrust UC30S3.txt / ViewMyMessagesAction.java: share 0.00 (no claims; about 0.0 h left)
+[533/548] iTrust UC30S3.txt / ValidationFormat.java: share 0.00 (no claims; about 0.0 h left)
+[534/548] iTrust UC30S3.txt / TransactionType.java: share 0.00 (no claims; about 0.0 h left)
+[535/548] iTrust UC30S3.txt / Email.java: share 0.00 (no claims; about 0.0 h left)
+[536/548] iTrust UC30S4.txt / SendMessageAction.java: share 0.00 (unclear, identifier-not-declared, identifier-not-declared, identifier-not-declared, identifier-not-declared; about 0.0 h left)
+[537/548] iTrust UC30S4.txt / Email.java: share 0.20 (supported, unclear, unclear, unclear, unclear; about 0.0 h left)
+[538/548] iTrust UC30S4.txt / ValidationFormat.java: share 0.00 (no claims; about 0.0 h left)
+[539/548] iTrust UC30S4.txt / TransactionType.java: share 0.00 (no claims; about 0.0 h left)
+[540/548] iTrust UC30S5.txt / MessageBean.java: share 0.20 (unclear, unclear, unclear, supported, unclear; about 0.0 h left)
+[541/548] iTrust UC30S5.txt / Email.java: share 0.00 (no claims; about 0.0 h left)
+[542/548] iTrust UC30S6.txt / MessageBean.java: share 0.00 (no claims; about 0.0 h left)
+[543/548] iTrust UC30S7.txt / ViewMyMessagesAction.java: share 1.00 (supported, supported, supported, supported, supported; about 0.0 h left)
+[544/548] iTrust UC31S1.txt / PrescriptionReportBean.java: share 0.00 (identifier-not-declared, identifier-not-declared, unclear, unclear, unsupported; about 0.0 h left)
+[545/548] iTrust UC31S1.txt / PrescriptionBean.java: share 0.00 (unclear, unclear, unclear, unclear, unclear; about 0.0 h left)
+[546/548] iTrust UC31S1.txt / TransactionType.java: share 0.00 (no claims; about 0.0 h left)
+[547/548] iTrust UC31S1.txt / ViewExpiredPrescriptionsAction.java: share 0.40 (supported, supported, unclear, unclear, identifier-not-declared; about 0.0 h left)
+[548/548] iTrust UC31S1.txt / ViewOfficeVisitAction.java: share 0.00 (unclear, unsupported, unclear, unclear, unclear; about 0.0 h left)
+# Verification of baseline__qwen2.5-coder-14b__colab-l4__test (strict parsing, verifier qwen2.5-coder:14b on colab-l4)
+
+- Links: 548; claims per link: 3.9; invalid claims JSON: 0; verdicts: {'supported': 790, 'identifier-not-declared': 482, 'unsupported': 266, 'unclear': 600}
+
+## Without verification
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 163 | 105 | 58 | 723 | 0.644 | 0.127 | 0.212 | 0.151 |
+| eTour_en | 46 | 235 | 176 | 79 | 97 | 156 | 0.449 | 0.336 | 0.384 | 0.354 |
+| iTrust | 60 | 125 | 209 | 21 | 188 | 104 | 0.100 | 0.168 | 0.126 | 0.148 |
+| Avg. |  |  |  |  |  |  | 0.398 | 0.210 | 0.241 | 0.218 |
+| w. Avg. |  |  |  |  |  |  | 0.548 | 0.173 | 0.237 | 0.191 |
+
+## tau = 0.2
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 73 | 58 | 15 | 770 | 0.795 | 0.070 | 0.129 | 0.086 |
+| eTour_en | 46 | 235 | 134 | 68 | 66 | 167 | 0.507 | 0.289 | 0.369 | 0.317 |
+| iTrust | 60 | 125 | 117 | 15 | 102 | 110 | 0.128 | 0.120 | 0.124 | 0.122 |
+| Avg. |  |  |  |  |  |  | 0.477 | 0.160 | 0.207 | 0.175 |
+| w. Avg. |  |  |  |  |  |  | 0.668 | 0.119 | 0.176 | 0.135 |
+
+## tau = 0.4
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 41 | 34 | 7 | 794 | 0.829 | 0.041 | 0.078 | 0.051 |
+| eTour_en | 46 | 235 | 110 | 53 | 57 | 182 | 0.482 | 0.226 | 0.307 | 0.252 |
+| iTrust | 60 | 125 | 62 | 12 | 50 | 113 | 0.194 | 0.096 | 0.128 | 0.107 |
+| Avg. |  |  |  |  |  |  | 0.502 | 0.121 | 0.171 | 0.137 |
+| w. Avg. |  |  |  |  |  |  | 0.694 | 0.083 | 0.129 | 0.096 |
+
+## tau = 0.6
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 25 | 21 | 4 | 807 | 0.840 | 0.025 | 0.049 | 0.031 |
+| eTour_en | 46 | 235 | 74 | 37 | 37 | 198 | 0.500 | 0.157 | 0.239 | 0.182 |
+| iTrust | 60 | 125 | 37 | 7 | 30 | 118 | 0.189 | 0.056 | 0.086 | 0.065 |
+| Avg. |  |  |  |  |  |  | 0.510 | 0.080 | 0.125 | 0.093 |
+| w. Avg. |  |  |  |  |  |  | 0.704 | 0.055 | 0.091 | 0.065 |
+
+## tau = 0.8
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 16 | 12 | 4 | 816 | 0.750 | 0.014 | 0.028 | 0.018 |
+| eTour_en | 46 | 235 | 48 | 27 | 21 | 208 | 0.562 | 0.115 | 0.191 | 0.137 |
+| iTrust | 60 | 125 | 26 | 5 | 21 | 120 | 0.192 | 0.040 | 0.066 | 0.048 |
+| Avg. |  |  |  |  |  |  | 0.502 | 0.056 | 0.095 | 0.067 |
+| w. Avg. |  |  |  |  |  |  | 0.654 | 0.037 | 0.065 | 0.045 |
+
+## tau = 1.0
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 5 | 5 | 0 | 823 | 1.000 | 0.006 | 0.012 | 0.008 |
+| eTour_en | 46 | 235 | 18 | 11 | 7 | 224 | 0.611 | 0.047 | 0.087 | 0.057 |
+| iTrust | 60 | 125 | 7 | 2 | 5 | 123 | 0.286 | 0.016 | 0.030 | 0.020 |
+| Avg. |  |  |  |  |  |  | 0.632 | 0.023 | 0.043 | 0.028 |
+| w. Avg. |  |  |  |  |  |  | 0.848 | 0.015 | 0.029 | 0.019 |
+
+Device: colab-l4. 432 accepted links (strict parsing) to verify with qwen2.5-coder:14b.
+[112/432] SMOS SMOS7.txt / managerUser.txt: share 0.00 (no claims; about 0.0 h left)
+[116/432] SMOS SMOS8.txt / User.txt: share 1.00 (supported, supported, supported, supported, supported; about 0.0 h left)
+[117/432] SMOS SMOS9.txt / ServletDeleteUser.txt: share 0.00 (identifier-not-declared, identifier-not-declared, identifier-not-declared, identifier-not-declared, identifier-not-declared; about 0.0 h left)
+[413/432] iTrust UC30S2.txt / SendMessageAction.java: share 0.00 (identifier-not-declared, identifier-not-declared, identifier-not-declared, identifier-not-declared, identifier-not-declared; about 0.0 h left)
+[414/432] iTrust UC30S2.txt / MessageBean.java: share 0.20 (supported, unclear, unclear, unclear, unclear; about 0.0 h left)
+[416/432] iTrust UC30S2.txt / ValidationFormat.java: share 0.20 (identifier-not-declared, identifier-not-declared, identifier-not-declared, supported, unsupported; about 0.0 h left)
+[417/432] iTrust UC30S3.txt / SendMessageAction.java: share 0.20 (supported, identifier-not-declared, identifier-not-declared, identifier-not-declared, identifier-not-declared; about 0.0 h left)
+[422/432] iTrust UC30S4.txt / MessageBean.java: share 0.20 (supported, unclear, unclear, unclear, unclear; about 0.0 h left)
+[424/432] iTrust UC30S4.txt / ViewMyMessagesAction.java: share 0.00 (no claims; about 0.0 h left)
+[426/432] iTrust UC30S5.txt / ViewMyMessagesAction.java: share 0.60 (supported, unclear, supported, supported, unclear; about 0.0 h left)
+[427/432] iTrust UC30S5.txt / MessageDAO.java: share 0.80 (supported, supported, supported, supported, identifier-not-declared; about 0.0 h left)
+[429/432] iTrust UC30S6.txt / ViewMyMessagesAction.java: share 0.40 (supported, unclear, unclear, supported, unclear; about 0.0 h left)
+[432/432] iTrust UC32E1.txt / GetVisitRemindersAction.java: share 0.60 (unsupported, supported, supported, supported, identifier-not-declared; about 0.0 h left)
+# Verification of examples__qwen2.5-coder-14b__colab-l4__test (strict parsing, verifier qwen2.5-coder:14b on colab-l4)
+
+- Links: 432; claims per link: 4.3; invalid claims JSON: 0; verdicts: {'supported': 725, 'unsupported': 218, 'identifier-not-declared': 526, 'unclear': 389}
+
+## Without verification
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 117 | 95 | 22 | 733 | 0.812 | 0.115 | 0.201 | 0.139 |
+| eTour_en | 46 | 235 | 141 | 93 | 48 | 142 | 0.660 | 0.396 | 0.495 | 0.430 |
+| iTrust | 60 | 125 | 174 | 35 | 139 | 90 | 0.201 | 0.280 | 0.234 | 0.260 |
+| Avg. |  |  |  |  |  |  | 0.558 | 0.263 | 0.310 | 0.276 |
+| w. Avg. |  |  |  |  |  |  | 0.718 | 0.188 | 0.263 | 0.209 |
+
+## tau = 0.2
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 59 | 53 | 6 | 775 | 0.898 | 0.064 | 0.120 | 0.079 |
+| eTour_en | 46 | 235 | 114 | 77 | 37 | 158 | 0.675 | 0.328 | 0.441 | 0.365 |
+| iTrust | 60 | 125 | 92 | 24 | 68 | 101 | 0.261 | 0.192 | 0.221 | 0.203 |
+| Avg. |  |  |  |  |  |  | 0.612 | 0.195 | 0.261 | 0.216 |
+| w. Avg. |  |  |  |  |  |  | 0.787 | 0.130 | 0.194 | 0.148 |
+
+## tau = 0.4
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 35 | 30 | 5 | 798 | 0.857 | 0.036 | 0.070 | 0.045 |
+| eTour_en | 46 | 235 | 95 | 62 | 33 | 173 | 0.653 | 0.264 | 0.376 | 0.300 |
+| iTrust | 60 | 125 | 51 | 18 | 33 | 107 | 0.353 | 0.144 | 0.205 | 0.163 |
+| Avg. |  |  |  |  |  |  | 0.621 | 0.148 | 0.217 | 0.169 |
+| w. Avg. |  |  |  |  |  |  | 0.764 | 0.093 | 0.144 | 0.108 |
+
+## tau = 0.6
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 31 | 27 | 4 | 801 | 0.871 | 0.033 | 0.063 | 0.040 |
+| eTour_en | 46 | 235 | 79 | 52 | 27 | 183 | 0.658 | 0.221 | 0.331 | 0.255 |
+| iTrust | 60 | 125 | 33 | 14 | 19 | 111 | 0.424 | 0.112 | 0.177 | 0.131 |
+| Avg. |  |  |  |  |  |  | 0.651 | 0.122 | 0.190 | 0.142 |
+| w. Avg. |  |  |  |  |  |  | 0.782 | 0.078 | 0.128 | 0.092 |
+
+## tau = 0.8
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 20 | 17 | 3 | 811 | 0.850 | 0.021 | 0.040 | 0.026 |
+| eTour_en | 46 | 235 | 55 | 38 | 17 | 197 | 0.691 | 0.162 | 0.262 | 0.191 |
+| iTrust | 60 | 125 | 24 | 8 | 16 | 117 | 0.333 | 0.064 | 0.107 | 0.076 |
+| Avg. |  |  |  |  |  |  | 0.625 | 0.082 | 0.137 | 0.098 |
+| w. Avg. |  |  |  |  |  |  | 0.764 | 0.053 | 0.091 | 0.064 |
+
+## tau = 1.0
+
+| Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
+|---|---|---|---|---|---|---|---|---|---|---|
+| SMOS | 54 | 828 | 8 | 8 | 0 | 820 | 1.000 | 0.010 | 0.019 | 0.012 |
+| eTour_en | 46 | 235 | 23 | 19 | 4 | 216 | 0.826 | 0.081 | 0.147 | 0.099 |
+| iTrust | 60 | 125 | 6 | 2 | 4 | 123 | 0.333 | 0.016 | 0.031 | 0.020 |
+| Avg. |  |  |  |  |  |  | 0.720 | 0.036 | 0.066 | 0.043 |
+| w. Avg. |  |  |  |  |  |  | 0.895 | 0.024 | 0.046 | 0.030 |
+
+=== 2026-11-17T15:57:45Z TEST qwen2.5-coder:14b: chunk up to 70 requirements per project
+Device: colab-l4. 3400 pairs; 3220 already answered; 180 to ask qwen2.5-coder:14b.
+[3201/3400] iTrust UC32S1.txt #1 FamilyHistoryFactor.java: no (5.1 s; about 0.3 h left)
+[3202/3400] iTrust UC32S1.txt #2 CholesterolFactor.java: no (3.3 s; about 0.2 h left)
+[3203/3400] iTrust UC32S1.txt #3 DiagnosisBean.java: yes (7.4 s; about 0.3 h left)
+[3204/3400] iTrust UC32S1.txt #4 HypertensionFactor.java: no (no tag) (4.0 s; about 0.2 h left)
+[3205/3400] iTrust UC32S1.txt #5 AgeFactor.java: no (no tag) (3.5 s; about 0.2 h left)
+[3206/3400] iTrust UC32S1.txt #6 SmokingFactor.java: no (3.6 s; about 0.2 h left)
+[3207/3400] iTrust UC32S1.txt #7 PriorDiagnosisFactor.java: yes (4.2 s; about 0.2 h left)
+[3208/3400] iTrust UC32S1.txt #8 HealthRecordForm.java: no (no tag) (3.6 s; about 0.2 h left)
+[3209/3400] iTrust UC32S1.txt #9 ChildhoodInfectionFactor.java: yes (5.6 s; about 0.2 h left)
+[3210/3400] iTrust UC32S1.txt #10 WeightFactor.java: no (no tag) (3.5 s; about 0.2 h left)
+[3211/3400] iTrust UC32S1.txt #11 EditPHRAction.java: yes (9.3 s; about 0.2 h left)
+[3212/3400] iTrust UC32S1.txt #12 HealthRecord.java: no (no tag) (5.5 s; about 0.2 h left)
+[3213/3400] iTrust UC32S1.txt #13 PatientBaseAction.java: no (no tag) (3.5 s; about 0.2 h left)
+[3214/3400] iTrust UC32S1.txt #14 EthnicityFactor.java: no (4.3 s; about 0.2 h left)
+[3215/3400] iTrust UC32S1.txt #15 ViewMyRecordsAction.java: yes (9.7 s; about 0.2 h left)
+[3216/3400] iTrust UC32S1.txt #16 HeartDiseaseRisks.java: yes (7.2 s; about 0.2 h left)
+[3217/3400] iTrust UC32S1.txt #17 EditHealthHistoryAction.java: no (no tag) (4.7 s; about 0.2 h left)
+[3218/3400] iTrust UC32S1.txt #18 ReferralBean.java: no (no tag) (3.4 s; about 0.2 h left)
+[3219/3400] iTrust UC32S1.txt #19 Type1DiabetesRisks.java: yes (7.8 s; about 0.2 h left)
+[3220/3400] iTrust UC32S1.txt #20 GetVisitRemindersAction.java: no (no tag) (8.1 s; about 0.2 h left)
+[3221/3400] iTrust UC32S2.txt #1 Role.java: no (3.2 s; about 0.2 h left)
+[3222/3400] iTrust UC32S2.txt #2 HCPDiagnosisBean.java: no (no tag) (4.3 s; about 0.2 h left)
+[3223/3400] iTrust UC32S2.txt #3 SurveyResultBean.java: no (no tag) (4.1 s; about 0.2 h left)
+[3224/3400] iTrust UC32S2.txt #4 MyDiagnosisAction.java: no (no tag) (4.3 s; about 0.2 h left)
+[3225/3400] iTrust UC32S2.txt #5 TransactionType.java: yes (9.7 s; about 0.2 h left)
+[3226/3400] iTrust UC32S2.txt #6 ReferralBean.java: no (no tag) (2.8 s; about 0.2 h left)
+[3227/3400] iTrust UC32S2.txt #7 EditPHRAction.java: no (8.3 s; about 0.2 h left)
+[3228/3400] iTrust UC32S2.txt #8 PatientVisitBean.java: no (no tag) (4.6 s; about 0.2 h left)
+[3229/3400] iTrust UC32S2.txt #9 ViewVisitedHCPsAction.java: no (no tag) (4.3 s; about 0.2 h left)
+[3230/3400] iTrust UC32S2.txt #10 HCPVisitBean.java: no (5.6 s; about 0.2 h left)
+[3231/3400] iTrust UC32S2.txt #11 VisitReminderReturnForm.java: no (no tag) (2.7 s; about 0.2 h left)
+[3232/3400] iTrust UC32S2.txt #12 SendMessageAction.java: no (no tag) (5.2 s; about 0.2 h left)
+[3233/3400] iTrust UC32S2.txt #13 ApptBean.java: no (no tag) (4.2 s; about 0.2 h left)
+[3234/3400] iTrust UC32S2.txt #14 NoHealthRecordsException.java: no (2.8 s; about 0.2 h left)
+[3235/3400] iTrust UC32S2.txt #15 EditHealthHistoryAction.java: no (no tag) (5.0 s; about 0.2 h left)
+[3236/3400] iTrust UC32S2.txt #16 ViewExpiredPrescriptionsAction.java: no (no tag) (3.4 s; about 0.2 h left)
+[3237/3400] iTrust UC32S2.txt #17 AgeFactor.java: no (2.6 s; about 0.2 h left)
+[3238/3400] iTrust UC32S2.txt #18 ViewPrescriptionRenewalNeedsAction.java: no (no tag) (4.2 s; about 0.2 h left)
+[3239/3400] iTrust UC32S2.txt #19 ViewMyReportRequestsAction.java: no (no tag) (4.1 s; about 0.2 h left)
+[3240/3400] iTrust UC32S2.txt #20 PatientNavigation.java: no (no tag) (2.7 s; about 0.2 h left)
+[3241/3400] iTrust UC33E1.txt #1 SurveySearchValidator.java: no (no tag) (3.5 s; about 0.2 h left)
+[3242/3400] iTrust UC33E1.txt #2 HCPVisitBean.java: yes (8.7 s; about 0.2 h left)
+[3243/3400] iTrust UC33E1.txt #3 iTrustException.java: no (3.2 s; about 0.2 h left)
+[3244/3400] iTrust UC33E1.txt #4 SendMessageAction.java: no (no tag) (5.6 s; about 0.2 h left)
+[3245/3400] iTrust UC33E1.txt #5 HCPDiagnosisBean.java: no (no tag) (3.2 s; about 0.2 h left)
+[3246/3400] iTrust UC33E1.txt #6 ErrorList.java: yes (6.8 s; about 0.2 h left)
+[3247/3400] iTrust UC33E1.txt #7 MailValidator.java: no (no tag) (3.0 s; about 0.2 h left)
+[3248/3400] iTrust UC33E1.txt #8 PersonnelValidator.java: no (no tag) (3.2 s; about 0.2 h left)
+[3249/3400] iTrust UC33E1.txt #9 HCPLinkBean.java: no (no tag) (3.6 s; about 0.2 h left)
+[3250/3400] iTrust UC33E1.txt #10 PatientRiskFactor.java: no (3.0 s; about 0.2 h left)
+[3251/3400] iTrust UC33E1.txt #11 ReferralBean.java: yes (8.0 s; about 0.2 h left)
+[3252/3400] iTrust UC33E1.txt #12 EMailValidator.java: no (no tag) (3.4 s; about 0.2 h left)
+[3253/3400] iTrust UC33E1.txt #13 DeclareHCPAction.java: no (4.9 s; about 0.2 h left)
+[3254/3400] iTrust UC33E1.txt #14 AddPersonnelValidator.java: no (no tag) (3.7 s; about 0.2 h left)
+[3255/3400] iTrust UC33E1.txt #15 ViewVisitedHCPsAction.java: no (no tag) (6.8 s; about 0.2 h left)
+[3256/3400] iTrust UC33E1.txt #16 LabProcedureValidator.java: no (no tag) (3.1 s; about 0.2 h left)
+[3257/3400] iTrust UC33E1.txt #17 MessageValidator.java: no (3.5 s; about 0.2 h left)
+[3258/3400] iTrust UC33E1.txt #18 DrugInteractionBean.java: no (4.2 s; about 0.2 h left)
+[3259/3400] iTrust UC33E1.txt #19 ApptTypeBeanValidator.java: no (2.9 s; about 0.2 h left)
+[3260/3400] iTrust UC33E1.txt #20 ViewMyReportRequestsAction.java: no (no tag) (5.4 s; about 0.2 h left)
+[3261/3400] iTrust UC33E2.txt #1 PatientRiskFactor.java: no (no tag) (2.9 s; about 0.2 h left)
+[3262/3400] iTrust UC33E2.txt #2 Role.java: no (no tag) (2.9 s; about 0.2 h left)
+[3263/3400] iTrust UC33E2.txt #3 TransactionType.java: no (no tag) (3.6 s; about 0.2 h left)
+[3264/3400] iTrust UC33E2.txt #4 ReferralBean.java: yes (4.7 s; about 0.2 h left)
+[3265/3400] iTrust UC33E2.txt #5 VisitReminderReturnForm.java: no (no tag) (2.9 s; about 0.1 h left)
+[3266/3400] iTrust UC33E2.txt #6 EditOfficeVisitForm.java: yes (5.4 s; about 0.1 h left)
+[3267/3400] iTrust UC33E2.txt #7 HCPDiagnosisBean.java: no (3.1 s; about 0.1 h left)
+[3268/3400] iTrust UC33E2.txt #8 VisitRemindersDAO.java: no (6.2 s; about 0.1 h left)
+[3269/3400] iTrust UC33E2.txt #9 AgeFactor.java: no (3.4 s; about 0.1 h left)
+[3270/3400] iTrust UC33E2.txt #10 ViewPrescriptionRenewalNeedsAction.java: no (no tag) (4.5 s; about 0.1 h left)
+[3271/3400] iTrust UC33E2.txt #11 MedicationBean.java: no (no tag) (3.0 s; about 0.1 h left)
+[3272/3400] iTrust UC33E2.txt #12 DeclareHCPAction.java: no (no tag) (4.8 s; about 0.1 h left)
+[3273/3400] iTrust UC33E2.txt #13 NoHealthRecordsException.java: no (4.1 s; about 0.1 h left)
+[3274/3400] iTrust UC33E2.txt #14 ViewMyReportRequestsAction.java: no (no tag) (5.3 s; about 0.1 h left)
+[3275/3400] iTrust UC33E2.txt #15 GetVisitRemindersAction.java: no (no tag) (8.4 s; about 0.1 h left)
+[3276/3400] iTrust UC33E2.txt #16 HealthRecordFormValidator.java: no (no tag) (3.9 s; about 0.1 h left)

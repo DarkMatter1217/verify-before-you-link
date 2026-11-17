@@ -20,7 +20,7 @@
 | Avg. |  |  |  |  |  |  | 0.449 | 0.338 | 0.341 | 0.333 |
 | w. Avg. |  |  |  |  |  |  | 0.595 | 0.273 | 0.338 | 0.290 |
 
-- Pairs: 3200; answers from {'ollama': 260, 'harness-cache': 2940, 'lissa-rq1': 0}
+- Pairs: 3200; answers from {'ollama': 0, 'harness-cache': 3200, 'lissa-rq1': 0}
 - Without a <trace> tag: 2178; cut at 4096 answer tokens: 0
 - Per call: median 4.1 s (IQR 3.0-5.7 s, n = 3200)
 - Per requirement: median 92.4 s (IQR 81.9-103.0 s, n = 160)
