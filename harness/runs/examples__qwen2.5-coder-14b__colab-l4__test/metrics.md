@@ -1,26 +1,26 @@
-# examples with qwen2.5-coder:14b on colab-l4, test slice (first 10 per project)
+# examples with qwen2.5-coder:14b on colab-l4, test slice (first 50 per project)
 
 ## Strict parsing
 
 | Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
 |---|---|---|---|---|---|---|---|---|---|---|
-| SMOS | 10 | 172 | 25 | 22 | 3 | 150 | 0.880 | 0.128 | 0.223 | 0.154 |
-| eTour_en | 10 | 61 | 38 | 26 | 12 | 35 | 0.684 | 0.426 | 0.525 | 0.461 |
-| iTrust | 10 | 21 | 31 | 5 | 26 | 16 | 0.161 | 0.238 | 0.192 | 0.217 |
-| Avg. |  |  |  |  |  |  | 0.575 | 0.264 | 0.314 | 0.278 |
-| w. Avg. |  |  |  |  |  |  | 0.774 | 0.209 | 0.293 | 0.233 |
+| SMOS | 50 | 752 | 110 | 88 | 22 | 664 | 0.800 | 0.117 | 0.204 | 0.141 |
+| eTour_en | 46 | 235 | 141 | 93 | 48 | 142 | 0.660 | 0.396 | 0.495 | 0.430 |
+| iTrust | 50 | 106 | 152 | 28 | 124 | 78 | 0.184 | 0.264 | 0.217 | 0.243 |
+| Avg. |  |  |  |  |  |  | 0.548 | 0.259 | 0.305 | 0.271 |
+| w. Avg. |  |  |  |  |  |  | 0.710 | 0.191 | 0.268 | 0.213 |
 
 ## Tolerant parsing
 
 | Project | Reqs | Gold | Pred. | TP | FP | FN | P | R | F1 | F2 |
 |---|---|---|---|---|---|---|---|---|---|---|
-| SMOS | 10 | 172 | 25 | 22 | 3 | 150 | 0.880 | 0.128 | 0.223 | 0.154 |
-| eTour_en | 10 | 61 | 38 | 26 | 12 | 35 | 0.684 | 0.426 | 0.525 | 0.461 |
-| iTrust | 10 | 21 | 31 | 5 | 26 | 16 | 0.161 | 0.238 | 0.192 | 0.217 |
-| Avg. |  |  |  |  |  |  | 0.575 | 0.264 | 0.314 | 0.278 |
-| w. Avg. |  |  |  |  |  |  | 0.774 | 0.209 | 0.293 | 0.233 |
+| SMOS | 50 | 752 | 110 | 88 | 22 | 664 | 0.800 | 0.117 | 0.204 | 0.141 |
+| eTour_en | 46 | 235 | 141 | 93 | 48 | 142 | 0.660 | 0.396 | 0.495 | 0.430 |
+| iTrust | 50 | 106 | 152 | 28 | 124 | 78 | 0.184 | 0.264 | 0.217 | 0.243 |
+| Avg. |  |  |  |  |  |  | 0.548 | 0.259 | 0.305 | 0.271 |
+| w. Avg. |  |  |  |  |  |  | 0.710 | 0.191 | 0.268 | 0.213 |
 
-- Pairs: 600; answers from {'ollama': 0, 'harness-cache': 600, 'lissa-rq1': 0}
-- Without a <trace> tag: 275; cut at 4096 answer tokens: 0
-- Per call: median 4.7 s (IQR 3.6-6.5 s, n = 600)
-- Per requirement: median 100.2 s (IQR 88.5-118.5 s, n = 30)
+- Pairs: 2920; answers from {'ollama': 500, 'harness-cache': 2420, 'lissa-rq1': 0}
+- Without a <trace> tag: 1391; cut at 4096 answer tokens: 0
+- Per call: median 4.7 s (IQR 3.6-6.5 s, n = 2920)
+- Per requirement: median 102.1 s (IQR 91.1-119.0 s, n = 146)

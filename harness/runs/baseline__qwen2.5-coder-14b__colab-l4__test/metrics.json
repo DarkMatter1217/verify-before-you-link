@@ -4,56 +4,56 @@
   "projects": [
    {
     "project": "SMOS",
-    "requirements": 20,
-    "gold": 344,
-    "predicted": 57,
-    "tp": 43,
-    "fp": 14,
-    "fn": 301,
-    "p": 0.7543859649122807,
-    "r": 0.125,
-    "f1": 0.2144638403990025,
-    "f2": 0.15003489183531055
+    "requirements": 54,
+    "gold": 828,
+    "predicted": 163,
+    "tp": 105,
+    "fp": 58,
+    "fn": 723,
+    "p": 0.6441717791411042,
+    "r": 0.12681159420289856,
+    "f1": 0.21190716448032293,
+    "f2": 0.1510791366906475
    },
    {
     "project": "eTour_en",
-    "requirements": 20,
-    "gold": 101,
-    "predicted": 79,
-    "tp": 35,
-    "fp": 44,
-    "fn": 66,
-    "p": 0.4430379746835443,
-    "r": 0.3465346534653465,
-    "f1": 0.38888888888888884,
-    "f2": 0.3623188405797101
+    "requirements": 46,
+    "gold": 235,
+    "predicted": 176,
+    "tp": 79,
+    "fp": 97,
+    "fn": 156,
+    "p": 0.44886363636363635,
+    "r": 0.33617021276595743,
+    "f1": 0.3844282238442822,
+    "f2": 0.3539426523297491
    },
    {
     "project": "iTrust",
-    "requirements": 20,
-    "gold": 42,
-    "predicted": 82,
-    "tp": 11,
-    "fp": 71,
-    "fn": 31,
-    "p": 0.13414634146341464,
-    "r": 0.2619047619047619,
-    "f1": 0.1774193548387097,
-    "f2": 0.22000000000000003
+    "requirements": 60,
+    "gold": 125,
+    "predicted": 209,
+    "tp": 21,
+    "fp": 188,
+    "fn": 104,
+    "p": 0.10047846889952153,
+    "r": 0.168,
+    "f1": 0.12574850299401197,
+    "f2": 0.14809590973201692
    },
    {
     "project": "Avg.",
-    "p": 0.44385676035307986,
-    "r": 0.24447980512336945,
-    "f1": 0.2602573613755337,
-    "f2": 0.2441179108050069
+    "p": 0.39783796146808736,
+    "r": 0.21032726898961868,
+    "f1": 0.240694630439539,
+    "f2": 0.21770589958413783
    },
    {
     "project": "w. Avg.",
-    "p": 0.6363239295982053,
-    "r": 0.18275154004106775,
-    "f1": 0.24744343280956968,
-    "f2": 0.200094878213342
+    "p": 0.5483308049551592,
+    "r": 0.17255892255892258,
+    "f1": 0.23696828928229396,
+    "f2": 0.19089397070189335
    }
   ],
   "requirements": [
@@ -218,6 +218,278 @@
     "f1": 0.2
    },
    {
+    "project": "SMOS",
+    "requirement": "SMOS33",
+    "tp": 4,
+    "fp": 1,
+    "fn": 13,
+    "f1": 0.36363636363636365
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS34",
+    "tp": 5,
+    "fp": 1,
+    "fn": 12,
+    "f1": 0.43478260869565216
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS35",
+    "tp": 1,
+    "fp": 1,
+    "fn": 16,
+    "f1": 0.10526315789473684
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS36",
+    "tp": 1,
+    "fp": 1,
+    "fn": 16,
+    "f1": 0.10526315789473684
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS37",
+    "tp": 0,
+    "fp": 0,
+    "fn": 17,
+    "f1": 0.0
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS38",
+    "tp": 2,
+    "fp": 0,
+    "fn": 15,
+    "f1": 0.21052631578947367
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS39",
+    "tp": 2,
+    "fp": 0,
+    "fn": 15,
+    "f1": 0.21052631578947367
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS4",
+    "tp": 1,
+    "fp": 0,
+    "fn": 6,
+    "f1": 0.25
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS40",
+    "tp": 3,
+    "fp": 0,
+    "fn": 14,
+    "f1": 0.3
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS42",
+    "tp": 2,
+    "fp": 0,
+    "fn": 15,
+    "f1": 0.21052631578947367
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS43",
+    "tp": 2,
+    "fp": 0,
+    "fn": 15,
+    "f1": 0.21052631578947367
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS44",
+    "tp": 5,
+    "fp": 1,
+    "fn": 12,
+    "f1": 0.43478260869565216
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS45",
+    "tp": 2,
+    "fp": 2,
+    "fn": 7,
+    "f1": 0.3076923076923077
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS46",
+    "tp": 2,
+    "fp": 3,
+    "fn": 7,
+    "f1": 0.2857142857142857
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS47",
+    "tp": 1,
+    "fp": 1,
+    "fn": 8,
+    "f1": 0.18181818181818182
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS48",
+    "tp": 1,
+    "fp": 2,
+    "fn": 8,
+    "f1": 0.16666666666666666
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS49",
+    "tp": 1,
+    "fp": 1,
+    "fn": 18,
+    "f1": 0.09523809523809523
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS51",
+    "tp": 1,
+    "fp": 0,
+    "fn": 18,
+    "f1": 0.1
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS52",
+    "tp": 0,
+    "fp": 1,
+    "fn": 10,
+    "f1": 0.0
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS53",
+    "tp": 0,
+    "fp": 2,
+    "fn": 17,
+    "f1": 0.0
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS54",
+    "tp": 1,
+    "fp": 0,
+    "fn": 16,
+    "f1": 0.1111111111111111
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS56",
+    "tp": 0,
+    "fp": 8,
+    "fn": 10,
+    "f1": 0.0
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS57",
+    "tp": 4,
+    "fp": 2,
+    "fn": 6,
+    "f1": 0.5
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS58",
+    "tp": 2,
+    "fp": 6,
+    "fn": 7,
+    "f1": 0.23529411764705882
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS6",
+    "tp": 0,
+    "fp": 0,
+    "fn": 19,
+    "f1": 0.0
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS60",
+    "tp": 4,
+    "fp": 1,
+    "fn": 6,
+    "f1": 0.5333333333333333
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS61",
+    "tp": 3,
+    "fp": 1,
+    "fn": 7,
+    "f1": 0.42857142857142855
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS62",
+    "tp": 2,
+    "fp": 1,
+    "fn": 7,
+    "f1": 0.3333333333333333
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS65",
+    "tp": 3,
+    "fp": 3,
+    "fn": 7,
+    "f1": 0.375
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS66",
+    "tp": 2,
+    "fp": 3,
+    "fn": 7,
+    "f1": 0.2857142857142857
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS67",
+    "tp": 0,
+    "fp": 1,
+    "fn": 19,
+    "f1": 0.0
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS7",
+    "tp": 2,
+    "fp": 0,
+    "fn": 17,
+    "f1": 0.19047619047619047
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS8",
+    "tp": 2,
+    "fp": 0,
+    "fn": 17,
+    "f1": 0.19047619047619047
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS9",
+    "tp": 1,
+    "fp": 1,
+    "fn": 18,
+    "f1": 0.09523809523809523
+   },
+   {
     "project": "eTour_en",
     "requirement": "UC1",
     "tp": 0,
@@ -378,6 +650,214 @@
     "f1": 0.8571428571428571
    },
    {
+    "project": "eTour_en",
+    "requirement": "UC32",
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC33",
+    "tp": 0,
+    "fp": 2,
+    "fn": 6,
+    "f1": 0.0
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC34",
+    "tp": 1,
+    "fp": 4,
+    "fn": 4,
+    "f1": 0.2
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC35",
+    "tp": 1,
+    "fp": 1,
+    "fn": 3,
+    "f1": 0.3333333333333333
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC37",
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "f1": NaN
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC39",
+    "tp": 3,
+    "fp": 0,
+    "fn": 7,
+    "f1": 0.46153846153846156
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC4",
+    "tp": 5,
+    "fp": 1,
+    "fn": 4,
+    "f1": 0.6666666666666666
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC41",
+    "tp": 3,
+    "fp": 0,
+    "fn": 3,
+    "f1": 0.6666666666666666
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC42",
+    "tp": 3,
+    "fp": 0,
+    "fn": 3,
+    "f1": 0.6666666666666666
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC43",
+    "tp": 2,
+    "fp": 5,
+    "fn": 5,
+    "f1": 0.2857142857142857
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC44",
+    "tp": 1,
+    "fp": 1,
+    "fn": 2,
+    "f1": 0.4
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC45",
+    "tp": 1,
+    "fp": 3,
+    "fn": 3,
+    "f1": 0.25
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC47",
+    "tp": 1,
+    "fp": 2,
+    "fn": 6,
+    "f1": 0.2
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC48",
+    "tp": 4,
+    "fp": 1,
+    "fn": 1,
+    "f1": 0.8
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC49",
+    "tp": 1,
+    "fp": 2,
+    "fn": 5,
+    "f1": 0.2222222222222222
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC5",
+    "tp": 1,
+    "fp": 3,
+    "fn": 3,
+    "f1": 0.25
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC50",
+    "tp": 4,
+    "fp": 4,
+    "fn": 3,
+    "f1": 0.5333333333333333
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC52",
+    "tp": 3,
+    "fp": 2,
+    "fn": 3,
+    "f1": 0.5454545454545454
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC53",
+    "tp": 0,
+    "fp": 3,
+    "fn": 6,
+    "f1": 0.0
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC54",
+    "tp": 3,
+    "fp": 4,
+    "fn": 5,
+    "f1": 0.4
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC55",
+    "tp": 1,
+    "fp": 1,
+    "fn": 2,
+    "f1": 0.4
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC56",
+    "tp": 1,
+    "fp": 0,
+    "fn": 3,
+    "f1": 0.4
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC57",
+    "tp": 1,
+    "fp": 5,
+    "fn": 0,
+    "f1": 0.2857142857142857
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC58",
+    "tp": 0,
+    "fp": 0,
+    "fn": 4,
+    "f1": 0.0
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC6",
+    "tp": 0,
+    "fp": 4,
+    "fn": 3,
+    "f1": 0.0
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC9",
+    "tp": 4,
+    "fp": 5,
+    "fn": 4,
+    "f1": 0.47058823529411764
+   },
+   {
     "project": "iTrust",
     "requirement": "UC10E1",
     "tp": 0,
@@ -536,6 +1016,326 @@
     "fp": 3,
     "fn": 1,
     "f1": 0.3333333333333333
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC19E1",
+    "tp": 0,
+    "fp": 2,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC19S1",
+    "tp": 0,
+    "fp": 4,
+    "fn": 3,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC19S2",
+    "tp": 0,
+    "fp": 3,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC19S3",
+    "tp": 0,
+    "fp": 3,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC1E2",
+    "tp": 0,
+    "fp": 2,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC1S1",
+    "tp": 0,
+    "fp": 3,
+    "fn": 4,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC1S2",
+    "tp": 0,
+    "fp": 5,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC21E2",
+    "tp": 0,
+    "fp": 1,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC21S1",
+    "tp": 0,
+    "fp": 4,
+    "fn": 3,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC22E1",
+    "tp": 0,
+    "fp": 2,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC22S1",
+    "tp": 0,
+    "fp": 3,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC22S3",
+    "tp": 0,
+    "fp": 1,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC23E1",
+    "tp": 0,
+    "fp": 3,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC23S1",
+    "tp": 0,
+    "fp": 5,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC23S3",
+    "tp": 2,
+    "fp": 7,
+    "fn": 7,
+    "f1": 0.2222222222222222
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC23S4",
+    "tp": 1,
+    "fp": 1,
+    "fn": 1,
+    "f1": 0.5
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC24",
+    "tp": 1,
+    "fp": 4,
+    "fn": 1,
+    "f1": 0.2857142857142857
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC25",
+    "tp": 0,
+    "fp": 3,
+    "fn": 3,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC25E1",
+    "tp": 0,
+    "fp": 3,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC26E1",
+    "tp": 0,
+    "fp": 3,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC26E2",
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC26S1",
+    "tp": 1,
+    "fp": 7,
+    "fn": 1,
+    "f1": 0.2
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC26S3",
+    "tp": 0,
+    "fp": 2,
+    "fn": 4,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC26S4",
+    "tp": 0,
+    "fp": 4,
+    "fn": 1,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC27S1",
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC28",
+    "tp": 0,
+    "fp": 4,
+    "fn": 3,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC29",
+    "tp": 0,
+    "fp": 7,
+    "fn": 5,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC2E2",
+    "tp": 0,
+    "fp": 2,
+    "fn": 1,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC2S1",
+    "tp": 1,
+    "fp": 6,
+    "fn": 2,
+    "f1": 0.2
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC2S2",
+    "tp": 1,
+    "fp": 3,
+    "fn": 2,
+    "f1": 0.2857142857142857
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC30E1",
+    "tp": 0,
+    "fp": 2,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC30E2",
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC30S2",
+    "tp": 0,
+    "fp": 3,
+    "fn": 4,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC30S3",
+    "tp": 1,
+    "fp": 4,
+    "fn": 2,
+    "f1": 0.25
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC30S4",
+    "tp": 1,
+    "fp": 3,
+    "fn": 2,
+    "f1": 0.2857142857142857
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC30S5",
+    "tp": 0,
+    "fp": 2,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC30S6",
+    "tp": 0,
+    "fp": 1,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC30S7",
+    "tp": 0,
+    "fp": 1,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC31S1",
+    "tp": 1,
+    "fp": 4,
+    "fn": 2,
+    "f1": 0.25
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC32E1",
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "f1": NaN
    }
   ]
  },
@@ -544,56 +1344,56 @@
   "projects": [
    {
     "project": "SMOS",
-    "requirements": 20,
-    "gold": 344,
-    "predicted": 90,
-    "tp": 68,
-    "fp": 22,
-    "fn": 276,
-    "p": 0.7555555555555555,
-    "r": 0.19767441860465115,
-    "f1": 0.3133640552995392,
-    "f2": 0.23192360163710776
+    "requirements": 54,
+    "gold": 828,
+    "predicted": 239,
+    "tp": 164,
+    "fp": 75,
+    "fn": 664,
+    "p": 0.6861924686192469,
+    "r": 0.19806763285024154,
+    "f1": 0.30740393626991563,
+    "f2": 0.23092086736130663
    },
    {
     "project": "eTour_en",
-    "requirements": 20,
-    "gold": 101,
-    "predicted": 117,
-    "tp": 61,
-    "fp": 56,
-    "fn": 40,
-    "p": 0.5213675213675214,
-    "r": 0.6039603960396039,
-    "f1": 0.5596330275229358,
-    "f2": 0.5854126679462571
+    "requirements": 46,
+    "gold": 235,
+    "predicted": 243,
+    "tp": 124,
+    "fp": 119,
+    "fn": 111,
+    "p": 0.5102880658436214,
+    "r": 0.5276595744680851,
+    "f1": 0.5188284518828452,
+    "f2": 0.5240912933220625
    },
    {
     "project": "iTrust",
-    "requirements": 20,
-    "gold": 42,
-    "predicted": 91,
-    "tp": 18,
-    "fp": 73,
-    "fn": 24,
-    "p": 0.1978021978021978,
-    "r": 0.42857142857142855,
-    "f1": 0.2706766917293233,
-    "f2": 0.34749034749034746
+    "requirements": 60,
+    "gold": 125,
+    "predicted": 239,
+    "tp": 36,
+    "fp": 203,
+    "fn": 89,
+    "p": 0.1506276150627615,
+    "r": 0.288,
+    "f1": 0.1978021978021978,
+    "f2": 0.24357239512855205
    },
    {
     "project": "Avg.",
-    "p": 0.49157509157509155,
-    "r": 0.4100687477385612,
-    "f1": 0.38122459151726606,
-    "f2": 0.3882755390245708
+    "p": 0.44903604984187656,
+    "r": 0.33790906910610885,
+    "f1": 0.3413448619849862,
+    "f2": 0.3328615186039737
    },
    {
     "project": "w. Avg.",
-    "p": 0.6588848523140105,
-    "r": 0.30184804928131415,
-    "f1": 0.36075686212626196,
-    "f2": 0.3152012177008863
+    "p": 0.5950450432431251,
+    "r": 0.2727272727272727,
+    "f1": 0.33769395635457367,
+    "f2": 0.29024451304454174
    }
   ],
   "requirements": [
@@ -758,6 +1558,278 @@
     "f1": 0.36363636363636365
    },
    {
+    "project": "SMOS",
+    "requirement": "SMOS33",
+    "tp": 5,
+    "fp": 1,
+    "fn": 12,
+    "f1": 0.43478260869565216
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS34",
+    "tp": 6,
+    "fp": 1,
+    "fn": 11,
+    "f1": 0.5
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS35",
+    "tp": 1,
+    "fp": 1,
+    "fn": 16,
+    "f1": 0.10526315789473684
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS36",
+    "tp": 5,
+    "fp": 1,
+    "fn": 12,
+    "f1": 0.43478260869565216
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS37",
+    "tp": 2,
+    "fp": 0,
+    "fn": 15,
+    "f1": 0.21052631578947367
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS38",
+    "tp": 4,
+    "fp": 0,
+    "fn": 13,
+    "f1": 0.38095238095238093
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS39",
+    "tp": 2,
+    "fp": 0,
+    "fn": 15,
+    "f1": 0.21052631578947367
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS4",
+    "tp": 1,
+    "fp": 0,
+    "fn": 6,
+    "f1": 0.25
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS40",
+    "tp": 4,
+    "fp": 0,
+    "fn": 13,
+    "f1": 0.38095238095238093
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS42",
+    "tp": 3,
+    "fp": 0,
+    "fn": 14,
+    "f1": 0.3
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS43",
+    "tp": 3,
+    "fp": 0,
+    "fn": 14,
+    "f1": 0.3
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS44",
+    "tp": 6,
+    "fp": 1,
+    "fn": 11,
+    "f1": 0.5
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS45",
+    "tp": 3,
+    "fp": 4,
+    "fn": 6,
+    "f1": 0.375
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS46",
+    "tp": 4,
+    "fp": 4,
+    "fn": 5,
+    "f1": 0.47058823529411764
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS47",
+    "tp": 3,
+    "fp": 1,
+    "fn": 6,
+    "f1": 0.46153846153846156
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS48",
+    "tp": 2,
+    "fp": 2,
+    "fn": 7,
+    "f1": 0.3076923076923077
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS49",
+    "tp": 1,
+    "fp": 1,
+    "fn": 18,
+    "f1": 0.09523809523809523
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS51",
+    "tp": 1,
+    "fp": 0,
+    "fn": 18,
+    "f1": 0.1
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS52",
+    "tp": 0,
+    "fp": 1,
+    "fn": 10,
+    "f1": 0.0
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS53",
+    "tp": 0,
+    "fp": 2,
+    "fn": 17,
+    "f1": 0.0
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS54",
+    "tp": 4,
+    "fp": 1,
+    "fn": 13,
+    "f1": 0.36363636363636365
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS56",
+    "tp": 0,
+    "fp": 9,
+    "fn": 10,
+    "f1": 0.0
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS57",
+    "tp": 5,
+    "fp": 2,
+    "fn": 5,
+    "f1": 0.5882352941176471
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS58",
+    "tp": 2,
+    "fp": 6,
+    "fn": 7,
+    "f1": 0.23529411764705882
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS6",
+    "tp": 2,
+    "fp": 0,
+    "fn": 17,
+    "f1": 0.19047619047619047
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS60",
+    "tp": 4,
+    "fp": 1,
+    "fn": 6,
+    "f1": 0.5333333333333333
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS61",
+    "tp": 3,
+    "fp": 1,
+    "fn": 7,
+    "f1": 0.42857142857142855
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS62",
+    "tp": 2,
+    "fp": 2,
+    "fn": 7,
+    "f1": 0.3076923076923077
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS65",
+    "tp": 6,
+    "fp": 3,
+    "fn": 4,
+    "f1": 0.631578947368421
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS66",
+    "tp": 3,
+    "fp": 6,
+    "fn": 6,
+    "f1": 0.3333333333333333
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS67",
+    "tp": 0,
+    "fp": 1,
+    "fn": 19,
+    "f1": 0.0
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS7",
+    "tp": 4,
+    "fp": 0,
+    "fn": 15,
+    "f1": 0.34782608695652173
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS8",
+    "tp": 3,
+    "fp": 0,
+    "fn": 16,
+    "f1": 0.2727272727272727
+   },
+   {
+    "project": "SMOS",
+    "requirement": "SMOS9",
+    "tp": 2,
+    "fp": 1,
+    "fn": 17,
+    "f1": 0.18181818181818182
+   },
+   {
     "project": "eTour_en",
     "requirement": "UC1",
     "tp": 3,
@@ -918,6 +1990,214 @@
     "f1": 0.8571428571428571
    },
    {
+    "project": "eTour_en",
+    "requirement": "UC32",
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC33",
+    "tp": 0,
+    "fp": 3,
+    "fn": 6,
+    "f1": 0.0
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC34",
+    "tp": 1,
+    "fp": 4,
+    "fn": 4,
+    "f1": 0.2
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC35",
+    "tp": 1,
+    "fp": 2,
+    "fn": 3,
+    "f1": 0.2857142857142857
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC37",
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "f1": NaN
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC39",
+    "tp": 6,
+    "fp": 1,
+    "fn": 4,
+    "f1": 0.7058823529411765
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC4",
+    "tp": 7,
+    "fp": 2,
+    "fn": 2,
+    "f1": 0.7777777777777778
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC41",
+    "tp": 4,
+    "fp": 0,
+    "fn": 2,
+    "f1": 0.8
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC42",
+    "tp": 4,
+    "fp": 0,
+    "fn": 2,
+    "f1": 0.8
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC43",
+    "tp": 3,
+    "fp": 7,
+    "fn": 4,
+    "f1": 0.35294117647058826
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC44",
+    "tp": 1,
+    "fp": 1,
+    "fn": 2,
+    "f1": 0.4
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC45",
+    "tp": 1,
+    "fp": 3,
+    "fn": 3,
+    "f1": 0.25
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC47",
+    "tp": 5,
+    "fp": 2,
+    "fn": 2,
+    "f1": 0.7142857142857143
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC48",
+    "tp": 5,
+    "fp": 1,
+    "fn": 0,
+    "f1": 0.9090909090909091
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC49",
+    "tp": 1,
+    "fp": 2,
+    "fn": 5,
+    "f1": 0.2222222222222222
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC5",
+    "tp": 4,
+    "fp": 4,
+    "fn": 0,
+    "f1": 0.6666666666666666
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC50",
+    "tp": 4,
+    "fp": 4,
+    "fn": 3,
+    "f1": 0.5333333333333333
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC52",
+    "tp": 3,
+    "fp": 2,
+    "fn": 3,
+    "f1": 0.5454545454545454
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC53",
+    "tp": 0,
+    "fp": 3,
+    "fn": 6,
+    "f1": 0.0
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC54",
+    "tp": 3,
+    "fp": 5,
+    "fn": 5,
+    "f1": 0.375
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC55",
+    "tp": 1,
+    "fp": 1,
+    "fn": 2,
+    "f1": 0.4
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC56",
+    "tp": 1,
+    "fp": 0,
+    "fn": 3,
+    "f1": 0.4
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC57",
+    "tp": 1,
+    "fp": 5,
+    "fn": 0,
+    "f1": 0.2857142857142857
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC58",
+    "tp": 0,
+    "fp": 0,
+    "fn": 4,
+    "f1": 0.0
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC6",
+    "tp": 2,
+    "fp": 5,
+    "fn": 1,
+    "f1": 0.4
+   },
+   {
+    "project": "eTour_en",
+    "requirement": "UC9",
+    "tp": 5,
+    "fp": 6,
+    "fn": 3,
+    "f1": 0.5263157894736842
+   },
+   {
     "project": "iTrust",
     "requirement": "UC10E1",
     "tp": 0,
@@ -1076,6 +2356,326 @@
     "fp": 3,
     "fn": 0,
     "f1": 0.5714285714285714
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC19E1",
+    "tp": 0,
+    "fp": 2,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC19S1",
+    "tp": 0,
+    "fp": 4,
+    "fn": 3,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC19S2",
+    "tp": 0,
+    "fp": 3,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC19S3",
+    "tp": 0,
+    "fp": 4,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC1E2",
+    "tp": 0,
+    "fp": 2,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC1S1",
+    "tp": 1,
+    "fp": 3,
+    "fn": 3,
+    "f1": 0.25
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC1S2",
+    "tp": 0,
+    "fp": 5,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC21E2",
+    "tp": 0,
+    "fp": 1,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC21S1",
+    "tp": 0,
+    "fp": 4,
+    "fn": 3,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC22E1",
+    "tp": 0,
+    "fp": 2,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC22S1",
+    "tp": 0,
+    "fp": 4,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC22S3",
+    "tp": 0,
+    "fp": 2,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC23E1",
+    "tp": 0,
+    "fp": 3,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC23S1",
+    "tp": 0,
+    "fp": 5,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC23S3",
+    "tp": 2,
+    "fp": 7,
+    "fn": 7,
+    "f1": 0.2222222222222222
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC23S4",
+    "tp": 1,
+    "fp": 2,
+    "fn": 1,
+    "f1": 0.4
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC24",
+    "tp": 1,
+    "fp": 4,
+    "fn": 1,
+    "f1": 0.2857142857142857
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC25",
+    "tp": 1,
+    "fp": 3,
+    "fn": 2,
+    "f1": 0.2857142857142857
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC25E1",
+    "tp": 0,
+    "fp": 3,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC26E1",
+    "tp": 0,
+    "fp": 3,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC26E2",
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC26S1",
+    "tp": 1,
+    "fp": 8,
+    "fn": 1,
+    "f1": 0.18181818181818182
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC26S3",
+    "tp": 0,
+    "fp": 2,
+    "fn": 4,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC26S4",
+    "tp": 0,
+    "fp": 6,
+    "fn": 1,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC27S1",
+    "tp": 1,
+    "fp": 0,
+    "fn": 1,
+    "f1": 0.6666666666666666
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC28",
+    "tp": 1,
+    "fp": 5,
+    "fn": 2,
+    "f1": 0.2222222222222222
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC29",
+    "tp": 1,
+    "fp": 7,
+    "fn": 4,
+    "f1": 0.15384615384615385
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC2E2",
+    "tp": 0,
+    "fp": 2,
+    "fn": 1,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC2S1",
+    "tp": 1,
+    "fp": 7,
+    "fn": 2,
+    "f1": 0.18181818181818182
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC2S2",
+    "tp": 1,
+    "fp": 3,
+    "fn": 2,
+    "f1": 0.2857142857142857
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC30E1",
+    "tp": 0,
+    "fp": 2,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC30E2",
+    "tp": 0,
+    "fp": 0,
+    "fn": 2,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC30S2",
+    "tp": 1,
+    "fp": 5,
+    "fn": 3,
+    "f1": 0.2
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC30S3",
+    "tp": 1,
+    "fp": 4,
+    "fn": 2,
+    "f1": 0.25
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC30S4",
+    "tp": 1,
+    "fp": 4,
+    "fn": 2,
+    "f1": 0.25
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC30S5",
+    "tp": 2,
+    "fp": 2,
+    "fn": 0,
+    "f1": 0.6666666666666666
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC30S6",
+    "tp": 0,
+    "fp": 2,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC30S7",
+    "tp": 0,
+    "fp": 1,
+    "fn": 0,
+    "f1": 0.0
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC31S1",
+    "tp": 1,
+    "fp": 4,
+    "fn": 2,
+    "f1": 0.25
+   },
+   {
+    "project": "iTrust",
+    "requirement": "UC32E1",
+    "tp": 0,
+    "fp": 0,
+    "fn": 0,
+    "f1": NaN
    }
   ]
  }

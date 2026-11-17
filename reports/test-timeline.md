@@ -42,3 +42,27 @@ The tables come from `reports/test_progress.py`.
 - **Baseline over 60 requirements:** F1 0.260 (GPT-4o on the same 60: 0.375–0.382).
 - **Compute:** 1 session, about 1,272 units left.
 - **Monitoring changed at Prabhjot's request:** instead of checks every 50 minutes, a restart check runs when each Colab session ends, and a health check one hour after each new session starts. Each stage is added here and committed.
+
+## 2026-11-17 15:03 UTC — Session 2 started (resumed after the 24-hour limit)
+
+- **Session 1** ran from 14:35 UTC on Nov 16 and ended at 14:33 UTC on Nov 17, at Colab's 24-hour limit, in Qwen chunk 6.
+- **Saved by then:** the last Drive save was at 14:32 UTC. Nothing finished was lost; the pipeline skips the finished chunks and re-asks at most a minute of calls.
+- **Delay:** the browser connection to Colab dropped and had to be restored first, so the restart came about 30 minutes after the session ended.
+- **Session 2 (15:03 UTC):** L4 runtime, Drive mounted, harness hashes matched, Ollama 0.40.2, everything restored from Drive, test script hashes `49258919b74f` and `9e393ad004b2`. Exactly 1 active session at about 1.94 units per hour; 1,237.9 units left.
+- **Progress:** Qwen chunks 1–5 are done (146 requirements). In chunk 6, the baseline and `definition` have reached 160 requirements.
+
+**qwen2.5-coder-14b** (test slice, strict parsing)
+
+| Prompt | Requirements scored | Avg. F1 | P / R | F1 SMOS / eTour / iTrust | With verification, tau 0.2 | GPT-4o on the same requirements |
+|---|---|---|---|---|---|---|
+| baseline | 160 | 0.241 | 0.398 / 0.210 | 0.212 / 0.384 / 0.126 | 0.212 (P 0.475, R 0.165; 146 requirements) | 0.344–0.349 |
+| definition | 160 | 0.191 | 0.499 / 0.131 | 0.137 / 0.264 / 0.173 |  | 0.344–0.349 |
+| summary | 146 | 0.216 | 0.360 / 0.187 | 0.185 / 0.330 / 0.133 |  | 0.347–0.351 |
+| project | 146 | 0.213 | 0.419 / 0.172 | 0.193 / 0.287 / 0.159 |  | 0.347–0.351 |
+| examples (frozen best) | 146 | 0.305 | 0.548 / 0.259 | 0.204 / 0.495 / 0.217 | 0.264 (P 0.611, R 0.197; 146 requirements) | 0.347–0.351 |
+
+**Inferences so far**
+- **The ranking of the prompts has stayed the same at every stage:** `examples` is clearly best (+0.06 over the baseline on the same 146 requirements). Definition, project description and code summary all score below the baseline.
+- **The gap to GPT-4o has settled at about 0.04–0.05 F1.** It was 0.04 after chunk 1, 0.015 after chunk 2 and 0.035 after chunk 3; it narrows on iTrust and widens on SMOS.
+- **Verification keeps lowering F1** (examples 0.305 → 0.264): precision rises (0.548 → 0.611), but recall drops more. RQ3's negative result from dev holds.
+- These are partial results over about 70–78% of the test requirements; the final numbers and the Wilcoxon tests come once all 205 are scored.
