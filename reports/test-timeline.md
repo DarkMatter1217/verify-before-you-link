@@ -141,3 +141,41 @@ Verification at the other thresholds (average F1; verification only removes link
 - **For RQ4:** of the links verification removed at tau 0.2, 157 of 315 (baseline) and 87 of 225 (examples) had no claims at all. The verifier also flagged many claims for citing identifiers that the file does not declare (668 of 2,803 verdicts for the baseline). RQ4 should examine both.
 - **Against GPT-4o:** Qwen's best prompt reaches 0.322 against 0.352–0.354, about 91% of GPT-4o. It is level on eTour (0.495 vs 0.49) and close on iTrust (0.271 vs 0.28); the whole gap is on SMOS (0.201 vs 0.29). The SMOS gap does not come from retrieval: on SMOS, bge-m3's recall ceiling (0.45) is higher than that of GPT-4o's embedding model (0.42; RQ1 report).
 - **Llama (early):** `definition` leads after 60 requirements (0.346), while the frozen best, `definition+summary`, has 0.290 after 30. It is too early to read anything into this; the frozen choice stays.
+
+## 2026-11-18 16:00 UTC — Session 3 started
+
+- **Session 2** ran from 15:03 UTC on Nov 17. Its last Drive save was at 14:41:51 UTC on Nov 18, and saves run every 2 minutes, so it ended at about 14:42 UTC, about 23.6 hours after it started and somewhat before the full 24 hours. It stopped in Llama chunk 3 (up to 30 requirements per project), during the `summary` prompt.
+- **Saved by then:** everything up to 14:41 UTC. At most about 2 minutes of answers were lost; the pipeline asks those again.
+- **Delay:** the restart check was set for the expected 24-hour end (15:03 UTC), so setup began at 15:27 UTC and the pipeline restarted at 15:46 UTC, about an hour after the session ended.
+- **Session 3 (15:46 UTC):** L4 runtime, Drive mounted, harness hashes matched, Ollama 0.40.2, everything restored from Drive (last save 14:41:51 UTC), test script hashes `49258919b74f` and `9e393ad004b2`. Exactly 1 active session at about 1.94 units per hour; 1,191 units left.
+- **Progress:** Qwen is complete (skipped). Llama chunks 1–2 are done (60 requirements, all six prompts). In chunk 3 (90 requirements), the baseline and `definition` are done, and `summary` resumed with 1,374 of its 1,800 pairs already answered; `project`, `examples`, `definition+summary` and the verification follow.
+- **Expected finish:** Llama has about 31 hours of work left (one chunk of 30 requirements takes about 7 hours), and session 3 will need one more restart, so Llama should still finish in the evening of Nov 19 (Eastern time).
+
+
+**qwen2.5-coder-14b** (test slice, strict parsing)
+
+| Prompt | Requirements scored | Avg. F1 | P / R | F1 SMOS / eTour / iTrust | With verification, tau 0.2 | GPT-4o on the same requirements |
+|---|---|---|---|---|---|---|
+| baseline | 205 | 0.249 | 0.404 / 0.222 | 0.212 / 0.384 / 0.149 | 0.220 (P 0.491, R 0.171; 205 requirements) | 0.352–0.354 |
+| definition | 205 | 0.199 | 0.510 / 0.137 | 0.137 / 0.264 / 0.196 |  | 0.352–0.354 |
+| summary | 205 | 0.220 | 0.365 / 0.193 | 0.178 / 0.330 / 0.151 |  | 0.352–0.354 |
+| project | 205 | 0.213 | 0.425 / 0.172 | 0.185 / 0.287 / 0.167 |  | 0.352–0.354 |
+| examples (frozen best) | 205 | 0.322 | 0.570 / 0.275 | 0.201 / 0.495 / 0.271 | 0.279 (P 0.637, R 0.209; 205 requirements) | 0.352–0.354 |
+
+**llama3.1-8b** (test slice, strict parsing)
+
+| Prompt | Requirements scored | Avg. F1 | P / R | F1 SMOS / eTour / iTrust | With verification, tau 0.2 | GPT-4o on the same requirements |
+|---|---|---|---|---|---|---|
+| baseline | 90 | 0.267 | 0.216 / 0.476 | 0.399 / 0.314 / 0.089 | 0.265 (P 0.242, R 0.442; 60 requirements) | 0.366–0.369 |
+| definition | 90 | 0.323 | 0.310 / 0.417 | 0.390 / 0.405 / 0.174 |  | 0.366–0.369 |
+| summary | 60 | 0.275 | 0.233 / 0.477 | 0.361 / 0.322 / 0.142 |  | 0.375–0.382 |
+| project | 60 | 0.276 | 0.217 / 0.523 | 0.417 / 0.310 / 0.101 |  | 0.375–0.382 |
+| examples | 60 | 0.177 | 0.376 / 0.127 | 0.149 / 0.290 / 0.092 |  | 0.375–0.382 |
+| definition+summary (frozen best) | 60 | 0.333 | 0.338 / 0.423 | 0.370 / 0.414 / 0.216 | 0.302 (P 0.363, R 0.355; 60 requirements) | 0.375–0.382 |
+
+**Inferences so far (Llama, partial)**
+- **Llama behaves very differently from Qwen.** With LiSSA's prompt it says "yes" much more often: precision 0.216 and recall 0.476, against Qwen's 0.404 and 0.222.
+- **RQ2: the information that helps depends on the model.** The trace-link definition, which made Qwen significantly worse, helps Llama (0.323 vs the baseline's 0.267 on the same 90 requirements). Labelled examples, Qwen's best prompt, hurt Llama badly (0.177 on 60 requirements): recall collapses to 0.127.
+- **The frozen best prompt, `definition+summary`, is ahead of the baseline** (0.333 vs 0.290 on the same 60 requirements), but `definition` alone scored slightly higher on those 60 (0.346). The frozen choice stays; the Wilcoxon tests on all 205 requirements will decide.
+- **RQ3: verification lowers F1 for Llama too** (`definition+summary` 0.333 → 0.302, baseline 0.290 → 0.265 on 60 requirements), the same pattern as for Qwen and on dev.
+- **Against GPT-4o:** Llama's frozen best reaches about 88% of GPT-4o on the same 60 requirements (0.333 vs 0.375–0.382), close to Qwen's final 91%.
