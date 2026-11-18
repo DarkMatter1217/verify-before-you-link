@@ -75,5 +75,5 @@ python3 harness/analyze.py test harness/runs/baseline__...__test \
   - ties in choosing τ go to the smaller τ.
 - **Undefined F1 in the Wilcoxon tests.** Requirements without gold links are excluded by default; `--unlinked score` includes them instead.
 - **The cross-project examples** come only from the other projects' dev slices, so no test-slice requirement ever appears in a prompt.
-- **Pilots and reported runs:** `data/candidates-local.json` was computed on Prabhjot's Mac and is for pilots only. Reported runs use `data/candidates-rq1.json`.
+- **Pilots and reported runs:** `data/candidates-local.json` was computed on Prabhjot's Mac and is for pilots only. Reported runs use `data/candidates-rq1.json`, built from the Colab RQ1 run (`results-local/rq1/`). The main RQ1 run, on Rahul's laptop, shares 98–99% of these candidate pairs (`reports/rq1-laptop-vs-colab.md`).
 - **LiSSA's trace-link CSVs** can be corrupted: LiSSA overwrites the file without truncating it, so the tail of an older, longer file can remain. Four of the published GPT-4o CSVs have this problem (`selftest.py` lists them). LiSSA's `results-*.md` files are correct.

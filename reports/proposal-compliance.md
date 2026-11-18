@@ -1,9 +1,9 @@
 # How the project still matches the proposal
 
-Status: 16 November 2026 (dev passes done, choices frozen, test slice starting). Proposal: [`proposal/CSI5187_Proposal_Singh_Rahul.pdf`](../proposal/CSI5187_Proposal_Singh_Rahul.pdf).
+Status: 18 November 2026 (RQ1 final, with two runs; dev passes done and choices frozen; test slice: Qwen done, Llama running). Proposal: [`proposal/CSI5187_Proposal_Singh_Rahul.pdf`](../proposal/CSI5187_Proposal_Singh_Rahul.pdf).
 
 **Short answer:** the research design is the one in the proposal: same RQs, data, models, prompts, slices, metrics and tests.
-What changed is **where** the experiments run (a rented GPU instead of our laptops). The method did not change.
+What changed is **where** RQ2 and RQ3 run (a rented GPU instead of our laptops). RQ1 ran on a laptop as planned, and once more on the GPU. The method did not change.
 Each change below is stated, explained and backed by a measurement, and the final report will say the same.
 
 ## 1. Item by item
@@ -19,23 +19,23 @@ Each change below is stated, explained and backed by a measurement, and the fina
 | (not in the proposal) | Round-2 prompt combining the information types that helped on dev, with the rule fixed before pass 1 | Extension, see 2.3 |
 | RQ3: up to five atomic claims citing code identifiers; static identifier check; a factored check that sees only the cited code and not the requirement; keep a link if the supported share reaches τ | Implemented this way (`harness/verify.py`) | Matches |
 | 20% development / 80% test split per project; variants and τ chosen on dev, then frozen | Split fixed with seed 5187 before any RQ2 result; only dev has been run | Matches |
-| On test: each variant, verification and the 2×2 (baseline or best prompt, with or without verification) against the baseline; Wilcoxon signed-rank on per-requirement F1, two-sided, α = 0.05, Holm | Planned this way (`harness/analyze.py test`) | Matches; still to run |
-| RQ4: up to 100 coded errors in three pools, Cohen's κ; runtime and tokens per requirement on a laptop, median and IQR | Errors from the RQ3 test outputs; tokens from the saved answers; runtime from laptop runs (see 2.1) | Matches if the laptop timing runs happen |
+| On test: each variant, verification and the 2×2 (baseline or best prompt, with or without verification) against the baseline; Wilcoxon signed-rank on per-requirement F1, two-sided, α = 0.05, Holm | Run this way (`harness/analyze.py test`): Qwen done 17 Nov (`harness/runs/test-comparisons-qwen2.5-coder-14b.json`), Llama running | Matches |
+| RQ4: up to 100 coded errors in three pools, Cohen's κ; runtime and tokens per requirement on a laptop, median and IQR | Errors from the RQ3 test outputs; tokens from the saved answers; runtime on the laptop: LiSSA's own prompts done (`rq1-laptop/timing.md`), RQ2/RQ3 sample still to run (see 2.1) | Matches once the laptop sample runs |
 | Threats to validity following Runeson and Höst [9] | Running list kept; variability is measured (see 2.2) | On track |
-| Experiments on "a 24 GB Apple M5 laptop" / "our two laptops" | RQ1–RQ3 on a Google Colab L4 GPU; RQ1 also running on Rahul's laptop; RQ4 timings on Rahul's laptop | Change of hardware, see 2.1 |
-| Milestones: RQ1 by Nov 14, RQ2–RQ3 by Nov 28, analysis by Dec 5, report mid-December | RQ1 (Colab) finished Nov 15; RQ2–RQ3 dev in progress; test planned Nov 17–21 | One day late on RQ1; on track otherwise |
+| Experiments on "a 24 GB Apple M5 laptop" / "our two laptops" | RQ1 on Rahul's laptop (the main result), plus a second run on a Google Colab L4 GPU; RQ2–RQ3 on the Colab L4; RQ4 timings on Rahul's laptop | RQ1 matches; RQ2–RQ3 changed hardware, see 2.1 |
+| Milestones: RQ1 by Nov 14, RQ2–RQ3 by Nov 28, analysis by Dec 5, report mid-December | RQ1 on the laptop finished Nov 17 (the Colab run Nov 15); RQ2–RQ3 dev done Nov 16; test: Qwen done Nov 17, Llama expected Nov 19 | RQ1 three days late, but RQ2–RQ3 did not wait for it (they started from the Colab run on Nov 15); on track otherwise |
 
 ## 2. The changes, with reasons
 
-### 2.1 Colab GPU instead of laptops
+### 2.1 Colab GPU instead of laptops for RQ2 and RQ3
 
-**Why.** A smoke test on Rahul's laptop estimated about 27 hours for one RQ1 run (20,480 model calls). RQ2 and RQ3 need roughly three times as many calls again (over 60,000 classification calls on dev and test, plus verification), which would not fit in the course timeline on two laptops (one of them fanless).
+**Why.** A smoke test on Rahul's laptop estimated about 27 hours for one RQ1 run (20,480 model calls); the run itself took 18 hours of model time, spread over five days. RQ2 and RQ3 need roughly three times as many calls again (over 60,000 classification calls on dev and test, plus verification), which would not fit in the course timeline on two laptops (one of them fanless).
 
 **Why the results still answer the RQs.**
-- **Same software, same models.** Ollama 0.40.2, the same 4-bit model files (Qwen digest `9ec8897f747e`, Llama digest `46e0c10c039e`), temperature 0, LiSSA's seed, the same context size. Only the chip doing the arithmetic differs.
-- **Hardware affects only small details, and we measured it.** In our smoke tests, two GPU types (T4 and L4) gave identical KISS and retrieval results, and chain-of-thought differed by about 1 link in 40.
+- **Same models, same settings.** The same 4-bit model files (Qwen digest `9ec8897f747e`, Llama digest `46e0c10c039e`), temperature 0, LiSSA's seed, the same context size, the same LiSSA code. Ollama is 0.40.2 on Colab and 0.40.14 on the laptop.
+- **Hardware affects only small details, and we measured it.** In our smoke tests, two GPU types (T4 and L4) gave identical KISS and retrieval results, and chain-of-thought differed by about 1 link in 40. The two full RQ1 runs, on the laptop and on Colab, differ by at most 0.008 average F1 ([`rq1-laptop-vs-colab.md`](rq1-laptop-vs-colab.md)).
 - **The models are still self-hosted.** RQ1 is about open models that an organisation runs itself instead of sending code to a cloud model's API. On Colab we run our own Ollama: no model provider receives any prompt, and the model version cannot change under us. The benchmark code is open source, so using a rented machine raises no privacy issue.
-- **The laptop question is answered on a laptop.** RQ4's runtime per requirement is measured on Rahul's 24 GB M5 Pro, not taken from Colab. Rahul's laptop RQ1 run gives the timings of LiSSA's own prompts; a small timing sample covers the RQ2/RQ3 configurations.
+- **The laptop question is answered on a laptop.** RQ4's runtime per requirement is measured on Rahul's 24 GB M5 Pro, not taken from Colab. Rahul's laptop RQ1 run gives the timings of LiSSA's own prompts ([`rq1-laptop/timing.md`](../LiSSA-RATLR-V2/lissa/results-local/rq1-laptop/timing.md)); a small timing sample covers the RQ2/RQ3 configurations.
 
 **No paid API was used.** Colab compute comes from a subscription we already had; the proposal's constraint was about paid LLM APIs.
 
@@ -50,6 +50,7 @@ Temperature 0 makes a model pick its most likely word each time, but GPU arithme
 | Qwen, RQ1's answers vs. a fresh run in another session, all 1,020 dev pairs | same yes/no for 96.7% |
 | Qwen dev baseline, RQ1's answers vs. a fresh run (strict parsing) | average F1 0.235 vs. 0.208 |
 | Same, tolerant parsing | 0.337 vs. 0.332 |
+| RQ1, laptop run vs. Colab run (different hardware and Ollama version), all 256 requirements | 98–99% of candidate pairs shared; same yes/no on 96–99% of the shared pairs, except Llama's chain-of-thought (83–89%); average F1 differs by at most 0.008 |
 | GPT-4o in LiSSA's own package, three runs with different seeds | links overlap only 79–88% (Jaccard), but average F1 varies by less than 0.01 (dev 0.385–0.394) |
 
 **Why this is acceptable, and how we handle it.**
@@ -79,7 +80,7 @@ LiSSA's significance runs used five seeds. At temperature 0, the seed made no di
 - **Strict parsing** is LiSSA's own rule: a link only if the answer's `<trace>` tag says yes; an answer without the tag counts as "no". It is used for **every reported result**: RQ1, the dev choices (best prompt, τ), all test comparisons, the Wilcoxon tests and the comparison with GPT-4o.
 - **Tolerant parsing** is our addition: if the tag is missing, a "yes" or "no" at the very start of the answer is taken as the answer. It is **not** used for any RQ1–RQ3 result. It appears only in RQ4.
 
-**Why tolerant parsing belongs in RQ4.** RQ4 asks which error types remain. One of the most frequent is a format error: the model answers but leaves out the required tag. Qwen does this in 65% of its chain-of-thought answers in RQ1 and in 70–78% on the dev slice; Llama in about 19% in RQ1. Under the strict rule each of these answers becomes "no", even when the answer starts with "Yes". Scoring the same answers with the tolerant rule shows how much F1 this one error type costs, which is a measurement of an error type, not a new evaluation metric.
+**Why tolerant parsing belongs in RQ4.** RQ4 asks which error types remain. One of the most frequent is a format error: the model answers but leaves out the required tag. Qwen does this in 65–67% of its chain-of-thought answers in the two RQ1 runs and in 70–78% on the dev slice; Llama in about 19% in RQ1. Under the strict rule each of these answers becomes "no", even when the answer starts with "Yes". Scoring the same answers with the tolerant rule shows how much F1 this one error type costs, which is a measurement of an error type, not a new evaluation metric.
 
 **Why it is not used elsewhere.**
 - The published GPT-4o numbers use only the strict rule. Tolerant scores for our models would have no GPT-4o counterpart, so a comparison would mix two rules.
@@ -90,19 +91,19 @@ LiSSA's significance runs used five seeds. At temperature 0, the seed made no di
 ## 3. Wording for the final report
 
 **Setup:**
-> A smoke test showed that one full RQ1 run takes about 27 hours on our 24 GB laptop, which made all RQ1–RQ3 configurations infeasible within the course timeline. We therefore ran RQ1–RQ3 with the identical software stack (Ollama 0.40.2, the same 4-bit model files, temperature 0, fixed seed, 16K context) on a single NVIDIA L4 GPU. No paid LLM API was used, and no model provider received any prompt. RQ4 runtimes were measured on a 24 GB M5 Pro laptop.
+> We ran RQ1 on a 24 GB Apple M5 Pro laptop (Ollama 0.40.14), as planned; it took about 18 hours of model time. RQ2 and RQ3 need several times as many model calls, which did not fit in the course timeline on our laptops, so we ran them with the same 4-bit model files and settings (temperature 0, fixed seed, 16K context) on a single NVIDIA L4 GPU (Ollama 0.40.2), together with a second RQ1 run. The two RQ1 runs differ by at most 0.008 in average F1. No paid LLM API was used, and no model provider received any prompt. RQ4 runtimes were measured on the laptop.
 
 **Threats to validity, output variability** (fill in the bracketed numbers when the runs finish):
-> We decode greedily (temperature 0, fixed seed), yet outputs are not bit-identical across GPU sessions, a reproducibility threat noted by Sallou et al. [3]. Following their guidelines, we measured it: re-asked prompts gave identical decisions in 98% (Qwen) and 92% (Llama) of cases within a session, and 96.7% of Qwen's 1,020 development decisions were identical across sessions, and two full runs of the baseline on the development slice differed by 0.027 in average F1. LiSSA's own three GPT-4o runs have link-set Jaccard indices of 0.79–0.88 but differ by at most 0.009 in average F1. We ran all compared configurations of a slice in one session where possible, release all prompts, answers, model and runtime versions, and do not interpret differences smaller than the measured run-to-run difference.
+> We decode greedily (temperature 0, fixed seed), yet outputs are not bit-identical across GPU sessions, a reproducibility threat noted by Sallou et al. [3]. Following their guidelines, we measured it: re-asked prompts gave identical decisions in 98% (Qwen) and 92% (Llama) of cases within a session, and 96.7% of Qwen's 1,020 development decisions were identical across sessions, and two full runs of the baseline on the development slice differed by 0.027 in average F1. Two full RQ1 runs on different hardware and Ollama versions agreed on 96–99% of yes/no decisions (83–89% for Llama's chain-of-thought answers) and differed by at most 0.008 in average F1. LiSSA's own three GPT-4o runs have link-set Jaccard indices of 0.79–0.88 but differ by at most 0.009 in average F1. We ran all compared configurations of a slice in one session where possible, release all prompts, answers, model and runtime versions, and do not interpret differences smaller than the measured run-to-run difference.
 
 **One sentence of the proposal to word more precisely.** The proposal says local open models "support reproducible research [3]". Sallou et al. warn that closed models change without notice; they do not claim that open models solve reproducibility. Suggested wording:
 > Closed models can change without notice, a reproducibility threat noted by Sallou et al. [3]; open weights can be pinned to an exact version.
 
 ## 4. What must still happen for this to hold
 
-1. **RQ4 timing runs on Rahul's laptop**, so that "runtime on a laptop" is measured on a laptop.
-2. **Freeze before test:** write down the chosen prompt per model and τ, with the date and file hashes, before any test-slice call.
-3. **Run the test slice once**, with every variant, verification and the 2×2, and the Wilcoxon tests as planned.
+1. **RQ4 timing sample on Rahul's laptop** for the RQ2/RQ3 configurations, so that "runtime on a laptop" is measured on a laptop. LiSSA's own prompts are already timed from the laptop RQ1 run.
+2. **Freeze before test:** done 16 Nov, before any test-slice call ([`harness/FROZEN.md`](../harness/FROZEN.md)).
+3. **Run the test slice once**, with every variant, verification and the 2×2, and the Wilcoxon tests as planned: Qwen done 17 Nov, Llama running.
 4. **Teamwork as planned:** Rahul leads the evaluation scripts, statistics, laptop runs and the threats section; both code the RQ4 errors independently.
 5. **Score every RQ1–RQ3 result with LiSSA's strict rule**; use tolerant scores only in the RQ4 error analysis.
 6. **State all changes** in sections 2.1–2.5 in the report.

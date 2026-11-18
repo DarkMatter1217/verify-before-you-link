@@ -25,16 +25,17 @@ flowchart LR
 |---|---|---|
 | Data, LiSSA build, Ollama setup | Done | `rq1-report.md`, "Validity checks" |
 | Harness reproduces LiSSA exactly | Done | `harness/data/check_rq1.md`: ALL CHECKS PASSED |
-| RQ1 on Colab L4 (both models, KISS, chain-of-thought, retrieval only) | Done 15 Nov 13:32 UTC | `LiSSA-RATLR-V2/lissa/results-local/rq1/` |
-| RQ1 on Rahul's laptop | Running | Rahul's machine |
+| RQ1 on Rahul's laptop (both models, KISS, chain-of-thought, retrieval only): **main result** | Done 17 Nov | `LiSSA-RATLR-V2/lissa/results-local/rq1-laptop/` |
+| RQ1 on Colab L4: second run; RQ2/RQ3 use its candidate pairs | Done 15 Nov 13:32 UTC | `LiSSA-RATLR-V2/lissa/results-local/rq1/` |
+| RQ1 runs compared; laptop time per requirement for LiSSA's prompts | Done 18 Nov | `reports/rq1-laptop-vs-colab.md`, `rq1-laptop/timing.md` |
 | Dev split and frozen prompt texts | Done 14 Nov | `harness/data/split.json`, `harness/prompts/` |
 | RQ2/RQ3 dev passes (pipeline v2) | Done 16 Nov 11:26 UTC | `harness/runs/pipeline-dev.log` (summary at the end) |
 | — Both models: baseline + 4 variants, round-2 combination | Done | `harness/runs/*__dev/metrics.md` |
 | — Repeatability check | Done | NOISE lines in the log |
 | — Claim verification on dev, τ choice (0.2) | Done | `harness/runs/*__dev/verify-strict/` |
 | Freeze of the dev choices | Done 16 Nov, committed before any test call | `harness/FROZEN.md` |
-| Test slice | Starting 16 Nov | `harness/runs/pipeline-test.log` |
-| RQ4 error coding, laptop timings | Not started | |
+| Test slice | Qwen done 17 Nov; Llama running (expected 19 Nov) | `harness/runs/pipeline-test.log`, `reports/test-timeline.md` |
+| RQ4 error coding; laptop timing sample for RQ2/RQ3 | Not started | |
 | Final report | Not started | |
 
 Dev results (strict average F1; GPT-4o 0.385): best prompt Qwen `examples` 0.308, Llama `definition+summary` 0.316; verification lowered F1 at every τ. Details: [`reports/progress-report.md`](../reports/progress-report.md), section 3.
@@ -88,8 +89,9 @@ python3 harness/analyze.py --parser strict test harness/runs/baseline__<model>__
 
 ### Step 5. RQ1, final tables (both)
 
-- Decide which RQ1 run is the main result (recommended: Rahul's laptop run, which matches the proposal; the Colab run as a second run).
-- Compare the two runs: link overlap and F1 difference per configuration. This is our measured run-to-run variability.
+- **Decided (18 Nov):** Rahul's laptop run is the main result, as the proposal planned; the Colab run is the second run.
+- **Done:** the two runs are compared in `reports/rq1-laptop-vs-colab.md` (`python3 reports/compare_rq1_runs.py`): average F1 within 0.008; 98–99% of candidate pairs shared. This is our measured run-to-run variability across hardware.
+- **In the report:** RQ1 ran on the laptop (Ollama 0.40.14); RQ2/RQ3 ran on Colab (Ollama 0.40.2) with the Colab run's candidate pairs. On the test slice, LiSSA's chain-of-thought prompt with Qwen scores 0.250 in both RQ1 runs and 0.249 as the RQ2/RQ3 baseline.
 
 ### Step 6. RQ4, errors (both, by 5 Dec)
 
@@ -102,6 +104,7 @@ python3 harness/analyze.py --parser strict test harness/runs/baseline__<model>__
 - **Sample:** about 10 requirements per configuration, stratified by project, fresh calls on the M5 Pro, both models, plus verification of their accepted links. About 6 hours, overnight.
 - **How:** `run.py` and `verify.py` with `--limit` on Rahul's Mac. Answers are saved per chip, so the Mac makes its own fresh calls.
 - **Report:** time per requirement, median and IQR, without model loading and saved answers. Tokens per requirement come from the saved Colab answers.
+- **Already done for LiSSA's own prompts:** `python3 reports/rq1_laptop_timing.py` reads the time-stamped logs of the laptop RQ1 run and writes `rq1-laptop/timing.md` (e.g. Qwen chain-of-thought 4.7 s per question, 114 s per requirement). Rahul should keep Ollama 0.40.14 for the sample, so all laptop timings come from one version.
 
 ### Step 8. Report (both, by mid-December; hard deadline 21 Dec)
 
@@ -113,7 +116,8 @@ python3 harness/analyze.py --parser strict test harness/runs/baseline__<model>__
 
 | Dates | Step | Proposal milestone |
 |---|---|---|
-| 14–15 Nov | RQ1 on Colab (done) | RQ1 by Nov 14 (one day late) |
+| 14–15 Nov | RQ1 on Colab (second run, done) | RQ1 by Nov 14 |
+| 12–17 Nov | RQ1 on Rahul's laptop (main run, done) | three days late; RQ2/RQ3 did not wait for it |
 | 15–16 Nov | Dev passes (running) | |
 | 16 Nov | Freeze dev choices | |
 | 17–21 Nov | Test slice | RQ2–RQ3 by Nov 28 |
@@ -126,8 +130,8 @@ python3 harness/analyze.py --parser strict test harness/runs/baseline__<model>__
 
 - No test-slice result is looked at before the dev choices are frozen and committed.
 - Every RQ1–RQ3 result is scored with LiSSA's strict rule; tolerant scores appear only in RQ4.
-- Same models (digests in `run.json`), Ollama 0.40.2, temperature 0, seed 133742243, context 16,384, answers capped at 4,096 tokens.
-- bge-m3 embeddings only; the top-20 candidates from RQ1 (`harness/data/candidates-rq1.json`).
+- Same models (digests in `run.json`), Ollama 0.40.2 on Colab (0.40.14 on the laptop), temperature 0, seed 133742243, context 16,384, answers capped at 4,096 tokens.
+- bge-m3 embeddings only; the top-20 candidates from the Colab RQ1 run (`harness/data/candidates-rq1.json`).
 - One request at a time on the GPU (`OLLAMA_NUM_PARALLEL=1`); no other speed-ups that change run conditions.
 - Answers from different chips are never mixed in one run.
 - Every configuration tried on dev is listed in the report.

@@ -1,10 +1,10 @@
 # Colab notebooks and scripts
 
-RQ1–RQ3 run on Google Colab with an **NVIDIA L4** GPU, one session at a time. Everything is saved to Google Drive (`MyDrive/lissa-colab/`) every 2 minutes, with an hourly snapshot (`MyDrive/lissa-colab-snapshots/`, the last 6 kept).
+RQ2–RQ3, and the second RQ1 run, ran on Google Colab with an **NVIDIA L4** GPU, one session at a time. The main RQ1 run is Rahul's laptop run (`LiSSA-RATLR-V2/lissa/results-local/rq1-laptop/`). Everything is saved to Google Drive (`MyDrive/lissa-colab/`) every 2 minutes, with an hourly snapshot (`MyDrive/lissa-colab-snapshots/`, the last 6 kept).
 
 | File | What it is |
 |---|---|
-| `rq1_colab_L4.ipynb` | RQ1: LiSSA unchanged with both models. Ran 14 Nov 20:30 – 15 Nov 13:32 UTC. Includes its output. |
+| `rq1_colab_L4.ipynb` | RQ1, second run: LiSSA unchanged with both models. Ran 14 Nov 20:30 – 15 Nov 13:32 UTC. Includes its output. RQ2/RQ3 use its candidate pairs. |
 | `rq2_rq3_colab_L4.ipynb` | RQ2/RQ3 on the dev slice. Cells 1–4 set up the session; the last cells start pipeline v2. |
 | `lissa_pipeline2.sh` | Pipeline v2: both dev passes. For each model, a fresh baseline and the four variants, then the round-2 combination, the repeatability check, and claim verification. Finished steps are skipped. |
 | `lissa_rq23v2.py` | Helpers for the pipeline: choose the round-2 combination, find the best single variant, the repeatability checks, the dev summary. |
