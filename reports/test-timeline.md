@@ -183,7 +183,7 @@ Verification at the other thresholds (average F1; verification only removes link
 ## 2026-11-18 17:02 UTC — Session 3 running normally
 
 - **Session 3:** exactly 1 active session at about 1.94 units per hour; 1,188.9 units left. Drive saved at 17:00 UTC. No errors.
-- **Speed:** 656 Llama calls since the restart at 15:48 UTC, median about 6.6 s per call (these requirements are from SMOS and eTour, where Llama's calls are slowest; on iTrust they average 5.4 s).
+- **Speed:** 656 Llama calls since the restart at 15:48 UTC, about 6.6 s per call on average (these requirements are from SMOS and eTour, where Llama's calls are slowest; on iTrust they average 5.4 s).
 - **Chunk 3 (90 requirements):** `summary` is done; `project` is running; `examples`, `definition+summary` and the verification follow. Chunk 3 should end at about 20:30 UTC.
 - **Expected finish:** about 13,800 calls remain after chunk 3. Llama should finish at about 22:30 UTC on Nov 19 (about 5:30 pm Eastern; likely 4–8 pm), including one more restart when session 3 reaches 24 hours at about 15:27 UTC on Nov 19.
 
@@ -213,3 +213,37 @@ Verification at the other thresholds (average F1; verification only removes link
 - **The code summary makes no difference for Llama either:** 0.265 against the baseline's 0.267 on the same 90 requirements, as for Qwen (no significant difference).
 - **`definition` keeps its lead over the baseline on 90 requirements** (0.323 vs 0.267), mainly through higher precision (0.310 vs 0.216). For Qwen the same definition was significantly worse, so the effect of the added information depends on the model.
 - No new results for `project`, `examples` and `definition+summary` yet; they reach 90 requirements later in chunk 3.
+
+## 2026-11-18 20:20 UTC — Llama chunk 3 done (90 of 205 requirements)
+
+- **Chunk 3 finished at 20:16 UTC**, about 15 minutes ahead of the estimate. All six prompts and the verification of the baseline and `definition+summary` now cover the same 90 requirements (30 per project).
+- **Chunk 4 (up to 40 requirements per project) started at 20:16 UTC.** Drive saved at 20:17 UTC; no new errors in the log.
+- **Expected finish unchanged:** about 13,800 calls remain. Llama should finish at about 22:30 UTC on Nov 19 (about 5:30 pm Eastern; likely 4–8 pm), including the restart when session 3 reaches 24 hours at about 15:27 UTC on Nov 19.
+
+
+**qwen2.5-coder-14b** (test slice, strict parsing)
+
+| Prompt | Requirements scored | Avg. F1 | P / R | F1 SMOS / eTour / iTrust | With verification, tau 0.2 | GPT-4o on the same requirements |
+|---|---|---|---|---|---|---|
+| baseline | 205 | 0.249 | 0.404 / 0.222 | 0.212 / 0.384 / 0.149 | 0.220 (P 0.491, R 0.171; 205 requirements) | 0.352–0.354 |
+| definition | 205 | 0.199 | 0.510 / 0.137 | 0.137 / 0.264 / 0.196 |  | 0.352–0.354 |
+| summary | 205 | 0.220 | 0.365 / 0.193 | 0.178 / 0.330 / 0.151 |  | 0.352–0.354 |
+| project | 205 | 0.213 | 0.425 / 0.172 | 0.185 / 0.287 / 0.167 |  | 0.352–0.354 |
+| examples (frozen best) | 205 | 0.322 | 0.570 / 0.275 | 0.201 / 0.495 / 0.271 | 0.279 (P 0.637, R 0.209; 205 requirements) | 0.352–0.354 |
+
+**llama3.1-8b** (test slice, strict parsing)
+
+| Prompt | Requirements scored | Avg. F1 | P / R | F1 SMOS / eTour / iTrust | With verification, tau 0.2 | GPT-4o on the same requirements |
+|---|---|---|---|---|---|---|
+| baseline | 90 | 0.267 | 0.216 / 0.476 | 0.399 / 0.314 / 0.089 | 0.240 (P 0.220, R 0.388; 90 requirements) | 0.366–0.369 |
+| definition | 90 | 0.323 | 0.310 / 0.417 | 0.390 / 0.405 / 0.174 |  | 0.366–0.369 |
+| summary | 90 | 0.265 | 0.229 / 0.437 | 0.367 / 0.324 / 0.105 |  | 0.366–0.369 |
+| project | 90 | 0.259 | 0.207 / 0.469 | 0.409 / 0.300 / 0.069 |  | 0.366–0.369 |
+| examples | 90 | 0.170 | 0.385 / 0.122 | 0.160 / 0.274 / 0.078 |  | 0.366–0.369 |
+| definition+summary (frozen best) | 90 | 0.320 | 0.339 / 0.383 | 0.384 / 0.418 / 0.159 | 0.284 (P 0.358, R 0.315; 90 requirements) | 0.366–0.369 |
+
+**Inferences so far (Llama, 90 requirements, all prompts on the same requirements)**
+- **RQ2: only the trace-link definition helps Llama.** `definition` 0.323 and `definition+summary` 0.320 against the baseline's 0.267. The summary (0.265) and the project description (0.259) make no difference. Labelled examples, Qwen's best prompt, hurt Llama (0.170): recall drops to 0.122.
+- **Adding the code summary to the definition does not add anything** (0.320 vs 0.323). The frozen choice stays; the Wilcoxon tests on all 205 requirements will decide.
+- **RQ3: verification lowers F1 for Llama as well** (`definition+summary` 0.320 → 0.284, baseline 0.267 → 0.240). It raises precision a little (0.339 → 0.358) but costs more recall (0.383 → 0.315), the same pattern as for Qwen and on dev.
+- **Against GPT-4o:** Llama's frozen best reaches about 87% of GPT-4o on the same 90 requirements (0.320 vs 0.366–0.369).
