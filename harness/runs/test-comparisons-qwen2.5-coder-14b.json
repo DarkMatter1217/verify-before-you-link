@@ -1,0 +1,62 @@
+[
+ {
+  "comparison": "definition__qwen2.5-coder-14b__colab-l4__test vs baseline__qwen2.5-coder-14b__colab-l4__test",
+  "n": 183,
+  "changed": 124,
+  "mean_diff": -0.04053445356210991,
+  "median_diff": 0.0,
+  "p": 0.0035234387250537612,
+  "r": -0.30193548387096775,
+  "p_holm": 0.015895548907319656
+ },
+ {
+  "comparison": "summary__qwen2.5-coder-14b__colab-l4__test vs baseline__qwen2.5-coder-14b__colab-l4__test",
+  "n": 183,
+  "changed": 106,
+  "mean_diff": -0.013232665706522036,
+  "median_diff": 0.0,
+  "p": 0.17934483885994956,
+  "r": -0.15023805325339445,
+  "p_holm": 0.3586896777198991
+ },
+ {
+  "comparison": "project__qwen2.5-coder-14b__colab-l4__test vs baseline__qwen2.5-coder-14b__colab-l4__test",
+  "n": 183,
+  "changed": 104,
+  "mean_diff": -0.02133624211084276,
+  "median_diff": 0.0,
+  "p": 0.09683065057034829,
+  "r": -0.18754578754578755,
+  "p_holm": 0.29049195171104486
+ },
+ {
+  "comparison": "examples__qwen2.5-coder-14b__colab-l4__test vs baseline__qwen2.5-coder-14b__colab-l4__test",
+  "n": 183,
+  "changed": 120,
+  "mean_diff": 0.07298957039313286,
+  "median_diff": 0.0,
+  "p": 3.9688784875469044e-05,
+  "r": 0.4322314049586777,
+  "p_holm": 0.00023813270925281425
+ },
+ {
+  "comparison": "baseline__qwen2.5-coder-14b__colab-l4__test @ tau=0.2 vs baseline__qwen2.5-coder-14b__colab-l4__test",
+  "n": 183,
+  "changed": 92,
+  "mean_diff": -0.02658997235011923,
+  "median_diff": 0.0,
+  "p": 0.003179109781463931,
+  "r": -0.3541374474053296,
+  "p_holm": 0.015895548907319656
+ },
+ {
+  "comparison": "examples__qwen2.5-coder-14b__colab-l4__test @ tau=0.2 vs baseline__qwen2.5-coder-14b__colab-l4__test",
+  "n": 183,
+  "changed": 129,
+  "mean_diff": 0.032228061420967374,
+  "median_diff": 0.0,
+  "p": 0.25324835886068364,
+  "r": 0.11592128801431127,
+  "p_holm": 0.3586896777198991
+ }
+]
