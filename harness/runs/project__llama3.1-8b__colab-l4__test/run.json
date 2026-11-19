@@ -10,11 +10,11 @@
   ],
   "candidates": null,
   "lissa_cache": null,
-  "limit": 80,
+  "limit": null,
   "hours": null,
   "ollama_url": "http://127.0.0.1:11434",
   "device": "colab-l4",
-  "run_id": "project__llama3.1-8b__colab-l4__test",
+  "run_id": null,
   "dry_run": false
  },
  "options": {
@@ -26,7 +26,7 @@
  "ollama_version": "0.40.2",
  "model_digest": "46e0c10c039e019119339687c3c1757cc81b9da49709a3b3924863ba87ca666e",
  "device": "colab-l4",
- "finished": "2026-11-19T16:08:01",
+ "finished": "2026-11-19T21:43:19",
  "candidates": {
   "file": "/content/LiSSA-Replication-Package/harness/data/candidates-rq1.json",
   "sha256": "7cde755d62b57db7a2f2bdae62ad88992f233b845495107e69cda9ee8b6a6b14",

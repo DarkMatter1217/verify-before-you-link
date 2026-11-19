@@ -1,7 +1,7 @@
 # Results: where they are
 
 The results stay where the code writes them, so every script works on them in place. This page is the index.
-State: 18 November 2026. RQ1 is final (two runs). The dev passes of RQ2/RQ3 are complete. On the test slice, Qwen is complete and Llama is running.
+State: 19 November 2026. RQ1 is final (two runs). RQ2/RQ3 are complete on the dev and test slices for both models.
 
 **RQ1 has two runs.** The main result is the run on Rahul's laptop (MacBook Pro, M5 Pro, 24 GB; Ollama 0.40.14), as the proposal planned. The second run, on a Colab L4 GPU (Ollama 0.40.2), shows how much a repeat run differs; RQ2 and RQ3 use its candidate pairs. The two runs agree to within 0.008 average F1: [`reports/rq1-laptop-vs-colab.md`](../reports/rq1-laptop-vs-colab.md).
 
@@ -48,17 +48,20 @@ Each run folder has `metrics.md` (readable tables), `metrics.json`, `decisions.c
 
 Claim verification lowered F1 at every τ for both models. Full tables: `harness/runs/*__dev/metrics.md` and `.../verify-strict/metrics.md`; the summary is at the end of `harness/runs/pipeline-dev.log`. The choices frozen for the test slice are in [`harness/FROZEN.md`](../harness/FROZEN.md).
 
-**RQ2/RQ3, test slice** (205 requirements), average F1 with LiSSA's strict rule; GPT-4o on the same requirements: 0.352–0.354. Llama is still running.
+**RQ2/RQ3, test slice** (205 requirements), average F1 with LiSSA's strict rule; GPT-4o chain-of-thought on the same requirements: 0.352. Wilcoxon signed-rank test against the baseline, Holm-corrected within each model.
 
-| Prompt | Qwen2.5-Coder-14B | Wilcoxon vs. baseline (Holm) |
-|---|---|---|
-| Baseline | 0.249 | |
-| + definition | 0.199 | worse, p 0.016 |
-| + summary | 0.220 | no difference |
-| + project | 0.213 | no difference |
-| + examples (frozen best) | **0.322** | better, p 0.0002 |
-| Baseline + verification, τ = 0.2 | 0.220 | worse, p 0.016 |
-| Examples + verification, τ = 0.2 | 0.279 | no difference |
+| Prompt | Qwen2.5-Coder-14B | Wilcoxon (Holm) | Llama-3.1-8B | Wilcoxon (Holm) |
+|---|---|---|---|---|
+| Baseline | 0.249 | | 0.260 | |
+| + definition | 0.199 | worse, p 0.016 | 0.313 | better, p < 0.001 |
+| + summary | 0.220 | no difference | 0.257 | no difference |
+| + project | 0.213 | no difference | 0.254 | no difference |
+| + examples | **0.322** (frozen best) | better, p 0.0002 | 0.158 | worse, p < 0.001 |
+| + definition+summary | | | **0.312** (frozen best) | better, p < 0.001 |
+| Baseline + verification, τ = 0.2 | 0.220 | worse, p 0.016 | 0.238 | worse, p 0.048 |
+| Best prompt + verification, τ = 0.2 | 0.279 | no difference | 0.280 | no difference |
+
+Full tables, exact p-values and the stage-by-stage record: [`reports/test-timeline.md`](../reports/test-timeline.md) (last section).
 
 The run folders also contain tolerant-rule scores. They are used only in RQ4, to measure the cost of answers that lack the `<trace>` tag (see [`reports/proposal-compliance.md`](../reports/proposal-compliance.md), section 2.5).
 

@@ -316,3 +316,70 @@ Verification at the other thresholds (average F1; verification only removes link
 **Inferences so far (only what changed)**
 - **Verification now covers 180 requirements and still lowers F1:** `definition+summary` 0.309 → 0.276 (precision 0.314 → 0.325, recall 0.365 → 0.301) and the baseline 0.260 → 0.237 on the same 180 requirements.
 - **The definition keeps its lead at 190 requirements** (0.314 vs the baseline's 0.261).
+
+## 2026-11-19 21:55 UTC — Test slice complete
+
+- **Llama finished all 205 test requirements.** Chunk 9 started at 16:25 UTC, chunk 10 at 18:29 UTC and chunk 11 (the last 5 iTrust requirements) at 20:38 UTC. The final scoring, the Wilcoxon tests and the GPT-4o reference ran at 21:43 UTC; the log ends with `TEST DONE` at 21:43:35 UTC.
+- **Final verification sets:** 3,162 accepted links for the Llama baseline and 1,440 for `definition+summary`, each checked claim by claim with tau 0.2.
+- **Saved and shut down:** a final save and snapshot at 21:51:24 UTC (the hourly snapshot at 21:43 was taken in the same second as `TEST DONE`), then the runtime was deleted. No session is left; 1,115.6 compute units remain.
+- **The whole test slice** ran in four Colab sessions on one L4 from 14:35 UTC on Nov 16 to 21:43 UTC on Nov 19, about 78 hours of runtime at about 1.94 units per hour. Every restart reused the saved answers, so no answer was asked twice.
+- **Saved answers:** `harness/cache/qwen2.5-coder-14b__colab-l4.jsonl` (33.5 MB) and `harness/cache/llama3.1-8b__colab-l4.jsonl` (66.6 MB) hold every prompt and answer with timing and token counts, for RQ4. Both are under 90 MB, so they are stored uncompressed.
+
+**Final results** (average F1 over SMOS, eTour and iTrust, LiSSA's strict rule)
+
+
+**qwen2.5-coder-14b** (test slice, strict parsing)
+
+| Prompt | Requirements scored | Avg. F1 | P / R | F1 SMOS / eTour / iTrust | With verification, tau 0.2 | GPT-4o on the same requirements |
+|---|---|---|---|---|---|---|
+| baseline | 205 | 0.249 | 0.404 / 0.222 | 0.212 / 0.384 / 0.149 | 0.220 (P 0.491, R 0.171; 205 requirements) | 0.352–0.354 |
+| definition | 205 | 0.199 | 0.510 / 0.137 | 0.137 / 0.264 / 0.196 |  | 0.352–0.354 |
+| summary | 205 | 0.220 | 0.365 / 0.193 | 0.178 / 0.330 / 0.151 |  | 0.352–0.354 |
+| project | 205 | 0.213 | 0.425 / 0.172 | 0.185 / 0.287 / 0.167 |  | 0.352–0.354 |
+| examples (frozen best) | 205 | 0.322 | 0.570 / 0.275 | 0.201 / 0.495 / 0.271 | 0.279 (P 0.637, R 0.209; 205 requirements) | 0.352–0.354 |
+
+**llama3.1-8b** (test slice, strict parsing)
+
+| Prompt | Requirements scored | Avg. F1 | P / R | F1 SMOS / eTour / iTrust | With verification, tau 0.2 | GPT-4o on the same requirements |
+|---|---|---|---|---|---|---|
+| baseline | 205 | 0.260 | 0.205 / 0.467 | 0.391 / 0.292 / 0.098 | 0.238 (P 0.209, R 0.383; 205 requirements) | 0.352–0.354 |
+| definition | 205 | 0.313 | 0.292 / 0.407 | 0.378 / 0.375 / 0.185 |  | 0.352–0.354 |
+| summary | 205 | 0.257 | 0.216 / 0.420 | 0.366 / 0.303 / 0.102 |  | 0.352–0.354 |
+| project | 205 | 0.254 | 0.198 / 0.475 | 0.402 / 0.277 / 0.085 |  | 0.352–0.354 |
+| examples | 205 | 0.158 | 0.349 / 0.113 | 0.142 / 0.240 / 0.093 |  | 0.352–0.354 |
+| definition+summary (frozen best) | 205 | 0.312 | 0.316 / 0.372 | 0.360 / 0.396 / 0.179 | 0.280 (P 0.328, R 0.307; 205 requirements) | 0.352–0.354 |
+
+**GPT-4o chain-of-thought on the same 205 requirements** (LiSSA's own answers): P 0.388, R 0.459, average F1 0.352 (SMOS 0.294, eTour 0.485, iTrust 0.277); link-weighted F1 0.326.
+
+**Significance tests**
+
+**qwen2.5-coder-14b**: Wilcoxon signed-rank test on per-requirement F1 against the baseline (two-sided; Holm correction within the model; n = requirements with at least one gold link)
+
+| Comparison with the baseline | n | Changed | Mean diff. | Median diff. | p | r | p (Holm) | Significant at 0.05 |
+|---|---|---|---|---|---|---|---|---|
+| `definition` | 183 | 124 | -0.041 | +0.000 | 0.004 | -0.30 | 0.016 | yes, worse |
+| `summary` | 183 | 106 | -0.013 | +0.000 | 0.179 | -0.15 | 0.359 | no |
+| `project` | 183 | 104 | -0.021 | +0.000 | 0.097 | -0.19 | 0.290 | no |
+| `examples` | 183 | 120 | +0.073 | +0.000 | 4e-05 | +0.43 | 0.00024 | yes, better |
+| `baseline` + verification, tau 0.2 | 183 | 92 | -0.027 | +0.000 | 0.003 | -0.35 | 0.016 | yes, worse |
+| `examples` + verification, tau 0.2 | 183 | 129 | +0.032 | +0.000 | 0.253 | +0.12 | 0.359 | no |
+
+**llama3.1-8b**: Wilcoxon signed-rank test on per-requirement F1 against the baseline (two-sided; Holm correction within the model; n = requirements with at least one gold link)
+
+| Comparison with the baseline | n | Changed | Mean diff. | Median diff. | p | r | p (Holm) | Significant at 0.05 |
+|---|---|---|---|---|---|---|---|---|
+| `definition` | 183 | 153 | +0.055 | +0.039 | 5.1e-09 | +0.54 | 3.1e-08 | yes, better |
+| `summary` | 183 | 149 | -0.006 | +0.000 | 0.199 | -0.12 | 0.399 | no |
+| `project` | 183 | 136 | -0.010 | +0.000 | 0.039 | -0.20 | 0.116 | no |
+| `examples` | 183 | 147 | -0.110 | -0.125 | 9.5e-12 | -0.65 | 6.7e-11 | yes, worse |
+| `definition+summary` | 183 | 151 | +0.053 | +0.024 | 1.4e-06 | +0.45 | 6.8e-06 | yes, better |
+| `baseline` + verification, tau 0.2 | 183 | 140 | -0.025 | +0.000 | 0.012 | -0.24 | 0.048 | yes, worse |
+| `definition+summary` + verification, tau 0.2 | 183 | 149 | +0.014 | +0.000 | 0.307 | +0.10 | 0.399 | no |
+
+The tests with verification compare each verified run with the plain baseline, as frozen before the test slice. Tests of verification within the same prompt (for example `examples` with and without verification) are a separate decision still to be made.
+
+**Final inferences**
+- **RQ2: which added information helps depends on the model.** For Qwen, only labelled examples help (0.249 → 0.322, significant); the trace-link definition makes it significantly worse (0.199). For Llama it is the other way round: the definition helps (0.260 → 0.313, significant) and the examples make it significantly worse (0.158). The code summary and the project description make no significant difference for either model. Adding the code summary to the definition adds nothing for Llama (0.312 vs 0.313).
+- **The frozen best prompts both beat their baselines significantly** (Qwen `examples`: Holm p 0.00024; Llama `definition+summary`: Holm p 0.0000068), so the choices made on the dev slice carried over to the test slice.
+- **RQ3: claim-level verification does not improve F1.** It raises precision for both models (Qwen baseline 0.404 → 0.491, Qwen `examples` 0.570 → 0.637; Llama `definition+summary` 0.316 → 0.328) but loses more recall. On the baseline it makes F1 significantly worse for both models (Qwen 0.249 → 0.220, Llama 0.260 → 0.238). On the best prompts, the verified runs are no longer significantly better than the baseline.
+- **Against GPT-4o (0.352):** the best local prompts reach 91% (Qwen `examples`, 0.322) and 89% (Llama `definition+summary`, 0.312) of GPT-4o's F1 on the same requirements, with a 14B and an 8B model on one GPU and no API cost. Per project, each local model beats GPT-4o on one project: Llama on SMOS (0.360 vs 0.294, mostly through recall) and Qwen on eTour (0.495 vs 0.485). GPT-4o stays ahead on iTrust (0.277 vs Qwen 0.271 and Llama 0.179).

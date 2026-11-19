@@ -1,0 +1,72 @@
+[
+ {
+  "comparison": "definition__llama3.1-8b__colab-l4__test vs baseline__llama3.1-8b__colab-l4__test",
+  "n": 183,
+  "changed": 153,
+  "mean_diff": 0.0553201634089056,
+  "median_diff": 0.038961038961038974,
+  "p": 5.114265131834931e-09,
+  "r": 0.5446057210763093,
+  "p_holm": 3.068559079100958e-08
+ },
+ {
+  "comparison": "summary__llama3.1-8b__colab-l4__test vs baseline__llama3.1-8b__colab-l4__test",
+  "n": 183,
+  "changed": 149,
+  "mean_diff": -0.006489286117220211,
+  "median_diff": 0.0,
+  "p": 0.19949742185658248,
+  "r": -0.12116331096196868,
+  "p_holm": 0.39899484371316496
+ },
+ {
+  "comparison": "project__llama3.1-8b__colab-l4__test vs baseline__llama3.1-8b__colab-l4__test",
+  "n": 183,
+  "changed": 136,
+  "mean_diff": -0.00963526308211194,
+  "median_diff": 0.0,
+  "p": 0.03864710922834936,
+  "r": -0.20437956204379562,
+  "p_holm": 0.11594132768504808
+ },
+ {
+  "comparison": "examples__llama3.1-8b__colab-l4__test vs baseline__llama3.1-8b__colab-l4__test",
+  "n": 183,
+  "changed": 147,
+  "mean_diff": -0.11025918791264913,
+  "median_diff": -0.125,
+  "p": 9.501140884434449e-12,
+  "r": -0.6478212906784335,
+  "p_holm": 6.650798619104114e-11
+ },
+ {
+  "comparison": "definition+summary__llama3.1-8b__colab-l4__test vs baseline__llama3.1-8b__colab-l4__test",
+  "n": 183,
+  "changed": 151,
+  "mean_diff": 0.0526595020363674,
+  "median_diff": 0.02380952380952378,
+  "p": 1.352325423828377e-06,
+  "r": 0.45329383060299755,
+  "p_holm": 6.761627119141885e-06
+ },
+ {
+  "comparison": "baseline__llama3.1-8b__colab-l4__test @ tau=0.2 vs baseline__llama3.1-8b__colab-l4__test",
+  "n": 183,
+  "changed": 140,
+  "mean_diff": -0.0245250772287911,
+  "median_diff": 0.0,
+  "p": 0.011979476245271773,
+  "r": -0.2447821681864235,
+  "p_holm": 0.04791790498108709
+ },
+ {
+  "comparison": "definition+summary__llama3.1-8b__colab-l4__test @ tau=0.2 vs baseline__llama3.1-8b__colab-l4__test",
+  "n": 183,
+  "changed": 149,
+  "mean_diff": 0.014272745752016152,
+  "median_diff": 0.0,
+  "p": 0.3070329362826816,
+  "r": 0.09646532438478747,
+  "p_holm": 0.39899484371316496
+ }
+]
