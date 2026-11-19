@@ -283,3 +283,36 @@ Verification at the other thresholds (average F1; verification only removes link
 - **The code summary adds nothing on top of the definition** (0.309 vs 0.310). The frozen choice `definition+summary` stays; the Wilcoxon tests on all 205 requirements will decide whether it beats the baseline.
 - **RQ3: verification lowers F1 for Llama as for Qwen.** On the same 170 requirements, `definition+summary` drops from 0.304 to 0.273: precision rises a little (0.310 → 0.322) but recall falls more (0.362 → 0.301).
 - **Against GPT-4o:** Llama's frozen best reaches about 86–87% of GPT-4o on the same requirements (0.309 vs 0.356–0.358); Qwen's final best reached about 91% (0.322 vs 0.352–0.354).
+
+## 2026-11-19 17:22 UTC — Session 4 running normally
+
+- **Session 4:** exactly 1 active session at about 1.94 units per hour; 1,123.7 units left. Drive saved at 17:19 UTC. No errors since the restart.
+- **Chunk 8 (180 requirements) finished at 16:25 UTC:** the restart picked up the baseline verification where session 3 stopped, then verified `definition+summary` (1,296 links).
+- **Chunk 9 (up to 90 requirements per project; 10 new iTrust requirements) started at 16:25 UTC.** `baseline` and `definition` are done; `summary` is nearly done. Its 580 new Llama calls so far average 5.6 s.
+- **Expected finish unchanged:** chunk 9 should end at about 18:30 UTC, chunk 10 at about 20:20 UTC and chunk 11 (5 requirements) at about 21:15 UTC. Llama should finish at about 21:15–21:30 UTC (about 4:15–4:30 pm Eastern) today.
+
+
+**qwen2.5-coder-14b** (test slice, strict parsing)
+
+| Prompt | Requirements scored | Avg. F1 | P / R | F1 SMOS / eTour / iTrust | With verification, tau 0.2 | GPT-4o on the same requirements |
+|---|---|---|---|---|---|---|
+| baseline | 205 | 0.249 | 0.404 / 0.222 | 0.212 / 0.384 / 0.149 | 0.220 (P 0.491, R 0.171; 205 requirements) | 0.352–0.354 |
+| definition | 205 | 0.199 | 0.510 / 0.137 | 0.137 / 0.264 / 0.196 |  | 0.352–0.354 |
+| summary | 205 | 0.220 | 0.365 / 0.193 | 0.178 / 0.330 / 0.151 |  | 0.352–0.354 |
+| project | 205 | 0.213 | 0.425 / 0.172 | 0.185 / 0.287 / 0.167 |  | 0.352–0.354 |
+| examples (frozen best) | 205 | 0.322 | 0.570 / 0.275 | 0.201 / 0.495 / 0.271 | 0.279 (P 0.637, R 0.209; 205 requirements) | 0.352–0.354 |
+
+**llama3.1-8b** (test slice, strict parsing)
+
+| Prompt | Requirements scored | Avg. F1 | P / R | F1 SMOS / eTour / iTrust | With verification, tau 0.2 | GPT-4o on the same requirements |
+|---|---|---|---|---|---|---|
+| baseline | 190 | 0.261 | 0.205 / 0.470 | 0.391 / 0.292 / 0.100 | 0.237 (P 0.209, R 0.380; 180 requirements) | 0.358–0.361 |
+| definition | 190 | 0.314 | 0.294 / 0.405 | 0.378 / 0.375 / 0.190 |  | 0.358–0.361 |
+| summary | 180 | 0.256 | 0.216 / 0.413 | 0.366 / 0.303 / 0.099 |  | 0.356–0.358 |
+| project | 180 | 0.253 | 0.198 / 0.467 | 0.402 / 0.277 / 0.080 |  | 0.356–0.358 |
+| examples | 180 | 0.152 | 0.343 / 0.106 | 0.142 / 0.240 / 0.073 |  | 0.356–0.358 |
+| definition+summary (frozen best) | 180 | 0.309 | 0.314 / 0.365 | 0.360 / 0.396 / 0.170 | 0.276 (P 0.325, R 0.301; 180 requirements) | 0.356–0.358 |
+
+**Inferences so far (only what changed)**
+- **Verification now covers 180 requirements and still lowers F1:** `definition+summary` 0.309 → 0.276 (precision 0.314 → 0.325, recall 0.365 → 0.301) and the baseline 0.260 → 0.237 on the same 180 requirements.
+- **The definition keeps its lead at 190 requirements** (0.314 vs the baseline's 0.261).
