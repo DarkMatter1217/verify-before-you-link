@@ -247,3 +247,39 @@ Verification at the other thresholds (average F1; verification only removes link
 - **Adding the code summary to the definition does not add anything** (0.320 vs 0.323). The frozen choice stays; the Wilcoxon tests on all 205 requirements will decide.
 - **RQ3: verification lowers F1 for Llama as well** (`definition+summary` 0.320 → 0.284, baseline 0.267 → 0.240). It raises precision a little (0.339 → 0.358) but costs more recall (0.383 → 0.315), the same pattern as for Qwen and on dev.
 - **Against GPT-4o:** Llama's frozen best reaches about 87% of GPT-4o on the same 90 requirements (0.320 vs 0.366–0.369).
+
+## 2026-11-19 16:20 UTC — Session 4 started
+
+- **Overnight, session 3 finished Llama chunks 4 to 7** (chunk 4 started at 20:16 UTC on Nov 18, chunk 5 at 03:08, chunk 6 at 09:03, chunk 7 at 11:46 UTC on Nov 19). Chunk 8 (up to 80 requirements per project; 180 requirements) started at 13:37 UTC; all six prompts were answered and the verification of the baseline had reached 2,715 of 2,833 links when session 3 ended at its 24-hour limit at about 15:27 UTC (last save 15:25:43 UTC).
+- **The Mac's Google Drive app quit at 04:17 UTC** and was reopened at 14:36 UTC. Colab's saves to Drive in the cloud were not affected; only the copy on the Mac was behind.
+- **The browser connection was down at the 15:33 UTC restart check**, so session 4 started later than planned: runtime at 15:44 UTC, Drive restored from the 15:25:43 UTC save, test pipeline restarted at 16:06 UTC. No session was running for about 40 minutes.
+- **Session 4:** exactly 1 active session at about 1.94 units per hour; 1,126 units left. The restart reused every saved answer (0 new questions for the six prompts of chunk 8) and continued the baseline verification (2,763 of 2,833 at 16:17 UTC). No errors.
+- **Expected finish:** only iTrust remains, 25 requirements in three chunks (up to 90, 100 and 105). Chunk 7, with 10 iTrust requirements, took 1 h 51 min. Llama should finish at about 21:00–21:30 UTC (about 4–4:30 pm Eastern) today.
+
+
+**qwen2.5-coder-14b** (test slice, strict parsing)
+
+| Prompt | Requirements scored | Avg. F1 | P / R | F1 SMOS / eTour / iTrust | With verification, tau 0.2 | GPT-4o on the same requirements |
+|---|---|---|---|---|---|---|
+| baseline | 205 | 0.249 | 0.404 / 0.222 | 0.212 / 0.384 / 0.149 | 0.220 (P 0.491, R 0.171; 205 requirements) | 0.352–0.354 |
+| definition | 205 | 0.199 | 0.510 / 0.137 | 0.137 / 0.264 / 0.196 |  | 0.352–0.354 |
+| summary | 205 | 0.220 | 0.365 / 0.193 | 0.178 / 0.330 / 0.151 |  | 0.352–0.354 |
+| project | 205 | 0.213 | 0.425 / 0.172 | 0.185 / 0.287 / 0.167 |  | 0.352–0.354 |
+| examples (frozen best) | 205 | 0.322 | 0.570 / 0.275 | 0.201 / 0.495 / 0.271 | 0.279 (P 0.637, R 0.209; 205 requirements) | 0.352–0.354 |
+
+**llama3.1-8b** (test slice, strict parsing)
+
+| Prompt | Requirements scored | Avg. F1 | P / R | F1 SMOS / eTour / iTrust | With verification, tau 0.2 | GPT-4o on the same requirements |
+|---|---|---|---|---|---|---|
+| baseline | 180 | 0.260 | 0.204 / 0.465 | 0.391 / 0.292 / 0.097 | 0.236 (P 0.208, R 0.382; 170 requirements) | 0.356–0.358 |
+| definition | 180 | 0.310 | 0.290 / 0.398 | 0.378 / 0.375 / 0.177 |  | 0.356–0.358 |
+| summary | 180 | 0.256 | 0.216 / 0.413 | 0.366 / 0.303 / 0.099 |  | 0.356–0.358 |
+| project | 180 | 0.253 | 0.198 / 0.467 | 0.402 / 0.277 / 0.080 |  | 0.356–0.358 |
+| examples | 180 | 0.152 | 0.343 / 0.106 | 0.142 / 0.240 / 0.073 |  | 0.356–0.358 |
+| definition+summary (frozen best) | 180 | 0.309 | 0.314 / 0.365 | 0.360 / 0.396 / 0.170 | 0.273 (P 0.322, R 0.301; 170 requirements) | 0.356–0.358 |
+
+**Inferences so far (Llama, 180 requirements; verification on 170)**
+- **RQ2: the trace-link definition is the only information that helps Llama.** `definition` 0.310 and `definition+summary` 0.309 against the baseline's 0.260. The code summary (0.256) and the project description (0.253) make no difference, and labelled examples hurt (0.152; recall 0.106). This is the opposite of Qwen, where the definition was significantly worse (0.199 vs 0.249) and the examples significantly better (0.322).
+- **The code summary adds nothing on top of the definition** (0.309 vs 0.310). The frozen choice `definition+summary` stays; the Wilcoxon tests on all 205 requirements will decide whether it beats the baseline.
+- **RQ3: verification lowers F1 for Llama as for Qwen.** On the same 170 requirements, `definition+summary` drops from 0.304 to 0.273: precision rises a little (0.310 → 0.322) but recall falls more (0.362 → 0.301).
+- **Against GPT-4o:** Llama's frozen best reaches about 86–87% of GPT-4o on the same requirements (0.309 vs 0.356–0.358); Qwen's final best reached about 91% (0.322 vs 0.352–0.354).
